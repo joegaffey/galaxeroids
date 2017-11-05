@@ -42,14 +42,16 @@ class Enemy extends PIXI.Sprite {
     
     const path = new PIXI.tween.TweenPath();
     path.moveTo(x, y);
-    path.bezierCurveTo(destX + 100, destY, destX, destY + 100, destX, destY);
-    path.bezierCurveTo(x, 0, 0, y, x, y);
+
+    path.bezierCurveTo(0, 0, + 50, + 50, destX, destY);
+    path.bezierCurveTo(destX, destY, destX + 50, destY + 50, x, y);
+    
     path.closed = true;
     
-    // var gPath = new PIXI.Graphics();
-    // gPath.lineStyle(1, 0xffffff, 1);
-    // gPath.drawPath(path);
-    // app.stage.addChild(gPath);
+    var gPath = new PIXI.Graphics();
+    gPath.lineStyle(1, 0xffffff, 1);
+    gPath.drawPath(path);
+    app.stage.addChild(gPath);
 
     this.tween = PIXI.tweenManager.createTween(this);
     this.tween.easing = PIXI.tween.Easing.inOutSine();
