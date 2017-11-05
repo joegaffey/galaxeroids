@@ -57,7 +57,7 @@ class Enemy extends PIXI.Sprite {
     this.tween.time = 3000;
     
     this.tween.from({rotation: 0});
-    this.tween.to({rotation: PIXI.DEG_TO_RAD * 359});
+    this.tween.to({rotation: PIXI.DEG_TO_RAD * 180});
     
     // TBD remove collision check after unsuccessful attack
     this.ticker.add(function() {
@@ -122,8 +122,10 @@ class Enemy extends PIXI.Sprite {
   }
   
   hit() {
+    if(this.hits === 0 && !this.inPosition)
+      addNewPill(this, Props.PILL_POWER);
     this.hits++;
-    if(this.hits == Props.ENEMY_MAX_HITS) {
+    if(this.hits === Props.ENEMY_MAX_HITS) {
       app.addScore(Props.ENEMY_KILL_POINTS);
       this.explode();      
     }
