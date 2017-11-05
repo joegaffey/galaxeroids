@@ -1,0 +1,123 @@
+{"frames": {
+
+"Explosion_Sequence_A 1.png":
+{
+    "frame": {"x":0,"y":4,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 2.png":
+{
+    "frame": {"x":36,"y":4,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 3.png":
+{
+    "frame": {"x":72,"y":4,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 4.png":
+{
+    "frame": {"x":108,"y":4,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 5.png":
+{
+    "frame": {"x":144,"y":4,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 6.png":
+{
+    "frame": {"x":180,"y":4,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 7.png":
+{
+    "frame": {"x":0,"y":40,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 8.png":
+{
+    "frame": {"x":36,"y":40,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 9.png":
+{
+    "frame": {"x":72,"y":40,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 10.png":
+{
+    "frame": {"x":108,"y":40,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 11.png":
+{
+    "frame": {"x":144,"y":40,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 12.png":
+{
+    "frame": {"x":180,"y":40,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 13.png":
+{
+    "frame": {"x":0,"y":76,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+},
+"Explosion_Sequence_A 14.png":
+{
+    "frame": {"x":36,"y":76,"w":36,"h":36},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
+    "sourceSize": {"w":36,"h":36}
+}},
+"meta": {
+    "app": "http://www.texturepacker.com",
+    "version": "1.0",
+    "image": "https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2F8bitExplode.png?1503090470892",
+    "format": "RGBA8888",
+    "size": {"w":216,"h":112},
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:17e4a2d92ff3e27832c3f4936cec7c85$"
+}}

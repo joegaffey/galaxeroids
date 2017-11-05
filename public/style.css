@@ -1,0 +1,177 @@
+@font-face {
+    font-family: PressStart;
+    src: url(https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FPressStart2P.ttf?1509802747753);
+}
+
+body {
+  background-color: #000000;
+  background-size: 100% auto;
+  background-repeat:no-repeat;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+/*   font-family: Arial, Helvetica, sans-serif; */
+  font-family: PressStart;  
+}
+
+.graphicsCanvas {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.graphicsCanvas > canvas {
+  display: block;
+  margin: 0 auto;
+} 
+
+/*********************** Controls styles *************************/
+
+.controls {
+  display: none;
+  opacity: 0.5;
+}
+
+.leftControl, .rightControl {
+  position: absolute;
+  bottom: 50px;
+  height: 100px;
+  width: 100px;
+}
+
+.leftControl {
+  left: 50px;
+  background: url(leftControl.svg) no-repeat;
+}
+
+.rightControl {
+  left: 180px;
+  background: url(rightControl.svg) no-repeat;
+}
+
+.fireControl {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  background-color: #FF2200;
+}
+
+.chargeControl {
+  position: absolute;
+  bottom: 50px;
+  right: 175px;
+  background-color: #00FF00;
+}
+
+.fireControl, .chargeControl {
+  border-radius: 50%;
+  height: 94px;
+  width: 94px;
+  border-color: #ffffff;
+  border-width: 6px;
+  border-style: solid;
+}
+
+.energyControlIcon, .fireControlIcon {
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  border-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  opacity: 0.5;
+}
+
+.moveIcons {
+  opacity: 0.5;
+}
+
+.energyControlIcon {
+  background-color: #00ff00;
+}
+
+.fireControlIcon {
+  background-color: #ff0000;
+}
+
+/******************** Modal styles ******************************/
+
+.modal {
+  position: fixed; 
+  left: 0;
+  top: 0;
+  bottom: 0; 
+  right: 0; 
+  overflow: hidden; 
+  background-color: rgba(0,0,0,0.8); 
+}
+
+.modal-content {
+  display: block;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8); 
+  margin: 10% auto; 
+  padding: 0;
+  border: 3px solid #555;
+  width: 450px;
+  font-size: x-small;
+/*   font-family: Arial, Helvetica, sans-serif; */
+  font-family: PressStart;  
+  text-align: center;
+  color: #aaaaaa;
+}
+
+button {
+  font-size: small;
+  font-family: PressStart;  
+  padding: 8px;
+  background-color: #000000;
+  border-style: solid;
+  border-color: #555555;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.modal-content > table {
+  margin: 0 auto; 
+  text-align: left;
+}
+
+th {
+  padding-right: 20px; 
+  padding-bottom: 10px; 
+  font-weight: bold;
+}
+
+td {
+  padding-right: 20px;
+}
+
+
+/******************** Info bar styles ***********************/
+
+.info-bar {
+  height: 40px;
+}
+
+.score {
+  float: right;
+  height: 40px;
+  margin-right: 20px;
+  line-height: 40px;
+  vertical-align: middle;  
+  color: #888888;
+  font-size: large;
+}
+
+.lives {
+  float: left;
+  margin-left: 20px;
+  margin-top: 10px
+}
+
+.lives > img {
+  margin-right: 10px;
+}
