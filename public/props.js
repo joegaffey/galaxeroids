@@ -12,7 +12,7 @@ Props.STAGE_VRES = 600;
 Props.STAGE_VERT_OFFSET = 0;
 
 Props.DEATH_MESSAGE = 'Game over Man! Game Over!';
-Props.SUCCESS_MESSAGE = 'You have saved the planet!';
+Props.SUCCESS_MESSAGE = 'You have saved the galaxy!';
 
 Props.SHIP_VERT_ADJUST = 30;
 Props.SHIP_SPEED = 3;
