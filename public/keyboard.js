@@ -4,7 +4,7 @@ window.addEventListener('keyup', function (e) {
   if(e.keyCode === 32) {
     Controls.handleFire();
   }
-  else if(e.keyCode === 17) {
+  else if(e.keyCode === 16) {
     Controls.handleCharge();
   }
   else if(e.keyCode === 13) {
