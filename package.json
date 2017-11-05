@@ -1,0 +1,27 @@
+{
+  "name": "galaxeroids",
+  "version": "0.0.1",
+  "description": "Galaxeroids backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js 8585 http://galaxeroids.glitch.me/remote-events/ 100"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "pixi.js": "^4.5.3",
+    "body-parser": "^1.17.2",
+    "request": "^2.81.0"
+  },
+  "engines": {
+    "node": "8.1.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/galaxeroids"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}

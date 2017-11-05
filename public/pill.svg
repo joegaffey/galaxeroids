@@ -1,0 +1,19 @@
+<svg width="600" height="200" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="1001.9255" height="335.3085" id="canvas_background" fill="none"/>
+  <g id="canvasGrid" display="none">
+   <rect id="svg_1" width="100%" height="100%" x="0" y="0" stroke-width="0" fill="url(#gridpattern)"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <ellipse fill="#fff" stroke="#000" stroke-width="1.5" cx="113.5" cy="122" id="svg_2" ry="244"/>
+  <ellipse fill="#00ff00" stroke-width="0" stroke-opacity="null" cx="99.5" cy="100.5" id="svg_5" rx="100" ry="100.5" stroke="#000"/>
+  <ellipse fill="#00ff00" stroke-width="0" stroke-opacity="null" cx="499.53116" cy="100.5" id="svg_6" rx="100" ry="100.5" stroke="#000"/>
+  <rect fill="#00ff00" stroke="#000" stroke-width="0" stroke-opacity="null" x="100" y="0" width="400" height="200" id="svg_7"/>
+  <text fill="#ff0000" stroke-width="0" stroke-opacity="null" x="212.82764" y="107.30236" id="svg_8" font-size="32" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve" transform="matrix(12.283679402384283,0,0,7.267533018720608,-2438.8254126026595,-594.9770211216694) " stroke="#000" font-weight="bold">P</text>
+  <line fill="none" stroke="#00F" stroke-opacity="null" x1="125" y1="0" x2="125" y2="200" id="svg_9" stroke-linejoin="null" stroke-linecap="null" stroke-width="50"/>
+  <line fill="none" stroke="#00F" stroke-width="50" stroke-opacity="null" x1="475" y1="0" x2="475" y2="200" id="svg_11" stroke-linejoin="null" stroke-linecap="null"/>
+ </g>
+</svg>

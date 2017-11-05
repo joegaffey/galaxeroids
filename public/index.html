@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="en">
+<link rel="manifest" href="manifest.json">
+<title>Galaxeroids</title>
+<meta content="user-scalable=0" name="viewport">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" type="text/css" href="style.css">
+<!-- <link rel="shortcut icon" href="TBD.png"> -->
+</head>
+<body>
+<div class="info-bar">
+    <div class="score">0</div> 
+    <div class="lives"></div> 
+</div>
+<div class="graphicsCanvas"></div>
+<div class="controls">
+  <div class="leftControl"></div>
+  <div class="rightControl"></div>
+  <div class="chargeControl"></div>
+  <div class="fireControl"></div>
+</div>
+<div class="modal">
+  <div class="modal-content">
+    <p id="optMessage"></p>
+    <p id="scoreMessage"></p>
+    <table>
+      <tr><th></th><th>Keyboard</th><th>Joystick</th><th>Touch</th></tr>
+      <tr>
+        <td>Move</td>
+        <td>Arrow keys</td>
+        <td>axes0</td>
+        <td class="moveIcons"> 
+          <img height="12" width="12" src="leftControl.svg">
+          <img height="12" width="12" src="rightControl.svg">
+        </td>
+      </tr>
+      <tr><td>Fire</td><td>Space</td><td>Joy0</td><td><div class="fireControlIcon"></div></td></tr>
+      <tr><td>Energy</td><td>Ctrl</td><td>Joy1</td><td><div class="energyControlIcon"></div></td></tr>
+      <tr><td>Start/Pause</td><td>Enter</td><td>Joy9</td><td>N/A</td></tr>
+    </table>
+    <p><button onclick="app.unPause();">Start!</button></p>
+  </div>
+</div>
+  
+<script>
+if (navigator.serviceWorker.controller) {
+  console.log('[PWA Builder] active service worker found, no need to register')
+} else {
+  //Register the ServiceWorker
+  navigator.serviceWorker.register('pwabuilder-sw.js', {
+    scope: './'
+  }).then(function(reg) {
+    console.log('Service worker has been registered for scope:'+ reg.scope);
+  });
+}  
+</script>
+<script src="audio.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+<!-- <script src="./libs/pixi.min.js"></script> -->
+<script src="./lib/pixi-tween.min.js"></script>
+<script src="buffer-loader.js"></script>
+<script src="props.js"></script>
+<script src="graphics.js"></script>
+<script src="physics.js"></script>
+<script src="controls.js"></script>
+<script src="gamepad.js"></script>
+<script src="keyboard.js"></script>
+<script src="touch.js"></script>    
+<script src="ship.js"></script>
+<script src="enemy.js"></script>
+<script src="mother.js"></script>
+<script src="swarm.js"></script>
+<script src="assist.js"></script>
+<script src="effects.js"></script>  
+<script src="lives.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
