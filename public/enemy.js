@@ -48,10 +48,10 @@ class Enemy extends PIXI.Sprite {
     
     path.closed = true;
     
-    var gPath = new PIXI.Graphics();
-    gPath.lineStyle(1, 0xffffff, 1);
-    gPath.drawPath(path);
-    app.stage.addChild(gPath);
+    // var gPath = new PIXI.Graphics();
+    // gPath.lineStyle(1, 0xffffff, 1);
+    // gPath.drawPath(path);
+    // app.stage.addChild(gPath);
 
     this.tween = PIXI.tweenManager.createTween(this);
     this.tween.easing = PIXI.tween.Easing.inOutSine();
@@ -59,7 +59,7 @@ class Enemy extends PIXI.Sprite {
     this.tween.time = 3000;
     
     this.tween.from({rotation: 0});
-    this.tween.to({rotation: PIXI.DEG_TO_RAD * 180});
+    this.tween.to({rotation: PIXI.DEG_TO_RAD * 90});
     
     // TBD remove collision check after unsuccessful attack
     this.ticker.add(function() {
