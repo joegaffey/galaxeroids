@@ -75,6 +75,8 @@ setInterval(function() {
 
 swarm.addEnemies(Props.SWARM_INITIAL_SIZE);
 
+//swarm.addEnemyRows(levels[1].swarm.rows);
+
 app.reset = function() {
   if(mother) {
     mother.reset();

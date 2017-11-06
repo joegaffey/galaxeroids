@@ -30,9 +30,41 @@ class Swarm {
     }
   }
   
+  addEnemyType(type, col, row) {
+    if(!mother)
+      return;
+    if(type === 0) {
+      this.enemies.push(null);
+      return;
+    }
+    var enemy = new Enemy();
+    var i = this.enemies.length;
+    enemy.index = i;
+    enemy.x = this.getEnemyXByIndex(i);
+    enemy.y = this.getEnemyYByIndex(i);
+    enemy.tint = Props.ENEMY_COLORS[type];
+    this.enemies.push(enemy);
+    app.stage.addChild(enemy);
+    this.enemyCount++;
+    this.moveEnemyIntoPosition(enemy, i);
+  }
+  
   addEnemies(n) {
     for(var i = 0; i < n; i++) 
       this.addEnemy();
+  }
+  
+  addEnemyRows(rowsArr) {
+    this.columns = rowsArr[0].length;
+    rowsArr.forEach(function(row, i){
+      this.addEnemyRow(row, i);     
+    }.bind(this));
+  }
+  
+  addEnemyRow(rowArr, row){
+    rowArr.forEach(function(type, col){
+      this.addEnemyType(type, col, row);  
+    }.bind(this)); 
   }
   
   destroyEnemy(i) {
