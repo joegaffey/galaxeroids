@@ -98,9 +98,10 @@ class Assist extends PIXI.Sprite {
     this.entering = false;
     this.exiting = false;
     this.size = 0;
-    app.stage.removeChild(this);
     this.lazer.clear();
     this.lazer.lineStyle(Props.ASSIST_LAZER_WIDTH, Props.ASSIST_LAZER_COLOR);
+    this.ticker.stop();
+    this.destroy();
   }
   
   enter() {

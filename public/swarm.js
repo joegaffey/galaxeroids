@@ -121,7 +121,6 @@ class Swarm {
     this.enemies.splice(0, this.enemies.length);
     this.yPos = 0;
     this.xPos = 0;
-    swarm = new Swarm();
   }
 
   move() {

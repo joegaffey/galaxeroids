@@ -32,7 +32,8 @@ class Ship extends PIXI.Sprite {
   }
   
   reset() {
-    this.x = Props.STAGE_HRES / 2;
+    this.ticker.stop();
+    this.destroy();
   }
   
   addBullet(x, y) {    
@@ -59,6 +60,7 @@ class Ship extends PIXI.Sprite {
     });
     bullet.ticker.start();
     app.stage.addChild(bullet);
+    app.bullets.push(bullet);
   }
   
   addEnergy(x, y) {    

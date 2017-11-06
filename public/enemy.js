@@ -169,6 +169,7 @@ class Enemy extends PIXI.Sprite {
     });
     bullet.ticker.start();
     app.stage.addChild(bullet);
+    app.bullets.push(bullet);
   }
 }
 

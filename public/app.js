@@ -43,6 +43,8 @@ var swarm = new Swarm();
 var assist = new Assist();
 var lives = new Lives(); 
 
+app.bullets = [];
+
 setInterval(function() { 
   if(!app.paused)
     swarm.move(); 
@@ -67,7 +69,7 @@ setInterval(function() {
 setInterval(function() { 
   if(!app.paused) {
     if(mother)
-       mother.shoot();
+      mother.shoot();
   }
 }, Math.floor(Props.MOTHER_SHOOT_INTERVAL + Math.random() * Props.MOTHER_SHOOT_INTERVAL));
 
@@ -77,12 +79,30 @@ app.reset = function() {
   if(mother) {
     mother.reset();
   }
-  mother = new Mother();
   swarm.reset();
   ship.reset();
   assist.reset();
   lives.reset();
+  
+  app.bullets.forEach(function(bullet) {
+    if(bullet) {
+      bullet.ticker.stop();
+      app.stage.removeChild(bullet);
+      //bullet.destroy(); 
+    }
+  });
+  app.bullets = [];
+  
+  app.stage.children.forEach(function(child) {
+    child.destroy();
+  });  
+  
   app.updateScore(0);
+  
+  mother = new Mother();
+  ship = new Ship();
+  assist = new Assist();
+  swarm = new Swarm();
   swarm.addEnemies(Props.SWARM_INITIAL_SIZE);
 }
 
