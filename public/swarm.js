@@ -56,13 +56,15 @@ class Swarm {
   
   addEnemyRows(rowsArr) {
     this.columns = rowsArr[0].length;
+    this.width = this.columns * Props.ENEMY_GAP;
+    this.xPos = (app.renderer.width / 2) - (this.width / 2);
     rowsArr.forEach(function(row, i){
       this.addEnemyRow(row, i);     
     }.bind(this));
   }
   
   addEnemyRow(rowArr, row){
-    rowArr.forEach(function(type, col){
+    rowArr.forEach(function(type, col) {
       this.addEnemyType(type, col, row);  
     }.bind(this)); 
   }
@@ -132,11 +134,13 @@ class Swarm {
     }
     return enemy;
   }
-
+  
   getLowestEnemy() {
     let enemy = null;
-    let i = this.enemyCount;
-    while(!enemy && i >= -1) {
+    let i = this.enemies.length;
+    while(!enemy) {
+      if(i > this.enemies.length)
+        return null;
       enemy = this.enemies[i];
       i--;
     }
@@ -151,7 +155,7 @@ class Swarm {
       }
     });
     this.enemies.splice(0, this.enemies.length);
-    this.yPos = 0;
+    this.yPos = Props.SWARM_TOP;
     this.xPos = 0;
   }
 

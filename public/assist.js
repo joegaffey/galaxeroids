@@ -46,7 +46,7 @@ class Assist extends PIXI.Sprite {
     if(this.ready && !this.target) {
       if(swarm.enemyCount > 0)
         this.target = swarm.getLowestEnemy();
-      else if(mother)
+      else if(mother) 
         this.target = mother;
       if(this.target)
          this.target.power = Props.ASSIST_LAZER_DURATION;
@@ -59,7 +59,7 @@ class Assist extends PIXI.Sprite {
       try {
         this.lazer.moveTo(this.x, this.y);
         this.lazer.lineTo(this.target.x, this.target.y);    
-        this.target.power--;
+        this.target.power--;        
       }
       catch(e) {
         this.lazer.clear();
@@ -74,8 +74,10 @@ class Assist extends PIXI.Sprite {
       this.lazer.clear();
       this.lazer.lineStyle(Props.ASSIST_LAZER_WIDTH, Props.ASSIST_LAZER_COLOR);
       if(this.target) {
-        if(this.target === mother)
+        if(this.target === mother) {
           mother.hit();
+          Effects.explode(mother.x, mother.y, Props.EXPLOSION_TINY);    
+        }
         else {
           this.target.explode();
           app.addScore(Props.ENEMY_KILL_POINTS);

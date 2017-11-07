@@ -121,8 +121,11 @@ class Enemy extends PIXI.Sprite {
     Effects.explode(this.x, this.y, Props.EXPLOSION_MEDIUM);
     this.ticker.stop();
     this.destroy();
-    if(swarm.enemyCount === 0 && !mother)
-      app.stop(Props.SUCCESS_MESSAGE);
+    if(swarm.enemyCount === 0) {
+      if(!mother)
+        app.stop(Props.SUCCESS_MESSAGE);
+      app.nextLevel();
+    }
   }
   
   hit() {
