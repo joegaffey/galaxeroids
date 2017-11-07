@@ -73,9 +73,18 @@ setInterval(function() {
   }
 }, Math.floor(Props.MOTHER_SHOOT_INTERVAL + Math.random() * Props.MOTHER_SHOOT_INTERVAL));
 
-swarm.addEnemies(Props.SWARM_INITIAL_SIZE);
+app.nextLevel = function() {
+  currentLevel++;
+  if(currentLevel < levels.length) {
+    swarm.reset();
+    setTimeout(function() {
+      swarm.addEnemyRows(levels[currentLevel].swarm.rows);  
+    }, 1000);
+  }
+}
 
-//swarm.addEnemyRows(levels[1].swarm.rows);
+var currentLevel = -1;
+app.nextLevel();
 
 app.reset = function() {
   if(mother) {
@@ -105,7 +114,8 @@ app.reset = function() {
   ship = new Ship();
   assist = new Assist();
   swarm = new Swarm();
-  swarm.addEnemies(Props.SWARM_INITIAL_SIZE);
+  currentLevel = -1;
+  app.nextLevel();
 }
 
 app.showDialog = function(message) {

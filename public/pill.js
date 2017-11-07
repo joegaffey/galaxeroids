@@ -10,6 +10,8 @@ function addNewPill(sprite, power) {
   pill.ticker.add(function() {
     if(app.paused)
        return;
+    if(!pill)
+      return;
     pill.y += pill.speed;
     if(pill.y > app.renderer.height) {
       pill.ticker.stop();
