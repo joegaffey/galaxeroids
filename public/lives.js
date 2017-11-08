@@ -2,18 +2,20 @@ class Lives {
   
   constructor() {
     this.lives = Props.PLAYER_LIVES;
-    this.livesEl = document.querySelector('.lives');
+    this.livesContainer = new PIXI.Container();
+    app.game.addChild(this.livesContainer);    
     this.renderLives();
   }
   
   renderLives() {
-    this.livesEl.innerHTML = '';
+    this.livesContainer.removeChildren();
     for(var i = 0; i < this.lives; i++) {
-      var img = document.createElement('IMG');
-      img.src = 'ship.svg';
-      img.style.maxHeight = '15px';
-      img.style.maxWidth = '15px';
-      this.livesEl.appendChild(img);
+      let life = new PIXI.Sprite(GameGraphics.getShipGraphics());
+      life.x = 10 + i * 15;
+      life.y = 10;
+      life.scale.x = life.scale.y = 0.6;
+      life.tint = 0x44AAFF;
+      this.livesContainer.addChild(life);
     }
   }
   
