@@ -37,7 +37,7 @@ class Ship extends PIXI.Sprite {
   }
   
   addBullet(x, y) {    
-    var bullet = new PIXI.Sprite(GameGraphics.getBulletGraphics());
+    var bullet = new PIXI.Sprite(GameGraphics.getShipBulletGraphics());
     bullet.x = x;
     bullet.y = y;
     bullet.anchor.x = 0.5;
