@@ -13,6 +13,21 @@ GameGraphics.getBulletGraphics = function() {
   return graphics.generateTexture();
 }
 
+GameGraphics.getShipBulletGraphics = function() {
+  var graphics = new PIXI.Graphics();
+  graphics.beginFill(0xFFFFFF);
+  graphics.drawRect(4, 2, 4, 2);
+    graphics.beginFill(0xFFFF00);
+  graphics.drawRect(4, 4, 4, 2);
+  graphics.beginFill(0xFF9900);
+  graphics.drawRect(4, 6, 4, 4);
+  graphics.beginFill(0x990000);
+  graphics.drawRect(4, 10, 4, 5);
+  graphics.endFill();
+  graphics.boundsPadding = 0;
+  return graphics.generateTexture();
+}
+
 GameGraphics.getScanLines = function() {
   var graphics = new PIXI.Graphics();
   graphics.lineStyle(2, 0x333333, 0.3);
@@ -31,24 +46,6 @@ GameGraphics.getEnergyGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
   graphics.drawCircle(0, 0, 4);
-  graphics.endFill();
-  graphics.boundsPadding = 0;
-  return graphics.generateTexture();
-}
-
-GameGraphics.getEnemyGraphics0 = function() {
-  var graphics = new PIXI.Graphics();
-  graphics.beginFill(0xFFFFFF);
-  graphics.drawRect(10, 10, 20, 25);
-  graphics.endFill();
-  graphics.boundsPadding = 0;
-  return graphics.generateTexture();
-}
-
-GameGraphics.getEnemyGraphics1 = function() {
-  var graphics = new PIXI.Graphics();
-  graphics.beginFill(0xFFFFFF);
-  graphics.drawRect(10, 10, 25, 20);
   graphics.endFill();
   graphics.boundsPadding = 0;
   return graphics.generateTexture();
