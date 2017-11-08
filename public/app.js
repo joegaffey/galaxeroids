@@ -26,6 +26,19 @@ graphicsCanvas.appendChild(app.view);
 app.game = new PIXI.Container();
 app.stage.addChild(app.game);
 
+var style = new PIXI.TextStyle({
+    fontFamily: 'PressStart',
+    fontSize: 14,
+    fill: ['#888888']
+});
+
+app.scoreText = new PIXI.Text(app.score, style);
+app.scoreText.x = 790;
+app.scoreText.y = 10;
+app.scoreText.anchor.set(1, 0);
+app.stage.addChild(app.scoreText);
+
+
 var scanLinesSprite = new PIXI.Sprite(GameGraphics.getScanLines());
 app.stage.addChild(scanLinesSprite);
 
@@ -150,12 +163,12 @@ app.unPause = function() {
 
 app.updateScore = function(score) {
   app.score = score;
-  document.querySelector('.score').innerText = score;
+  app.scoreText.text = app.score;
 }
 
 app.addScore = function(score) {
   app.score += score;
-  document.querySelector('.score').innerText = app.score;
+  app.scoreText.text = app.score;
 }
 
 app.minusScore = function(score) {
@@ -163,7 +176,7 @@ app.minusScore = function(score) {
      app.score -= score;
   else
     app.score = 0;
-  document.querySelector('.score').innerText = app.score;
+  app.scoreText.text = app.score;
 }
 
 app.stop = function(message) {

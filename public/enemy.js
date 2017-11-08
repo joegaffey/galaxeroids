@@ -61,8 +61,8 @@ class Enemy extends PIXI.Sprite {
     this.tween.time = 3000;
     
     this.tween.from({rotation: 0});
-    this.tween.to({rotation: PIXI.DEG_TO_RAD * -90});
-    this.tween.from({rotation: PIXI.DEG_TO_RAD * -90});
+    this.tween.to({rotation: PIXI.DEG_TO_RAD * 180});
+    this.tween.from({rotation: PIXI.DEG_TO_RAD * 180});
     this.tween.to({rotation: 0});
     
     // TBD remove collision check after unsuccessful attack

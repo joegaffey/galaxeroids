@@ -148,30 +148,3 @@ th {
 td {
   padding-right: 20px;
 }
-
-
-/******************** Info bar styles ***********************/
-
-.info-bar {
-  height: 40px;
-}
-
-.score {
-  float: right;
-  height: 40px;
-  margin-right: 20px;
-  line-height: 40px;
-  vertical-align: middle;  
-  color: #888888;
-  font-size: large;
-}
-
-.lives {
-  float: left;
-  margin-left: 20px;
-  margin-top: 10px
-}
-
-.lives > img {
-  margin-right: 10px;
-}
