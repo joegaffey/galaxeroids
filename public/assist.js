@@ -14,7 +14,7 @@ class Assist extends PIXI.Sprite {
     
     this.lazer = new PIXI.Graphics();        
     this.lazer.lineStyle(Props.ASSIST_LAZER_WIDTH, Props.ASSIST_LAZER_COLOR);
-    app.stage.addChild(this.lazer);
+    app.game.addChild(this.lazer);
     
     this.ticker = new PIXI.ticker.Ticker();
     this.ticker.add(this.update, this);    
@@ -113,7 +113,7 @@ class Assist extends PIXI.Sprite {
     this.x = sides[Math.round(Math.random() * 1)];
     this.y = Math.round(Math.random() * (Props.STAGE_VRES - Props.ASSIST_Y_PAD_BOTTOM)) + Props.ASSIST_Y_PAD_TOP;    
     this.scale.x = this.scale.y = 0;
-    app.stage.addChild(this);
+    app.game.addChild(this);
   }
   
   exit() {
@@ -141,7 +141,7 @@ class Assist extends PIXI.Sprite {
     this.scale.x = this.scale.y = this.size;
     if(this.size <= 0) {
       this.exiting = false;
-      app.stage.removeChild(this);
+      app.game.removeChild(this);
     }
   }
 }

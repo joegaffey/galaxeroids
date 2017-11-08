@@ -15,8 +15,8 @@ class Enemy extends PIXI.Sprite {
       if(app.paused)
         return;
       
-      this.scale.x = 1 - (this.hits * Props.ENEMY_DECAY_RATE);  
-      this.scale.y = 1 - (this.hits * Props.ENEMY_DECAY_RATE);  
+      // this.scale.x = 1 - (this.hits * Props.ENEMY_DECAY_RATE);  
+      // this.scale.y = 1 - (this.hits * Props.ENEMY_DECAY_RATE);  
       
       if(this.yOffset > 0) {
         this.rotation = this.yOffset * 2 * Props.ENEMY_ROTATION_SPEED;
@@ -61,7 +61,9 @@ class Enemy extends PIXI.Sprite {
     this.tween.time = 3000;
     
     this.tween.from({rotation: 0});
-    this.tween.to({rotation: PIXI.DEG_TO_RAD * 90});
+    this.tween.to({rotation: PIXI.DEG_TO_RAD * -90});
+    this.tween.from({rotation: PIXI.DEG_TO_RAD * -90});
+    this.tween.to({rotation: 0});
     
     // TBD remove collision check after unsuccessful attack
     this.ticker.add(function() {
@@ -173,11 +175,11 @@ class Enemy extends PIXI.Sprite {
       }
     });
     bullet.ticker.start();
-    app.stage.addChild(bullet);
+    app.game.addChild(bullet);
     app.bullets.push(bullet);
   }
 }
 
-Enemy.textures = [GameGraphics.getEnemyGraphics0(),
-                  GameGraphics.getEnemyGraphics1()];
+Enemy.textures = [GameGraphics.alien1_1,
+                  GameGraphics.alien1_2];
     

@@ -23,5 +23,5 @@ Effects.explode = function(x, y, size) {
   explosion.rotation = Math.random() * Math.PI;
   explosion.scale.set(size + Math.random() * Props.EXPLOSION_SCALE);
   explosion.play();
-  app.stage.addChild(explosion);
+  app.game.addChild(explosion);
 } 

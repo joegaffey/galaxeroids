@@ -23,6 +23,12 @@ app.pause = function() {
 var graphicsCanvas = document.querySelector('.graphicsCanvas');
 graphicsCanvas.appendChild(app.view);
 
+app.game = new PIXI.Container();
+app.stage.addChild(app.game);
+
+var scanLinesSprite = new PIXI.Sprite(GameGraphics.getScanLines());
+app.stage.addChild(scanLinesSprite);
+
 function resize() {
     if (window.innerWidth / window.innerHeight >= Props.STAGE_RATIO) {
         var w = window.innerHeight * Props.STAGE_RATIO;
@@ -98,13 +104,13 @@ app.reset = function() {
   app.bullets.forEach(function(bullet) {
     if(bullet) {
       bullet.ticker.stop();
-      app.stage.removeChild(bullet);
+      app.game.removeChild(bullet);
       //bullet.destroy(); 
     }
   });
   app.bullets = [];
   
-  app.stage.children.forEach(function(child) {
+  app.game.children.forEach(function(child) {
     child.destroy();
   });  
   

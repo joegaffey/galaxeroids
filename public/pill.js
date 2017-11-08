@@ -22,5 +22,5 @@ function addNewPill(sprite, power) {
     }
   });
   pill.ticker.start();
-  app.stage.addChild(pill);
+  app.game.addChild(pill);
 }
