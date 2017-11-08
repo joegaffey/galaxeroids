@@ -18,7 +18,7 @@ class Ship extends PIXI.Sprite {
         this.x -= this.speed;
     }.bind(this));
     this.ticker.start();
-    app.stage.addChild(this);
+    app.game.addChild(this);
   }
   
   shoot() {
@@ -59,7 +59,7 @@ class Ship extends PIXI.Sprite {
       }
     });
     bullet.ticker.start();
-    app.stage.addChild(bullet);
+    app.game.addChild(bullet);
     app.bullets.push(bullet);
   }
   
@@ -87,7 +87,7 @@ class Ship extends PIXI.Sprite {
       }
     });
     energy.ticker.start();
-    app.stage.addChild(energy);
+    app.game.addChild(energy);
   }
   
   checkHit(bullet) {

@@ -1,9 +1,27 @@
 var GameGraphics = {};
+GameGraphics.spriteSheetImage = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsprites.png?1510171075032');
+GameGraphics.alien1_1 = new PIXI.Texture(GameGraphics.spriteSheetImage, new PIXI.Rectangle(0, 0, 19, 19));
+GameGraphics.alien1_2 = new PIXI.Texture(GameGraphics.spriteSheetImage, new PIXI.Rectangle(20, 0, 19, 19));
+
 
 GameGraphics.getBulletGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
   graphics.drawRect(4, 4, 3, 10);
+  graphics.endFill();
+  graphics.boundsPadding = 0;
+  return graphics.generateTexture();
+}
+
+GameGraphics.getScanLines = function() {
+  var graphics = new PIXI.Graphics();
+  graphics.lineStyle(2, 0x333333, 0.3);
+  let i = 0;
+  while(i < 600) {
+    graphics.moveTo(0, i * 3);
+    graphics.lineTo(800, i * 3);
+    i++;
+  }
   graphics.endFill();
   graphics.boundsPadding = 0;
   return graphics.generateTexture();

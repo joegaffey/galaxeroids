@@ -20,7 +20,7 @@ class Mother extends PIXI.Sprite {
           this.direction = 1;
       }
     }.bind(this));
-    app.stage.addChild(this);
+    app.game.addChild(this);
     this.ticker.start();
   }
   

@@ -22,7 +22,8 @@ class Swarm {
         enemy.y = this.getEnemyYByIndex(i);
         enemy.tint = Props.ENEMY_COLORS[(Math.floor(i / this.columns)) % Props.ENEMY_COLORS.length];
         this.enemies[i] = enemy;
-        app.stage.addChild(enemy);
+        enemy.scale.x = enemy.scale.y = 1.5;
+        app.game.addChild(enemy);
         this.enemyCount++;
         this.moveEnemyIntoPosition(enemy, i);
         return;
@@ -42,9 +43,11 @@ class Swarm {
     enemy.index = i;
     enemy.x = this.getEnemyXByIndex(i);
     enemy.y = this.getEnemyYByIndex(i);
-    enemy.tint = Props.ENEMY_COLORS[type];
+    if(type > 1)
+      enemy.tint = Props.ENEMY_COLORS[type];
     this.enemies.push(enemy);
-    app.stage.addChild(enemy);
+    enemy.scale.x = enemy.scale.y = 1.5;
+    app.game.addChild(enemy);
     this.enemyCount++;
     this.moveEnemyIntoPosition(enemy, i);
   }
