@@ -2,6 +2,7 @@ class Ship extends PIXI.Sprite {
   constructor() {    
     super(GameGraphics.getShipGraphics());
     this.tint = 0x44AAFF;
+    this.shootDelay = Props.SHIP_SHOOT_DELAY;
     
     this.x = Props.STAGE_HRES / 2;
     this.y = Props.STAGE_VRES - Props.SHIP_VERT_ADJUST;
@@ -11,6 +12,7 @@ class Ship extends PIXI.Sprite {
     this.direction = 1;
     this.ticker = new PIXI.ticker.Ticker();
     this.ticker.add(function() {
+      this.shootDelay--;
       if(app.paused)
         this.speed = 0;
       this.x += this.speed;
@@ -22,8 +24,11 @@ class Ship extends PIXI.Sprite {
   }
   
   shoot() {
-    GameAudio.shootSound();
-    this.addBullet(this.x, this.y - this.height / 2);
+    if(this.shootDelay <= 0) {
+      GameAudio.shootSound();
+      this.addBullet(this.x, this.y - this.height / 2);
+      this.shootDelay = Props.SHIP_SHOOT_DELAY;
+    }
   }
   
   charge() {
@@ -107,7 +112,7 @@ class Ship extends PIXI.Sprite {
         assist.destroyEnemies(pill.power);
       }
       else if(pill.type === pill.SPEED) {
-        if(Props.SHIP_SPEED < 6) {
+        if(Props.SHIP_SPEED <= 4) {
           app.showMessage('SPEED +1');
           Props.SHIP_SPEED++;
         }
@@ -115,9 +120,9 @@ class Ship extends PIXI.Sprite {
           app.showMessage('MAX SPEED');
       }
       else if(pill.type === pill.FIRE) {
-        if(Props.SHIP_SHOOT_DELAY > 5) {
+        if(Props.SHIP_SHOOT_DELAY >= 5) {
           app.showMessage('FIRE +1');
-          Props.SHIP_SHOOT_DELAY--;
+          Props.SHIP_SHOOT_DELAY-=3;
         }
         else
           app.showMessage('MAX FIRE');
