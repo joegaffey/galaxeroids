@@ -102,7 +102,26 @@ class Ship extends PIXI.Sprite {
   
   checkPillHit(pill) {
     if(isIntersecting(pill, this)) {
-      assist.destroyEnemies(pill.power);
+      if(pill.type === pill.ASSIST) {
+        app.showMessage('WINGMAN');
+        assist.destroyEnemies(pill.power);
+      }
+      else if(pill.type === pill.SPEED) {
+        if(Props.SHIP_SPEED < 6) {
+          app.showMessage('SPEED +1');
+          Props.SHIP_SPEED++;
+        }
+        else
+          app.showMessage('MAX SPEED');
+      }
+      else if(pill.type === pill.FIRE) {
+        if(Props.SHIP_SHOOT_DELAY > 5) {
+          app.showMessage('FIRE +1');
+          Props.SHIP_SHOOT_DELAY--;
+        }
+        else
+          app.showMessage('MAX FIRE');
+      }
       pill.ticker.stop();
       pill.destroy(); 
       app.addScore(Props.PILL_COLLECT_POINTS);
