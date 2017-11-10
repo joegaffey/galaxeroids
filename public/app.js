@@ -6,19 +6,17 @@ var app = new PIXI.Application();
 app.renderer = new PIXI.CanvasRenderer(Props.STAGE_HRES, Props.STAGE_VRES, { transparent: true });
 
 app.paused = true;
+app.gameover = false;
 app.score = 0;
 
 document.addEventListener('visibilitychange', function() {
   if( document.visibilityState == 'hidden') {
-    app.pause();
+    app.appStop('Press Start');
   }
+  // else if( document.visibilityState == 'visible') {
+  //   app.appStart();
+  // }
 });
-
-app.pause = function() {
-  app.ticker.stop();
-  app.paused = true;
-  app.showDialog();
-}
 
 var graphicsCanvas = document.querySelector('.graphicsCanvas');
 graphicsCanvas.appendChild(app.view);
@@ -53,7 +51,6 @@ app.showMessage = function(msg) {
     app.messageText.setText('');
   }, 2000);
 }
-app.showMessage('GET READY!!!');
 
 function resize() {
     if (window.innerWidth / window.innerHeight >= Props.STAGE_RATIO) {
@@ -108,10 +105,11 @@ setInterval(function() {
 app.nextLevel = function() {
   currentLevel++;
   if(currentLevel < levels.length) {
+    app.showMessage('GET READY!!!');
     swarm.reset();
     setTimeout(function() {
       swarm.addEnemyRows(levels[currentLevel].swarm.rows);  
-    }, 1000);
+    }, 2000);
   }
 }
 
@@ -119,6 +117,7 @@ var currentLevel = -1;
 app.nextLevel();
 
 app.reset = function() {
+  app.gameover = false;
   if(mother) {
     mother.reset();
   }
@@ -146,6 +145,7 @@ app.reset = function() {
   ship = new Ship();
   assist = new Assist();
   swarm = new Swarm();
+  lives = new Lives();
   currentLevel = -1;
   app.nextLevel();
 }
@@ -163,15 +163,13 @@ app.hideDialog = function() {
 }
 
 app.unPause = function() {  
-  if(app.stopped) {
-    app.stopped = false;
-    app.reset();
-  }
   app.paused = false;
   app.ticker.start();
-  app.hideDialog();
-  document.querySelector('#optMessage').innerText = '';
-  document.querySelector('#scoreMessage').innerText = '';
+}
+
+app.pause = function() {
+  app.ticker.stop();
+  app.paused = true;
 }
 
 app.updateScore = function(score) {
@@ -192,9 +190,22 @@ app.minusScore = function(score) {
   app.scoreText.text = app.score;
 }
 
-app.stop = function(message) {
-  app.ticker.stop();
-  app.paused = true;
-  app.stopped = true;
+app.appStart = function() {
+  if(app.gameover) {
+    app.reset();
+  }
+  app.unPause();
+  app.hideDialog();
+  document.querySelector('#optMessage').innerText = '';
+  document.querySelector('#scoreMessage').innerText = '';
+}
+
+app.endGame = function(msg) {
+  app.gameover = true;
+  app.appStop(msg)
+}
+
+app.appStop = function(message) {
+  app.pause();
   app.showDialog(message);
 }

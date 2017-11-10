@@ -13,15 +13,15 @@ class Controls {
 
   static handlePause() {
     if(app.paused)
-      app.unPause();
+      app.appStart();
     else
-      app.pause();
+      app.appStop();
   }
   
   static handleReset() {
     if(app.paused) {
       app.reset();
-      app.unPause();
+      app.appStop();
     }
   }
 

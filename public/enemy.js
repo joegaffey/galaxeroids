@@ -122,7 +122,7 @@ class Enemy extends PIXI.Sprite {
     this.destroy();
     if(swarm.enemyCount === 0) {
       if(!mother)
-        app.stop(Props.SUCCESS_MESSAGE);
+        app.endGame(Props.SUCCESS_MESSAGE);
       app.nextLevel();
     }
   }

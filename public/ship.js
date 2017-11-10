@@ -142,8 +142,16 @@ class Ship extends PIXI.Sprite {
   }
 
   hit() {
-    GameAudio.explosionSound();
     this.speed = 0;
+    let messages = ['AYE CARUMBA!', 'OUCH!!!', 'THAT\'S GOTTA HURT!', 'YIKES!'];
+    let msg = messages[Math.floor(Math.random() * messages.length)];
+    console.log(msg);
+    app.showMessage(msg);
+    GameAudio.explosionSound();
     lives.dec();
+    // app.pause();
+    // setTimeout(function() {
+    //   app.unPause();
+    // }, 2000);
   }
 }
