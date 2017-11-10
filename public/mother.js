@@ -46,7 +46,7 @@ class Mother extends PIXI.Sprite {
     Effects.explode(this.x, this.y, Props.EXPLOSION_HUGE);
     app.addScore(Props.MOTHER_KILL_POINTS);
     if(swarm.enemyCount === 0)
-      app.stop(Props.SUCCESS_MESSAGE);
+      app.endGame(Props.SUCCESS_MESSAGE);
     this.destroy(); 
     mother = null;
   }

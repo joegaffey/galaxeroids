@@ -4,10 +4,10 @@ class Lives {
     this.lives = Props.PLAYER_LIVES;
     this.livesContainer = new PIXI.Container();
     app.game.addChild(this.livesContainer);    
-    this.renderLives();
+    this.render();
   }
   
-  renderLives() {
+  render() {
     this.livesContainer.removeChildren();
     for(var i = 0; i < this.lives; i++) {
       let life = new PIXI.Sprite(GameGraphics.getShipGraphics());
@@ -21,22 +21,22 @@ class Lives {
   
   dec() {
     if(this.lives <= 0) {
-      app.stop(Props.DEATH_MESSAGE);
+      app.endGame(Props.DEATH_MESSAGE);
       return;
     }
     this.lives--;  
-    this.renderLives();
+    this.render();
   }
 
   inc() {
     if(this.lives >= Props.PLAYER_MAX_LIVES)
       return;
     this.lives++;  
-    this.renderLives();
+    this.render();
   }
   
   reset() {
     this.lives = Props.PLAYER_LIVES;
-    this.renderLives();
+    this.render();
   }
 }
