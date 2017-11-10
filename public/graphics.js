@@ -61,12 +61,13 @@ GameGraphics.getMotherGraphics = function() {
 }
 
 GameGraphics.getShipGraphics = function() {
-  var graphics = new PIXI.Graphics();
-  graphics.beginFill(0xFFFFFF);
-  graphics.drawCircle(0, 0, 10);
-  graphics.endFill();
-  graphics.boundsPadding = 0;
-  return graphics.generateTexture();
+  return new PIXI.Texture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fship1.png?1510356198839');
+  // var graphics = new PIXI.Graphics();
+  // graphics.beginFill(0xFFFFFF);
+  // graphics.drawCircle(0, 0, 10);
+  // graphics.endFill();
+  // graphics.boundsPadding = 0;
+  // return graphics.generateTexture();
 }
 
 GameGraphics.getAssistGraphics = function() {

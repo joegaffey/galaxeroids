@@ -1,13 +1,13 @@
 class Ship extends PIXI.Sprite {
   constructor() {    
     super(GameGraphics.getShipGraphics());
-    this.tint = 0x44AAFF;
     this.shootDelay = Props.SHIP_SHOOT_DELAY;
     this.orbs = 3;
     this.renderOrbs();
     
     this.x = Props.STAGE_HRES / 2;
     this.y = Props.STAGE_VRES - Props.SHIP_VERT_ADJUST;
+    this.scale.x = this.scale.y = 2;
     this.anchor.x = 0.5;
     this.anchor.y = 0.5;
     this.speed = 0;
@@ -27,7 +27,7 @@ class Ship extends PIXI.Sprite {
   
   renderOrbs() {
     let orb = new PIXI.Sprite(GameGraphics.getEnergyGraphics());
-    orb.x = 100;
+    orb.x = 80;
     orb.y = 10;
     orb.scale.x = 1.5;
     orb.scale.y = 1.5;
@@ -36,7 +36,7 @@ class Ship extends PIXI.Sprite {
     app.game.addChild(orb);
     
     this.orbText = new PIXI.Text('x' + this.orbs, style);
-    this.orbText.x = 140;
+    this.orbText.x = 120;
     this.orbText.y = 10;
     this.orbText.anchor.set(1, 0);
     app.game.addChild(this.orbText);
@@ -185,7 +185,6 @@ class Ship extends PIXI.Sprite {
     this.speed = 0;
     let messages = ['AYE CARUMBA!', 'OUCH!!!', 'THAT\'S GOTTA HURT!', 'YIKES!'];
     let msg = messages[Math.floor(Math.random() * messages.length)];
-    console.log(msg);
     app.showMessage(msg);
     GameAudio.explosionSound();
     lives.dec();
