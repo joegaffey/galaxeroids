@@ -44,6 +44,10 @@ GameAudio.alienHitSound = function() {
   GameAudio.playSound(5, 2); 
 }
 
+GameAudio.pillCollectSound = function() {
+  GameAudio.playSound(5, 2); 
+}
+
 GameAudio.motherHitSound = function() {
   GameAudio.playSound(3, 0.6); 
 }
