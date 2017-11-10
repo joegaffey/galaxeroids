@@ -191,14 +191,9 @@ class Swarm {
   checkEnergy(energy) {
     this.enemies.forEach(function(enemy, i) {
       if(energy && enemy && isIntersecting(energy, enemy)) {
-        if(enemy.hits > 0) {
-          energy.ticker.stop();
-          energy.destroy(); 
-          enemy.hits--;
-          if(enemy.hits == 0)
-            enemy.rotation = 0;
-          app.minusScore(Props.ENEMY_HIT_POINTS);
-        }
+        energy.ticker.stop();
+        energy.destroy(); 
+        enemy.explode();
         return;
       }
     }.bind(this));

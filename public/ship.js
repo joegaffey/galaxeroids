@@ -3,6 +3,8 @@ class Ship extends PIXI.Sprite {
     super(GameGraphics.getShipGraphics());
     this.tint = 0x44AAFF;
     this.shootDelay = Props.SHIP_SHOOT_DELAY;
+    this.orbs = 3;
+    this.renderOrbs();
     
     this.x = Props.STAGE_HRES / 2;
     this.y = Props.STAGE_VRES - Props.SHIP_VERT_ADJUST;
@@ -23,6 +25,35 @@ class Ship extends PIXI.Sprite {
     app.game.addChild(this);
   }
   
+  renderOrbs() {
+    let orb = new PIXI.Sprite(GameGraphics.getEnergyGraphics());
+    orb.x = 100;
+    orb.y = 10;
+    orb.scale.x = 1.5;
+    orb.scale.y = 1.5;
+    orb.tint = 0x00FF00;
+    orb.anchor.set(0.5, 0);
+    app.game.addChild(orb);
+    
+    this.orbText = new PIXI.Text('x' + this.orbs, style);
+    this.orbText.x = 140;
+    this.orbText.y = 10;
+    this.orbText.anchor.set(1, 0);
+    app.game.addChild(this.orbText);
+  }
+  
+  incOrbs() {
+    this.orbs++;
+    this.orbText.setText('x' + this.orbs);
+  }
+  
+  decOrbs() {
+    if(this.orbs > 0) {
+      this.orbs--;
+      this.orbText.setText('x' + this.orbs);
+    }
+  }
+  
   shoot() {
     if(this.shootDelay <= 0) {
       GameAudio.shootSound();
@@ -32,12 +63,12 @@ class Ship extends PIXI.Sprite {
   }
   
   charge() {
-    GameAudio.shootSound();
     this.addEnergy(this.x, this.y - this.height / 2);
   }
   
   reset() {
     this.ticker.stop();
+    this.orbText.destroy();
     this.destroy();
   }
   
@@ -69,6 +100,10 @@ class Ship extends PIXI.Sprite {
   }
   
   addEnergy(x, y) {    
+    if(this.orbs <= 0)
+       return;
+    GameAudio.shootSound();
+    this.decOrbs();
     var energy = new PIXI.Sprite(GameGraphics.getEnergyGraphics());
     energy.x = x;
     energy.y = y;
@@ -127,8 +162,13 @@ class Ship extends PIXI.Sprite {
         else
           app.showMessage('MAX FIRE');
       }
+      else if(pill.type === pill.ORB) {
+          app.showMessage('DESTRUCTORB');
+          this.incOrbs();
+      }
       pill.ticker.stop();
       pill.destroy(); 
+      GameAudio.pillCollectSound();
       app.addScore(Props.PILL_COLLECT_POINTS);
       return;
     }
