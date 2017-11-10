@@ -38,9 +38,22 @@ app.scoreText.y = 10;
 app.scoreText.anchor.set(1, 0);
 app.stage.addChild(app.scoreText);
 
+app.messageText = new PIXI.Text('', style);
+app.messageText.x = 400;
+app.messageText.y = 10;
+app.messageText.anchor.set(0.5, 0);
+app.stage.addChild(app.messageText);
 
 var scanLinesSprite = new PIXI.Sprite(GameGraphics.getScanLines());
 app.stage.addChild(scanLinesSprite);
+
+app.showMessage = function(msg) {
+  app.messageText.setText(msg);
+  setTimeout(function() {
+    app.messageText.setText('');
+  }, 2000);
+}
+app.showMessage('GET READY!!!');
 
 function resize() {
     if (window.innerWidth / window.innerHeight >= Props.STAGE_RATIO) {

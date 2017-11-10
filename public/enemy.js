@@ -15,9 +15,6 @@ class Enemy extends PIXI.Sprite {
       if(app.paused)
         return;
       
-      // this.scale.x = 1 - (this.hits * Props.ENEMY_DECAY_RATE);  
-      // this.scale.y = 1 - (this.hits * Props.ENEMY_DECAY_RATE);  
-      
       if(this.yOffset > 0) {
         this.rotation = this.yOffset * 2 * Props.ENEMY_ROTATION_SPEED;
         this.y = swarm.getEnemyYByIndex(this.index) - this.yOffset;

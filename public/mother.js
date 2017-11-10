@@ -91,7 +91,8 @@ class Mother extends PIXI.Sprite {
       }
     });
     bullet.ticker.start();
-    app.stage.addChild(bullet);
+    app.game.addChild(bullet);
+    app.bullets.push(bullet);
   }
   
   addPill(power) {    
