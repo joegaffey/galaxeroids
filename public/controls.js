@@ -26,7 +26,7 @@ class Controls {
   }
 
   static handleLeft() {
-    ship.speed = -Props.SHIP_SPEED;
+    ship.speed = -Props.SHIP_SPEED -ship.speedBoost;
   }
 
   static handleLeftEnd() {
@@ -34,7 +34,7 @@ class Controls {
   }
 
   static handleRight() {
-    ship.speed = Props.SHIP_SPEED;
+    ship.speed = Props.SHIP_SPEED + ship.speedBoost;
   }
 
   static handleRightEnd() {

@@ -2,6 +2,7 @@ class Ship extends PIXI.Sprite {
   constructor() {    
     super(GameGraphics.getShipGraphics());
     this.shootDelay = Props.SHIP_SHOOT_DELAY;
+    this.firePower = 0;
     this.orbs = 3;
     this.renderOrbs();
     
@@ -11,6 +12,7 @@ class Ship extends PIXI.Sprite {
     this.anchor.x = 0.5;
     this.anchor.y = 0.5;
     this.speed = 0;
+    this.speedBoost = 0;
     this.direction = 1;
     this.ticker = new PIXI.ticker.Ticker();
     this.ticker.add(function() {
@@ -36,9 +38,9 @@ class Ship extends PIXI.Sprite {
     app.game.addChild(orb);
     
     this.orbText = new PIXI.Text('x' + this.orbs, style);
-    this.orbText.x = 120;
+    this.orbText.x = 90;
     this.orbText.y = 10;
-    this.orbText.anchor.set(1, 0);
+    this.orbText.anchor.set(0, 0);
     app.game.addChild(this.orbText);
   }
   
@@ -58,7 +60,7 @@ class Ship extends PIXI.Sprite {
     if(this.shootDelay <= 0) {
       GameAudio.shootSound();
       this.addBullet(this.x, this.y - this.height / 2);
-      this.shootDelay = Props.SHIP_SHOOT_DELAY;
+      this.shootDelay = Props.SHIP_SHOOT_DELAY - this.firePower;
     }
   }
   
@@ -69,6 +71,8 @@ class Ship extends PIXI.Sprite {
   reset() {
     this.ticker.stop();
     this.orbText.destroy();
+    this.firePower = 0;
+    this.speedBoost = 0;
     this.destroy();
   }
   
@@ -147,17 +151,17 @@ class Ship extends PIXI.Sprite {
         assist.destroyEnemies(pill.power);
       }
       else if(pill.type === pill.SPEED) {
-        if(Props.SHIP_SPEED <= 4) {
+        if(this.speedBoost <= 4) {
           app.showMessage('SPEED +1');
-          Props.SHIP_SPEED++;
+          this.speedBoost++;
         }
         else
           app.showMessage('MAX SPEED');
       }
       else if(pill.type === pill.FIRE) {
-        if(Props.SHIP_SHOOT_DELAY >= 5) {
+        if(this.firePower < 10) {
           app.showMessage('FIRE +1');
-          Props.SHIP_SHOOT_DELAY-=3;
+          this.firePower +=2;
         }
         else
           app.showMessage('MAX FIRE');
@@ -165,6 +169,14 @@ class Ship extends PIXI.Sprite {
       else if(pill.type === pill.ORB) {
           app.showMessage('DESTRUCTORB');
           this.incOrbs();
+      }
+      else if(pill.type === pill.LIFE) {
+        if(lives.lives < Props.PLAYER_MAX_LIVES) {
+          app.showMessage('1UP !!!');
+          lives.inc();
+        }
+        else
+          app.showMessage('MAX LIVES');
       }
       pill.ticker.stop();
       pill.destroy(); 
@@ -188,6 +200,8 @@ class Ship extends PIXI.Sprite {
     app.showMessage(msg);
     GameAudio.explosionSound();
     lives.dec();
+    this.firePower = 0;
+    this.speedBoost = 0;
     // app.pause();
     // setTimeout(function() {
     //   app.unPause();

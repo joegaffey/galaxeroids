@@ -5,6 +5,15 @@ function addNewPill(sprite, power) {
   pill.FIRE = 1;
   pill.ASSIST = 2;
   pill.ORB = 3;
+  pill.LIFE = 4;
+  
+  pill.powerUps = [
+    pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,
+    pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,
+    pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,
+    pill.ASSIST,pill.ASSIST,pill.ASSIST,pill.ASSIST,
+    pill.LIFE
+  ];
   
   pill.x = sprite.x;
   pill.y = sprite.y;
@@ -13,7 +22,7 @@ function addNewPill(sprite, power) {
   pill.power = power;
   pill.speed = Props.PILL_SPEED;
   pill.ticker = new PIXI.ticker.Ticker();
-  pill.type = Math.floor(Math.random() * 4);
+  pill.type = pill.powerUps[Math.floor(Math.random() * pill.powerUps.length)];
   pill.ticker.add(function() {
     if(app.paused)
        return;

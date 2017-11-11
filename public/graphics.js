@@ -30,11 +30,11 @@ GameGraphics.getShipBulletGraphics = function() {
 
 GameGraphics.getScanLines = function() {
   var graphics = new PIXI.Graphics();
-  graphics.lineStyle(2, 0x333333, 0.3);
+  graphics.lineStyle(2, 0x333333, 0.2);
   let i = 0;
   while(i < 600) {
-    graphics.moveTo(0, i * 3);
-    graphics.lineTo(800, i * 3);
+    graphics.moveTo(0, i * 4);
+    graphics.lineTo(800, i * 4);
     i++;
   }
   graphics.endFill();

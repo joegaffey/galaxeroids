@@ -16,9 +16,9 @@ class Lives {
     this.livesContainer.addChild(miniShip);
     
     this.livesText = new PIXI.Text('x' + this.lives, style);
-    this.livesText.x = 55;
+    this.livesText.x = 25;
     this.livesText.y = 10;
-    this.livesText.anchor.set(1, 0);
+    this.livesText.anchor.set(0, 0);
     this.livesContainer.addChild(this.livesText);
   }
   
