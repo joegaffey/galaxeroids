@@ -75,8 +75,11 @@ var lives = new Lives();
 app.bullets = [];
 
 setInterval(function() { 
-  if(!app.paused)
+  if(!app.paused) {
     swarm.move(); 
+    if(mother)
+      mother.swapTexture();
+  }
 }, Props.SWARM_MOVE_INTERVAL);
 
 setInterval(function() { 

@@ -1,12 +1,13 @@
 class Mother extends PIXI.Sprite {
+  
   constructor() {
-    super(GameGraphics.getMotherGraphics());
-    this.tint = 0xFF0000;
+    super(Mother.textures[0]);
     this.x = app.renderer.width / 2;
-    this.y = 40;
-    this.anchor.x = 0.5;
-    this.anchor.y = 0.5;
+    this.y = 50;
+    this.anchor.x = this.anchor.y = 0.5;
+    this.scale.x = this.scale.y = 2;
     this.hits = 0;
+    this.currentTexture = 0;
     this.direction = 1;
     this.pillTimeout = Props.PILL_DELAY;
     this.ticker = new PIXI.ticker.Ticker();
@@ -22,6 +23,14 @@ class Mother extends PIXI.Sprite {
     }.bind(this));
     app.game.addChild(this);
     this.ticker.start();
+  }
+  
+  swapTexture() {
+    if(this.currentTexture === 0)
+      this.currentTexture = 1;
+    else 
+      this.currentTexture = 0;
+    this.setTexture(Mother.textures[this.currentTexture]);
   }
   
   hit() {
@@ -107,3 +116,6 @@ class Mother extends PIXI.Sprite {
     this.destroy();
   }
 }
+
+Mother.textures = [GameGraphics.mother1,
+                  GameGraphics.mother2];
