@@ -1,7 +1,7 @@
 var lastKey = -1;
 
 window.addEventListener('keyup', function (e) {
-  if(e.keyCode === 32) {
+  if(e.keyCode === 90) {
     Controls.handleFire();
   }
   else if(e.keyCode === 88) {
