@@ -3,6 +3,10 @@ GameGraphics.spriteSheetImage = new PIXI.BaseTexture.fromImage('https://cdn.glit
 GameGraphics.alien1_1 = new PIXI.Texture(GameGraphics.spriteSheetImage, new PIXI.Rectangle(0, 0, 19, 19));
 GameGraphics.alien1_2 = new PIXI.Texture(GameGraphics.spriteSheetImage, new PIXI.Rectangle(20, 0, 19, 19));
 
+GameGraphics.spriteSheetImage1 = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlienMother.png?1510435694501');
+GameGraphics.mother1 = new PIXI.Texture(GameGraphics.spriteSheetImage1, new PIXI.Rectangle(0, 0, 40, 20));
+GameGraphics.mother2 = new PIXI.Texture(GameGraphics.spriteSheetImage1, new PIXI.Rectangle(0, 20, 40, 20));
+
 
 GameGraphics.getBulletGraphics = function() {
   var graphics = new PIXI.Graphics();
@@ -17,7 +21,7 @@ GameGraphics.getShipBulletGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
   graphics.drawRect(4, 2, 4, 2);
-    graphics.beginFill(0xFFFF00);
+  graphics.beginFill(0xFFFF00);
   graphics.drawRect(4, 4, 4, 2);
   graphics.beginFill(0xFF9900);
   graphics.drawRect(4, 6, 4, 4);
