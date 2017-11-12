@@ -1,11 +1,21 @@
 var gpIndex = -1;
-var pads = navigator.getGamepads();
-for(var i in pads) {
-  if(pads[i] && pads[i].timestamp > 0) {
-    gpIndex = i;
-    break;
+
+setInterval (function() {
+  detectGamepad();  
+}, 1000);
+
+function detectGamepad() {
+  if(gpIndex > -1)
+    return;
+  var pads = navigator.getGamepads();
+  for(var i in pads) {
+    if(pads[i] && pads[i].timestamp > 0) {
+      gpIndex = i;
+      break;
+    }
   }
 }
+detectGamepad();
 
 var resetPause = true;
 var resetReset = true;
@@ -57,5 +67,6 @@ function checkGamepad() {
   catch(e) { console.log(e); }
   window.requestAnimationFrame(checkGamepad);
 }
+
 if(gpIndex > -1)
   window.requestAnimationFrame(checkGamepad);
