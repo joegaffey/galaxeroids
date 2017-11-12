@@ -9,11 +9,10 @@ for(var i in pads) {
 
 var resetPause = true;
 var resetReset = true;
+var resetCharge = true;
 
-var shootDelay = Props.SHIP_SHOOT_DELAY;
 
 function checkGamepad() {
-  shootDelay--;
   var gp = navigator.getGamepads()[gpIndex];
   var analogueLR = gp.axes[0];
   try {
@@ -24,34 +23,19 @@ function checkGamepad() {
     else
       Controls.handleStop();
     
-    if(gp.buttons[0].value === 1) {
-      if(shootDelay <= 0) {
-        Controls.handleFire();
-        shootDelay = Props.SHIP_SHOOT_DELAY;
-      }
+    if(gp.buttons[0].value === 1 || gp.buttons[2].value === 1) {
+      Controls.handleFire();
     }
     
-    if(gp.buttons[1].value === 1) {
-      if(shootDelay <= 0) {
+    if(gp.buttons[1].value === 1 || gp.buttons[3].value === 1) {
+      if(resetCharge) {
         Controls.handleCharge();
-        shootDelay = Props.SHIP_SHOOT_DELAY;
+        resetCharge = false;
       }
     }    
-    
-    if(gp.buttons[2].value === 1) {
-      if(shootDelay <= 0) {
-        Controls.handleFire();
-        shootDelay = Props.SHIP_SHOOT_DELAY;
-      }
-    }
-    
-    if(gp.buttons[3].value === 1) {
-      if(shootDelay <= 0) {
-        Controls.handleCharge();
-        shootDelay = Props.SHIP_SHOOT_DELAY;
-      }
-    } 
-    
+    else
+      resetCharge = true;
+
     if(gp.buttons[8].value === 1) {
       if(resetReset) {
         Controls.handleReset();
