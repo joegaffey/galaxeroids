@@ -10,11 +10,11 @@ app.gameover = false;
 app.score = 0;
 
 document.addEventListener('visibilitychange', function() {
-  if( document.visibilityState == 'hidden') {
-    app.appStop('Press Start');
+  if(document.visibilityState == 'hidden') {
+    app.pause();
   }
   // else if( document.visibilityState == 'visible') {
-  //   app.appStart();
+  //   app.unPause();
   // }
 });
 
@@ -24,10 +24,13 @@ graphicsCanvas.appendChild(app.view);
 app.game = new PIXI.Container();
 app.stage.addChild(app.game);
 
+app.info = new PIXI.Container();
+app.stage.addChild(app.info);
+
 var style = new PIXI.TextStyle({
-    fontFamily: 'PressStart',
-    fontSize: 14,
-    fill: ['#888888']
+  fontFamily: 'PressStart',
+  fontSize: 14,
+  fill: ['#888888']
 });
 
 app.scoreText = new PIXI.Text(app.score, style);
@@ -53,15 +56,16 @@ app.showMessage = function(msg) {
 }
 
 function resize() {
-    if (window.innerWidth / window.innerHeight >= Props.STAGE_RATIO) {
-        var w = window.innerHeight * Props.STAGE_RATIO;
-        var h = window.innerHeight;
-    } else {
-        var w = window.innerWidth;
-        var h = window.innerWidth / Props.STAGE_RATIO;
-    }
-    app.renderer.view.style.width = w + 'px';
-    app.renderer.view.style.height = h - Props.STAGE_VERT_OFFSET + 'px';
+  if (window.innerWidth / window.innerHeight >= Props.STAGE_RATIO) {
+    var w = window.innerHeight * Props.STAGE_RATIO;
+    var h = window.innerHeight;
+  } 
+  else {
+    var w = window.innerWidth;
+    var h = window.innerWidth / Props.STAGE_RATIO;
+  }
+  app.renderer.view.style.width = w + 'px';
+  app.renderer.view.style.height = h - Props.STAGE_VERT_OFFSET + 'px';
 }
 window.onresize = resize;
 resize();
@@ -73,6 +77,7 @@ var assist = new Assist();
 var lives = new Lives(); 
 
 app.bullets = [];
+app.tweens = [];
 
 setInterval(function() { 
   if(!app.paused) {
@@ -86,7 +91,7 @@ setInterval(function() {
   if(!app.paused) {
     var enemy = swarm.getRandomEnemy();
     if(enemy)
-       enemy.shoot();
+      enemy.shoot();
   }
 }, Math.floor(Props.SWARM_SHOOT_INTERVAL + Math.random() * Props.SWARM_SHOOT_INTERVAL));
 
@@ -94,7 +99,7 @@ setInterval(function() {
   if(!app.paused) {
     var enemy = swarm.getRandomEnemy();
     if(enemy)
-       enemy.attack();
+      enemy.attack();
   }
 }, Math.floor(5000 + Math.random() * 5000));
 
@@ -114,6 +119,22 @@ app.nextLevel = function() {
       swarm.addEnemyRows(levels[currentLevel].swarm.rows);  
     }, 2000);
   }
+}
+
+app.pauseTweens = function() {
+  app.tweens.forEach(function(tween) {
+    if(tween) {
+      tween.stop();
+    }
+  });
+}
+
+app.unPauseTweens = function() {
+  app.tweens.forEach(function(tween) {
+    if(tween) {
+      tween.start();
+    }
+  });
 }
 
 var currentLevel = -1;
@@ -137,12 +158,14 @@ app.reset = function() {
     }
   });
   app.bullets = [];
+  app.tweens = [];
   
   app.game.children.forEach(function(child) {
     child.destroy();
   });  
   
   app.updateScore(0);
+  app.infoScreen.gameMessage.text = '';
   
   mother = new Mother();
   ship = new Ship();
@@ -153,26 +176,23 @@ app.reset = function() {
   app.nextLevel();
 }
 
-app.showDialog = function(message) {
-  if(message) {
-    document.querySelector('#scoreMessage').innerText = 'You scored ' + app.score + ' points';
-    document.querySelector('#optMessage').innerText = message;
-  }
-  document.querySelector('.modal').style.display = 'block';
-}
-
-app.hideDialog = function() {
-  document.querySelector('.modal').style.display = 'none';
-}
+app.infoScreen = new InfoScreen();
+app.info.addChild(app.infoScreen);
 
 app.unPause = function() {  
+  app.infoScreen.visible = false;
   app.paused = false;
   app.ticker.start();
+  app.unPauseTweens();
 }
 
 app.pause = function() {
-  app.ticker.stop();
-  app.paused = true;
+  app.infoScreen.visible = true;
+  setTimeout(function() {
+    app.ticker.stop();
+    app.paused = true;
+    app.pauseTweens();
+  }, 100);
 }
 
 app.updateScore = function(score) {
@@ -198,17 +218,10 @@ app.appStart = function() {
     app.reset();
   }
   app.unPause();
-  app.hideDialog();
-  document.querySelector('#optMessage').innerText = '';
-  document.querySelector('#scoreMessage').innerText = '';
 }
 
 app.endGame = function(msg) {
   app.gameover = true;
-  app.appStop(msg)
-}
-
-app.appStop = function(message) {
+  app.infoScreen.gameMessage.text = msg;
   app.pause();
-  app.showDialog(message);
 }

@@ -21,28 +21,6 @@
   <div class="chargeControl"></div>
   <div class="fireControl"></div>
 </div>
-<div class="modal">
-  <div class="modal-content">
-    <p id="optMessage"></p>
-    <p id="scoreMessage"></p>
-    <table>
-      <tr><th></th><th>Keyboard</th><th>Joystick</th><th>Touch</th></tr>
-      <tr>
-        <td>Move</td>
-        <td>Arrow keys</td>
-        <td>axes0</td>
-        <td class="moveIcons"> 
-          <img height="12" width="12" src="leftControl.svg">
-          <img height="12" width="12" src="rightControl.svg">
-        </td>
-      </tr>
-      <tr><td>Fire</td><td>Z</td><td>Joy0</td><td><div class="fireControlIcon"></div></td></tr>
-      <tr><td>Orb</td><td>X</td><td>Joy1</td><td><div class="energyControlIcon"></div></td></tr>
-      <tr><td>Start/Pause</td><td>Enter</td><td>Joy9</td><td>N/A</td></tr>
-    </table>
-    <p><button onclick="app.appStart();">Start!</button></p>
-  </div>
-</div>
   
 <script>
 if (navigator.serviceWorker.controller) {
@@ -62,6 +40,7 @@ if (navigator.serviceWorker.controller) {
 <script src="./libs/pixi-tween.min.js"></script>
 <script src="buffer-loader.js"></script>
 <script src="props.js"></script>
+<script src="info-screen.js"></script>    
 <script src="levels.js"></script>
 <script src="graphics.js"></script>
 <script src="physics.js"></script>

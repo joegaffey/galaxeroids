@@ -71,6 +71,7 @@ class Enemy extends PIXI.Sprite {
     }.bind(this));
     
     this.inPosition = false;
+    app.tweens.push(this.tween);
     
     this.tween.start(function() {
       this.x = swarm.getEnemyXByIndex(this.index);
