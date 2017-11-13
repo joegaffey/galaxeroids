@@ -15,7 +15,7 @@ class Controls {
     if(app.paused)
       app.appStart();
     else
-      app.appStop();
+      app.pause();
   }
   
   static handleReset() {

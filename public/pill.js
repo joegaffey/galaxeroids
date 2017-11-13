@@ -1,5 +1,5 @@
 function addNewPill(sprite, power) {   
-  var pill = new PIXI.Sprite(PIXI.Texture.fromImage('pill.svg', undefined, undefined, Props.PILL_SCALE));
+  var pill = new PIXI.Sprite(GameGraphics.pillGraphics);
   
   pill.SPEED = 0;
   pill.FIRE = 1;
@@ -16,7 +16,7 @@ function addNewPill(sprite, power) {
   ];
   
   pill.x = sprite.x;
-  pill.y = sprite.y;
+  pill.y = sprite.y - (sprite.height / 2);
   pill.anchor.x = 0.5;
   pill.anchor.y = 0.5;
   pill.power = power;

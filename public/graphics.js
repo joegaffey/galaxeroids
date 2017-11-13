@@ -1,4 +1,7 @@
 var GameGraphics = {};
+
+GameGraphics.pillGraphics = new PIXI.Texture.fromImage('pill.svg', undefined, undefined, Props.PILL_SCALE);
+
 GameGraphics.spriteSheetImage = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsprites.png?1510171075032');
 GameGraphics.alien1_1 = new PIXI.Texture(GameGraphics.spriteSheetImage, new PIXI.Rectangle(0, 0, 19, 19));
 GameGraphics.alien1_2 = new PIXI.Texture(GameGraphics.spriteSheetImage, new PIXI.Rectangle(20, 0, 19, 19));
@@ -12,6 +15,16 @@ GameGraphics.getBulletGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
   graphics.drawRect(4, 4, 3, 10);
+  graphics.endFill();
+  graphics.boundsPadding = 0;
+  return graphics.generateTexture();
+}
+
+GameGraphics.getBlackBGGraphics = function() {
+  var graphics = new PIXI.Graphics();
+  graphics.beginFill(0x000000);
+  graphics.alpha = 0.8;
+  graphics.drawRect(0, 0, 800, 600);
   graphics.endFill();
   graphics.boundsPadding = 0;
   return graphics.generateTexture();
@@ -66,12 +79,6 @@ GameGraphics.getMotherGraphics = function() {
 
 GameGraphics.getShipGraphics = function() {
   return new PIXI.Texture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fship1.png?1510356198839');
-  // var graphics = new PIXI.Graphics();
-  // graphics.beginFill(0xFFFFFF);
-  // graphics.drawCircle(0, 0, 10);
-  // graphics.endFill();
-  // graphics.boundsPadding = 0;
-  // return graphics.generateTexture();
 }
 
 GameGraphics.getAssistGraphics = function() {
