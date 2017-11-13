@@ -21,7 +21,6 @@ var resetPause = true;
 var resetReset = true;
 var resetCharge = true;
 
-
 function checkGamepad() {
   var gp = navigator.getGamepads()[gpIndex];
   var analogueLR = gp.axes[0];
