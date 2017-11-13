@@ -1,31 +1,31 @@
 class Controls {
-  static handleFire() {
+  static handleFire(ev) {
     if(app.paused)
       return;
     ship.shoot();
   }
 
-  static handleCharge() {
+  static handleCharge(ev) {
     if(app.paused)
       return;
     ship.charge();
   }
 
-  static handlePause() {
+  static handlePause(ev) {
     if(app.paused)
       app.appStart();
     else
       app.pause();
   }
   
-  static handleReset() {
+  static handleReset(ev) {
     if(app.paused) {
       app.reset();
       app.appStop();
     }
   }
 
-  static handleLeft() {
+  static handleLeft(ev) {
     ship.speed = -Props.SHIP_SPEED -ship.speedBoost;
   }
 

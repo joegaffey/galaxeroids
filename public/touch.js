@@ -3,20 +3,39 @@ document.body.addEventListener('touchstart', showControls);
 function showControls() {
   document.querySelector('.controls').style.display = 'block';
   document.body.removeEventListener('touchstart', showControls);
-  Controls.handlePause();
-  // document.body.addEventListener('touchstart', Controls.handlePause);
+  document.body.addEventListener('touchstart', Controls.handlePause);
 }
 
 var fireButton = document.querySelector('.fireControl');
-fireButton.addEventListener('touchstart', Controls.handleFire);
+fireButton.addEventListener('touchstart', function(ev) { 
+  ev.stopPropagation();
+  Controls.handleFire();
+});
 
 var chargeButton = document.querySelector('.chargeControl');
-chargeButton.addEventListener('touchstart', Controls.handleCharge);
+chargeButton.addEventListener('touchstart', function(ev) { 
+  ev.stopPropagation();
+  Controls.handleCharge();
+});
 
 var leftButton = document.querySelector('.leftControl');
-leftButton.addEventListener('touchstart', Controls.handleLeft);
-leftButton.addEventListener('touchend', Controls.handleLeftEnd);
+leftButton.addEventListener('touchstart', function(ev) { 
+  ev.stopPropagation();
+  Controls.handleLeft();
+});
+
+leftButton.addEventListener('touchend', function(ev) { 
+  ev.stopPropagation();
+  Controls.handleLeftEnd();
+});
 
 var rightButton = document.querySelector('.rightControl');
-rightButton.addEventListener('touchstart', Controls.handleRight);
-rightButton.addEventListener('touchend', Controls.handleRightEnd);
+rightButton.addEventListener('touchstart', function(ev) { 
+  ev.stopPropagation();
+  Controls.handleRight();
+});
+
+rightButton.addEventListener('touchend', function(ev) { 
+  ev.stopPropagation();
+  Controls.handleRightEnd();
+});
