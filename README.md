@@ -7,7 +7,7 @@ It was created entirely in-browser using [Glitch](https://glitch.com/) for code 
 
 You can [play it here](https://joegaffey.github.io/galaxeroids/public/) but it's Work In Progress until 1/12 (at least).
 
-Thanks to [Pixi.js](http://www.pixijs.com/) for general rendering and animation duties and [pixi-tween](https://github.com/themoonrat/pixi-tween/) for the alien attack animations.
+Thanks to [Pixi.js](http://www.pixijs.com/) for general rendering and animation duties and [GSAP](https://greensock.com/docs/Plugins/PixiPlugin) for the alien attack animations.
 
 The app uses uncompiled ES6 (view source) so it requires a fairly  modern browser. I test it (sometimes) in Chrome (Windows, Android), Firefox (Windows) and Edge. 
 

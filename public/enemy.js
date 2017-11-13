@@ -25,42 +25,34 @@ class Enemy extends PIXI.Sprite {
       
     }.bind(this));
     this.ticker.start();
-    
-    this.ticker.add(function(delta) {
-      PIXI.tweenManager.update();
-    });
   }
   
+  
   attack() {    
-    const x = this.x;
-    const y = this.y;
-    const destX = ship.x;
-    const destY = ship.y;
-    
-    const path = new PIXI.tween.TweenPath();
-    path.moveTo(x, y);
+    const x1 = this.x;
+    const y1 = this.y;
+    const x2 = ship.x;
+    const y2 = ship.y;
 
-    path.bezierCurveTo(0, 0, -50, -50, destX, destY);
-    path.bezierCurveTo(destX, destY, destX + 50, destY + 50, x, y);
+    this.inPosition = false;
+    TweenMax.to([this.position, this], 4, {
+      bezier:{
+        values:[
+          {x: x1, y: y1, rotation: 0.1}, 
+          {x: x2, y: y2 - 300, rotation: -1}, 
+          {x: x2, y: y2, rotation: 0},
+          {x: x2, y: y2 - 300, rotation: 1}, 
+          {x: x1, y: y1, rotation: 0}
+        ]
+      }, 
+      onComplete: attackComplete.bind(this)
+    });    
     
-    path.closed = true;
-    
-    if(Props.ENEMY_PATH_VISIBLE) {
-      var gPath = new PIXI.Graphics();
-      gPath.lineStyle(1, 0xffffff, 1);
-      gPath.drawPath(path);
-      app.stage.addChild(gPath);
+    function attackComplete() {
+      this.x = swarm.getEnemyXByIndex(this.index);
+      this.y = swarm.getEnemyYByIndex(this.index);
+      this.inPosition = true;
     }
-
-    this.tween = PIXI.tweenManager.createTween(this);
-    this.tween.easing = PIXI.tween.Easing.inOutSine();
-    this.tween.path = path;
-    this.tween.time = 3000;
-    
-    this.tween.from({rotation: 0});
-    this.tween.to({rotation: PIXI.DEG_TO_RAD * 180});
-    this.tween.from({rotation: PIXI.DEG_TO_RAD * 180});
-    this.tween.to({rotation: 0});
     
     // TBD remove collision check after unsuccessful attack
     this.ticker.add(function() {
@@ -68,16 +60,7 @@ class Enemy extends PIXI.Sprite {
         this.explode();
         ship.hit();
       }
-    }.bind(this));
-    
-    this.inPosition = false;
-    app.tweens.push(this.tween);
-    
-    this.tween.start(function() {
-      this.x = swarm.getEnemyXByIndex(this.index);
-      this.y = swarm.getEnemyYByIndex(this.index);
-      this.inPosition = true;
-    }.bind(this));
+    }.bind(this));    
   }
   
   swapTexture() {
@@ -113,8 +96,8 @@ class Enemy extends PIXI.Sprite {
   }
   
   explode() {
-    if(this.tween)
-      this.tween.stop();
+    TweenMax.killTweensOf(this);
+    TweenMax.killTweensOf(this.position);      
     swarm.enemyCount--;
     swarm.enemies[this.index] = null;
     GameAudio.explosionSound();
@@ -137,7 +120,7 @@ class Enemy extends PIXI.Sprite {
     }
     this.hits++;
     if(this.hits === Props.ENEMY_MAX_HITS) {
-      app.addScore(Props.ENEMY_KILL_POINTS);
+      app.addScore(Props.ENEMY_KILL_POINTS);  
       this.explode();      
     }
     else {

@@ -121,22 +121,6 @@ app.nextLevel = function() {
   }
 }
 
-app.pauseTweens = function() {
-  app.tweens.forEach(function(tween) {
-    if(tween) {
-      tween.stop();
-    }
-  });
-}
-
-app.unPauseTweens = function() {
-  app.tweens.forEach(function(tween) {
-    if(tween) {
-      tween.start();
-    }
-  });
-}
-
 var currentLevel = -1;
 app.nextLevel();
 
@@ -183,7 +167,7 @@ app.unPause = function() {
   app.infoScreen.visible = false;
   app.paused = false;
   app.ticker.start();
-  app.unPauseTweens();
+  TweenMax.resumeAll();
 }
 
 app.pause = function() {
@@ -191,7 +175,7 @@ app.pause = function() {
   setTimeout(function() {
     app.ticker.stop();
     app.paused = true;
-    app.pauseTweens();
+    TweenMax.pauseAll();
   }, 100);
 }
 
