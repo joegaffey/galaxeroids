@@ -2,14 +2,17 @@ var GameGraphics = {};
 
 GameGraphics.pillGraphics = new PIXI.Texture.fromImage('pill.svg', undefined, undefined, Props.PILL_SCALE);
 
-GameGraphics.spriteSheetImage = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsprites.png?1510171075032');
-GameGraphics.alien1_1 = new PIXI.Texture(GameGraphics.spriteSheetImage, new PIXI.Rectangle(0, 0, 19, 19));
-GameGraphics.alien1_2 = new PIXI.Texture(GameGraphics.spriteSheetImage, new PIXI.Rectangle(20, 0, 19, 19));
+GameGraphics.alien1Sheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsprites.png?1510171075032');
+GameGraphics.alien1_1 = new PIXI.Texture(GameGraphics.alien1Sheet, new PIXI.Rectangle(0, 0, 19, 19));
+GameGraphics.alien1_2 = new PIXI.Texture(GameGraphics.alien1Sheet, new PIXI.Rectangle(20, 0, 19, 19));
 
-GameGraphics.spriteSheetImage1 = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlienMother.png?1510435694501');
-GameGraphics.mother1 = new PIXI.Texture(GameGraphics.spriteSheetImage1, new PIXI.Rectangle(0, 0, 40, 20));
-GameGraphics.mother2 = new PIXI.Texture(GameGraphics.spriteSheetImage1, new PIXI.Rectangle(0, 20, 40, 20));
+GameGraphics.alien2Sheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien1.png?1510695285196');
+GameGraphics.alien2_1 = new PIXI.Texture(GameGraphics.alien2Sheet, new PIXI.Rectangle(0, 0, 31, 31));
+GameGraphics.alien2_2 = new PIXI.Texture(GameGraphics.alien2Sheet, new PIXI.Rectangle(0, 32, 31, 31));
 
+GameGraphics.motherSheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlienMother.png?1510435694501');
+GameGraphics.mother1 = new PIXI.Texture(GameGraphics.motherSheet, new PIXI.Rectangle(0, 0, 40, 20));
+GameGraphics.mother2 = new PIXI.Texture(GameGraphics.motherSheet, new PIXI.Rectangle(0, 20, 40, 20));
 
 GameGraphics.getBulletGraphics = function() {
   var graphics = new PIXI.Graphics();

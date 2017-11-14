@@ -38,15 +38,23 @@ class Swarm {
       this.enemies.push(null);
       return;
     }
-    var enemy = new Enemy();
+    var enemy;
+    if(type === 1) {
+      enemy = new Enemy(GameGraphics.alien2_1);
+      enemy.textures = [GameGraphics.alien2_1, GameGraphics.alien2_2];
+      enemy.scale.x = enemy.scale.y = 0.8;
+    }
+    else if(type >= 2) {
+      enemy = new Enemy(GameGraphics.alien1_1);
+      enemy.textures = [GameGraphics.alien1_1, GameGraphics.alien1_2];
+      enemy.tint = Props.ENEMY_COLORS[type];
+      enemy.scale.x = enemy.scale.y = 1.5;
+    }
     var i = this.enemies.length;
     enemy.index = i;
     enemy.x = this.getEnemyXByIndex(i);
     enemy.y = this.getEnemyYByIndex(i);
-    if(type > 1)
-      enemy.tint = Props.ENEMY_COLORS[type];
     this.enemies.push(enemy);
-    enemy.scale.x = enemy.scale.y = 1.5;
     app.game.addChild(enemy);
     this.enemyCount++;
     this.moveEnemyIntoPosition(enemy, i);
