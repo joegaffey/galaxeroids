@@ -25,8 +25,7 @@ class Enemy extends PIXI.Sprite {
       
     }.bind(this));
     this.ticker.start();
-  }
-  
+  }  
   
   attack() {    
     const x1 = this.x;
@@ -36,25 +35,38 @@ class Enemy extends PIXI.Sprite {
 
     this.inPosition = false;
     TweenMax.to([this.position, this], 4, {
-      bezier:{
+      bezier: {
+        type: 'Soft',
         values:[
-          {x: x1, y: y1, rotation: 0.1}, 
-          {x: x2, y: y2 - 300, rotation: -1}, 
+          {x: x1, y: y1, rotation: 0},
+          {x: x1, y: y1 - 100, rotation: -0.5},
+          {x: x2, y: y2 - 100, rotation: -1}, 
           {x: x2, y: y2, rotation: 0},
-          {x: x2, y: y2 - 300, rotation: 1}, 
+          {x: x2, y: y2 - 100, rotation: 1}, 
           {x: x1, y: y1, rotation: 0}
         ]
       }, 
       onComplete: attackComplete.bind(this)
-    });    
+    });      
+    
+    var complete = function() { 
+      this.inPosition = true;
+    };
     
     function attackComplete() {
-      this.x = swarm.getEnemyXByIndex(this.index);
-      this.y = swarm.getEnemyYByIndex(this.index);
-      this.inPosition = true;
-    }
+      TweenMax.to(this.position, 0.4, {
+        bezier: {
+          type: 'Soft',
+          values:[
+            {x: this.x, y: this.y}, 
+            {x: swarm.getEnemyXByIndex(this.index), y: swarm.getEnemyYByIndex(this.index)},
+          ]
+        },
+        onComplete: complete.bind(this)
+      });
+    }    
     
-    // TBD remove collision check after unsuccessful attack
+    
     this.ticker.add(function() {
       if(isIntersecting(ship, this)) {
         this.explode();
@@ -93,6 +105,21 @@ class Enemy extends PIXI.Sprite {
       this.y += dirY * Props.ENEMY_SPEED;
       ship.checkCollision(this);
     }
+    
+//     TweenMax.to(this.position, 2, {
+//       bezier: {
+//           type: 'Soft',
+//           values:[
+//             {x: mother.x, y: mother.y}, 
+//             {x: this.startX, y: this.startY},
+//           ]
+//        },
+//        oncomplete: complete.bind(this)        
+//     });
+    
+//     function complete() { 
+//       this.inPosition = true 
+//     }
   }
   
   explode() {
