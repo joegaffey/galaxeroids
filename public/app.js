@@ -1,3 +1,13 @@
+try {
+  var myFont = new FontFace('PressStart', 'url(https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FPressStart2P.ttf?1509802747753)');
+  myFont.load().then(function(font) {
+    document.fonts.add(font);
+  });
+}
+catch(e) {
+  console.log(e);
+}
+
 var app = new PIXI.Application();
 
 // Use canvas renderer to avoid cross origin issues with webgl
@@ -13,9 +23,9 @@ document.addEventListener('visibilitychange', function() {
   if(document.visibilityState == 'hidden') {
     app.pause();
   }
-  // else if( document.visibilityState == 'visible') {
-  //   app.unPause();
-  // }
+  else if( document.visibilityState == 'visible') {
+    app.unPause();
+  }
 });
 
 var graphicsCanvas = document.querySelector('.graphicsCanvas');
@@ -77,7 +87,10 @@ var assist = new Assist();
 var lives = new Lives(); 
 
 app.bullets = [];
-app.tweens = [];
+
+app.infoScreen = new InfoScreen();
+app.info.addChild(app.infoScreen);
+
 
 setInterval(function() { 
   if(!app.paused) {
@@ -126,6 +139,7 @@ app.nextLevel();
 
 app.reset = function() {
   app.gameover = false;
+  TweenMax.killAll();
   if(mother) {
     mother.reset();
   }
@@ -142,7 +156,6 @@ app.reset = function() {
     }
   });
   app.bullets = [];
-  app.tweens = [];
   
   app.game.children.forEach(function(child) {
     child.destroy();
@@ -159,9 +172,6 @@ app.reset = function() {
   currentLevel = -1;
   app.nextLevel();
 }
-
-app.infoScreen = new InfoScreen();
-app.info.addChild(app.infoScreen);
 
 app.unPause = function() {  
   app.infoScreen.visible = false;
