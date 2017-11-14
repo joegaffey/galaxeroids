@@ -34,6 +34,7 @@ class Enemy extends PIXI.Sprite {
     const y2 = ship.y;
 
     this.inPosition = false;
+    this.isAttacking = true;
     TweenMax.to([this.position, this], 4, {
       bezier: {
         type: 'Soft',
@@ -51,6 +52,7 @@ class Enemy extends PIXI.Sprite {
     
     var complete = function() { 
       this.inPosition = true;
+      this.isAttacking = false;
     };
     
     function attackComplete() {
@@ -65,7 +67,6 @@ class Enemy extends PIXI.Sprite {
         onComplete: complete.bind(this)
       });
     }    
-    
     
     this.ticker.add(function() {
       if(isIntersecting(ship, this)) {
@@ -139,8 +140,13 @@ class Enemy extends PIXI.Sprite {
   }
   
   hit() {
-    if(!this.inPosition) {
+    if(this.isAttacking) {
       addNewPill(this, Props.PILL_POWER);
+      app.addScore(Props.ENEMY_KILL_POINTS * 5);
+      this.explode();  
+      return;
+    }
+    if(this.isFlying) {
       app.addScore(Props.ENEMY_KILL_POINTS * 5);
       this.explode();  
       return;

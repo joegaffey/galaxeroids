@@ -76,6 +76,66 @@ class Swarm {
     this.enemies[i].explode();
   }
   
+  acrobatics() {    
+    const x1 = 100;
+    const y1 = 250;
+    const x2 = 700;
+    const y2 = 250;
+    const x3 = 400;
+    const y3 = 200;
+    
+    const duration = 4;
+    const delay = 0.3;
+    
+    const flyers = this.getLiveEnemies();
+    flyers.forEach(enemy => { 
+      enemy.inPosition = false; 
+      enemy.isFlying = true;
+    });
+    
+    TweenMax.staggerTo(flyers, duration, {
+      bezier: {
+          type: 'Soft',
+          values:[
+            {x: x1, y: y1, rotation: -0.5},
+            {x: x2, y: y2, rotation: -1}, 
+            {x: x3, y: y3, rotation: 0}
+          ]
+        }, 
+        ease: Linear.easeNone,
+        onComplete: acrobaticsComplete
+      },delay
+    );      
+    
+    var sequenceComplete = function() { 
+      this.target.inPosition = true;
+      this.target.isFlying = false;
+    };
+    
+    function acrobaticsComplete() {
+      const enemy = this.target;
+      TweenMax.to(this.target, 0.4, {
+        bezier: {
+          type: 'Soft',
+          values:[
+            {x: enemy.x, y: enemy.y}, 
+            {x: swarm.getEnemyXByIndex(enemy.index), y: swarm.getEnemyYByIndex(enemy.index)},
+          ]
+        },
+        onComplete: sequenceComplete
+      });
+    } 
+  }
+
+  getLiveEnemies() {
+    const live = [];
+    this.enemies.forEach(enemy => { 
+      if(enemy)
+        live.push(enemy); 
+    });
+    return live;
+  }
+  
   getEnemyXByIndex(i) {
     return this.xPos + (i % this.columns) * Props.ENEMY_GAP;
   }

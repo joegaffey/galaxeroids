@@ -110,11 +110,17 @@ setInterval(function() {
 
 setInterval(function() { 
   if(!app.paused) {
-    var enemy = swarm.getRandomEnemy();
-    if(enemy)
-      enemy.attack();
+    if(Math.random() > 0.5) {
+      var enemy = swarm.getRandomEnemy();
+      if(enemy)
+        enemy.attack();
+    }
+    else {
+      swarm.acrobatics();
+    }
   }
 }, Math.floor(5000 + Math.random() * 5000));
+
 
 setInterval(function() { 
   if(!app.paused) {
