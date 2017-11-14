@@ -1,6 +1,6 @@
 class Enemy extends PIXI.Sprite {
-  constructor() {
-    super(Enemy.textures[0]);
+  constructor(texture) {
+    super(texture);
     this.currentTexture = 0;
     this.anchor.x = 0.5;
     this.anchor.y = 0.5;
@@ -81,7 +81,7 @@ class Enemy extends PIXI.Sprite {
       this.currentTexture = 1;
     else 
       this.currentTexture = 0;
-    this.setTexture(Enemy.textures[this.currentTexture]);
+    this.setTexture(this.textures[this.currentTexture]);
   }
   
   moveToStartPosition() {
@@ -193,7 +193,4 @@ class Enemy extends PIXI.Sprite {
     app.bullets.push(bullet);
   }
 }
-
-Enemy.textures = [GameGraphics.alien1_1,
-                  GameGraphics.alien1_2];
     
