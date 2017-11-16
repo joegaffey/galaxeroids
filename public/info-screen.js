@@ -28,9 +28,9 @@ class InfoScreen extends PIXI.Sprite {
              Keyboard  Joystick  Touch
 
 Move         ← →       axes0     Arrows
-Fire         Z         joy0      Red 
-Orb          X         joy1      Green
-Start/Pause  Enter     joy9      Tap screen
+Fire         Z         joy0      Red Button
+Orb          X         joy1      Green Button
+Start/Pause  Enter     joy9      Start/Pause
       `, style);
       
       this.message.x = 400;
@@ -55,6 +55,12 @@ Start/Pause  Enter     joy9      Tap screen
       this.button.x = 400;
       this.button.y = 380;
       this.button.anchor.set(0.5, 0);
+      
+      this.button.interactive = true;
+      this.button.touchstart = this.button.click = function (e) {
+        console.log('test');
+        app.unPause();
+      };
       this.addChild(this.button);
     }
 }
