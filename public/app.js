@@ -91,7 +91,6 @@ app.bullets = [];
 app.infoScreen = new InfoScreen();
 app.info.addChild(app.infoScreen);
 
-
 setInterval(function() { 
   if(!app.paused) {
     swarm.move(); 

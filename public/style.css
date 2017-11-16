@@ -34,6 +34,18 @@ body {
   opacity: 0.5;
 }
 
+.pauseControl {
+  background-color: #000;
+  border-style: solid;
+  border-color: #FFF;
+  border-width: 0 20px 0 20px;
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  height: 60px;
+  width: 20px;
+}
+
 .leftControl, .rightControl {
   position: absolute;
   bottom: 50px;

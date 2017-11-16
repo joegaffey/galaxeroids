@@ -3,8 +3,13 @@ document.body.addEventListener('touchstart', showControls);
 function showControls() {
   document.querySelector('.controls').style.display = 'block';
   document.body.removeEventListener('touchstart', showControls);
-  document.body.addEventListener('touchstart', Controls.handlePause);
 }
+
+var fireButton = document.querySelector('.pauseControl');
+fireButton.addEventListener('touchstart', function(ev) { 
+  ev.stopPropagation();
+  Controls.handlePause();
+});
 
 var fireButton = document.querySelector('.fireControl');
 fireButton.addEventListener('touchstart', function(ev) { 
