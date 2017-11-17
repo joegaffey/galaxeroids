@@ -197,11 +197,13 @@ app.pause = function() {
 app.updateScore = function(score) {
   app.score = score;
   app.scoreText.text = app.score;
+  app.infoScreen.setScore(app.score);
 }
 
 app.addScore = function(score) {
   app.score += score;
   app.scoreText.text = app.score;
+  app.infoScreen.setScore(app.score);
 }
 
 app.minusScore = function(score) {
@@ -210,6 +212,7 @@ app.minusScore = function(score) {
   else
     app.score = 0;
   app.scoreText.text = app.score;
+  app.infoScreen.setScore(app.score);
 }
 
 app.appStart = function() {
