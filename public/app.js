@@ -137,6 +137,9 @@ app.nextLevel = function() {
       swarm.addEnemyRows(levels[currentLevel].swarm.rows);  
     }, 2000);
   }
+  else {
+    mother.attack();
+  }
 }
 
 var currentLevel = -1;
