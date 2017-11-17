@@ -1,4 +1,4 @@
-class Lives {
+ class Lives {
   
   constructor() {
     this.lives = Props.PLAYER_LIVES;

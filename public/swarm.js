@@ -84,7 +84,27 @@ class Swarm {
     this.enemies[i].explode();
   }
   
-  acrobatics() {    
+  acrobatics() {
+    if(this.isFlying) {
+      this.isFlying = false; //Workaround for onCompleteAll not getting called sometimes
+      return;
+    }
+    this.isFlying = true;
+    var i = Math.floor(Math.random() * 3);
+    switch(i) {
+      case 0: 
+          this.fig8();
+          break;
+      case 1: 
+          this.loop();
+          break;        
+      case 2: 
+          this.dive();
+          break;        
+    }
+  }
+    
+  loop() {
     const x1 = 100;
     const y1 = 250;
     const x2 = 700;
@@ -92,8 +112,8 @@ class Swarm {
     const x3 = 400;
     const y3 = 200;
     
-    const duration = 4;
-    const delay = 0.3;
+    const duration = 2.5;
+    const delay = 0.1;
     
     const flyers = this.getLiveEnemies();
     flyers.forEach(enemy => { 
@@ -111,29 +131,99 @@ class Swarm {
           ]
         }, 
         ease: Linear.easeNone,
-        onComplete: acrobaticsComplete
-      },delay
+        onComplete: this.acrobaticsComplete
+      },delay, this.acrobaticsCompleteAll
     );      
+  }
+   
+  fig8() {    
+    const x1 = 200, y1 = 350;
+    const x2 = 100, y2 = 250;
+    const x3 = 200, y3 = 100;
+    const x4 = 500, y4 = 350;
+    const x5 = 600, y5 = 250;        
+    const x6 = 500, y6 = 100;        
     
-    var sequenceComplete = function() { 
-      this.target.inPosition = true;
-      this.target.isFlying = false;
-    };
+    const duration = 2.5;
+    const delay = 0.1;
     
-    function acrobaticsComplete() {
-      const enemy = this.target;
-      TweenMax.to(this.target, 0.4, {
-        bezier: {
+    const flyers = this.getLiveEnemies();
+    flyers.forEach(enemy => { 
+      enemy.inPosition = false; 
+      enemy.isFlying = true;
+    });
+    
+    TweenMax.staggerTo(flyers, duration, {
+      bezier: {
           type: 'Soft',
           values:[
-            {x: enemy.x, y: enemy.y}, 
-            {x: swarm.getEnemyXByIndex(enemy.index), y: swarm.getEnemyYByIndex(enemy.index)},
+            {x: x1, y: y1, rotation: 0}, 
+            {x: x2, y: y2, rotation: 0},
+            {x: x3, y: y3, rotation: 0},
+            {x: x4, y: y4, rotation: 0},
+            {x: x5, y: y5, rotation: 0},
+            {x: x6, y: y6, rotation: 0}
           ]
-        },
-        onComplete: sequenceComplete
-      });
-    } 
+        }, 
+        ease: Linear.easeNone,
+        onComplete: this.acrobaticsComplete
+      },delay, this.acrobaticsCompleteAll
+    );      
   }
+  
+  dive() {    
+    const x1 = 400, y1 = -100;
+    const x2 = ship.x, y2 = -100;
+    const x3 = ship.x, y3 = 900;
+    const x4 = 400, y4 = 400;        
+    
+    const duration = 5;
+    const delay = 0.1;
+    
+    const flyers = this.getLiveEnemies();
+    flyers.forEach(enemy => { 
+      enemy.inPosition = false; 
+      enemy.isFlying = true;
+    });
+    
+    TweenMax.staggerTo(flyers, duration, {
+      bezier: {
+          type: 'Soft',
+          values:[
+            {x: x1, y: y1, rotation: 0}, 
+            {x: x2, y: y2, rotation: 0},
+            {x: x3, y: y3, rotation: 0},
+            {x: x4, y: y4, rotation: 0}
+          ]
+        }, 
+        ease: Linear.easeNone,
+        onComplete: this.acrobaticsComplete
+      },delay, this.acrobaticsCompleteAll
+    );      
+  }
+  
+  sequenceComplete() { 
+    this.target.inPosition = true;
+    this.target.isFlying = false;
+  }
+  
+  acrobaticsCompleteAll() {
+    swarm.isFlying = false; 
+  }
+    
+  acrobaticsComplete() {
+    const enemy = this.target;
+    TweenMax.to(this.target, 0.4, {
+      bezier: {
+        type: 'Soft',
+        values:[
+          {x: enemy.x, y: enemy.y}, 
+          {x: swarm.getEnemyXByIndex(enemy.index), y: swarm.getEnemyYByIndex(enemy.index)},
+        ]
+      },
+      onComplete: swarm.sequenceComplete
+    });
+  } 
 
   getLiveEnemies() {
     const live = [];

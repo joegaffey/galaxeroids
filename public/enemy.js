@@ -23,6 +23,9 @@ class Enemy extends PIXI.Sprite {
       else
         this.rotation = 0;
       
+      if(this.y > 600)
+         ship.checkCollision(this);
+      
     }.bind(this));
     this.ticker.start();
   }  
@@ -91,7 +94,6 @@ class Enemy extends PIXI.Sprite {
       this.inPosition = true;
       this.x = swarm.getEnemyXByIndex(this.index);
       this.y = swarm.getEnemyYByIndex(this.index);
-      ship.checkCollision(this);
       this.ticker.remove(this.moveToStartPosition, this);
     }
     else {   
@@ -104,7 +106,6 @@ class Enemy extends PIXI.Sprite {
 
       this.x += dirX * Props.ENEMY_SPEED;
       this.y += dirY * Props.ENEMY_SPEED;
-      ship.checkCollision(this);
     }
     
 //     TweenMax.to(this.position, 2, {
