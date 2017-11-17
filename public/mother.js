@@ -33,16 +33,38 @@ class Mother extends PIXI.Sprite {
     this.setTexture(Mother.textures[this.currentTexture]);
   }
   
+  attack() {
+    this.isAttacking = true;
+    this.ticker.stop();
+    const x1 = 400, y1 = 200, scale = 4, duration = 2;
+       
+    var timeline = new TimelineMax()
+      .to(this.position, duration, {x: x1, y: y1}, 0)
+      .to(this.scale, duration, {x: scale, y: scale} , 0);
+  }    
+  
   hit() {
     GameAudio.motherHitSound();
-    this.hits++;
-    if(!Props.SERVER_AVAILABLE && this.hits % Props.MOTHER_PILL_HITS === 0)
+    if(this.isAttacking)
+      this.hits++;
+    if(this.hits % Props.MOTHER_PILL_HITS === 0)
       this.addPill(Props.PILL_POWER);
-    if(this.hits === Props.MOTHER_MAX_HITS) {
+    if(this.hits >= Props.MOTHER_MAX_HITS) {
       this.explode();
     }
     else
       app.addScore(Props.MOTHER_HIT_POINTS);
+  }
+  
+  energy() {
+    GameAudio.motherHitSound();
+    if(this.isAttacking)
+      this.hits += 5;
+    if(this.hits >= Props.MOTHER_MAX_HITS) {
+      this.explode();
+    }
+    else
+      app.addScore(Props.MOTHER_HIT_POINTS * 5);
   }
   
   shoot() {
@@ -54,8 +76,7 @@ class Mother extends PIXI.Sprite {
     GameAudio.explosionSound();
     Effects.explode(this.x, this.y, Props.EXPLOSION_HUGE);
     app.addScore(Props.MOTHER_KILL_POINTS);
-    if(swarm.enemyCount === 0)
-      app.endGame(Props.SUCCESS_MESSAGE);
+    app.endGame(Props.SUCCESS_MESSAGE);
     this.destroy(); 
     mother = null;
   }
@@ -65,9 +86,7 @@ class Mother extends PIXI.Sprite {
       Effects.explode(bullet.x, bullet.y, Props.EXPLOSION_TINY);
       bullet.ticker.stop();
       bullet.destroy(); 
-      app.addScore(Props.MOTHER_HIT_POINTS);
-      if(this.hit() && swarm.enemyCount === 0)
-        app.stop(Props.SUCCESS_MESSAGE);       
+      this.hit();
     }
   }
   
@@ -76,7 +95,7 @@ class Mother extends PIXI.Sprite {
       Effects.explode(energy.x, energy.y, Props.EXPLOSION_SMALL);
       energy.ticker.stop();
       energy.destroy(); 
-      app.addScore(Props.MOTHER_HIT_POINTS * 3);
+      this.energy();
     }
   }
   
