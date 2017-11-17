@@ -38,10 +38,19 @@ class Mother extends PIXI.Sprite {
     this.ticker.stop();
     const x1 = 400, y1 = 200, scale = 4, duration = 2;
        
-    var timeline = new TimelineMax()
+    var timeline = new TimelineMax({onComplete: this.strafe})
       .to(this.position, duration, {x: x1, y: y1}, 0)
-      .to(this.scale, duration, {x: scale, y: scale} , 0);
+      .to(this.scale, duration, {x: scale, y: scale}, 0);
   }    
+  
+  strafe() {
+    const duration = 1;
+    const timeline = new TimelineMax({repeat: -1})
+      .to(mother.position, duration, {x: 400, delay: 1}, 0)  
+      .to(mother.position, duration, {x: 100, delay: 1}, 1)
+      .to(mother.position, duration, {x: 600, delay: 1}, 2)
+      .to(mother.position, duration, {x: 400, delay: 1}, 3);
+  }
   
   hit() {
     GameAudio.motherHitSound();
