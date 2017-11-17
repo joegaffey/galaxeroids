@@ -62,9 +62,10 @@ class Mother extends PIXI.Sprite {
   
   checkHit(bullet) {
     if(bullet && isIntersecting(bullet, this)) {
-      bullet.ticker.stop();
       Effects.explode(bullet.x, bullet.y, Props.EXPLOSION_TINY);
+      bullet.ticker.stop();
       bullet.destroy(); 
+      app.addScore(Props.MOTHER_HIT_POINTS);
       if(this.hit() && swarm.enemyCount === 0)
         app.stop(Props.SUCCESS_MESSAGE);       
     }
@@ -72,10 +73,10 @@ class Mother extends PIXI.Sprite {
   
   checkEnergy(energy) {
     if(energy && isIntersecting(energy, this)) {
+      Effects.explode(energy.x, energy.y, Props.EXPLOSION_SMALL);
       energy.ticker.stop();
       energy.destroy(); 
-      swarm.addEnemy();
-      app.minusScore(Props.MOTHER_HIT_POINTS);
+      app.addScore(Props.MOTHER_HIT_POINTS * 3);
     }
   }
   
