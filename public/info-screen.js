@@ -39,10 +39,10 @@ class InfoScreen extends PIXI.Sprite {
     this.message = new PIXI.Text(`
              Keyboard  Joystick  Touch
 
-Move         ← →       axes0     Arrows
-Fire         Z         joy0      Red 
-Orb          X         joy1      Green 
-Start/Pause  Enter     joy9      Start/Pause
+Move         ← →       D-pad     Arrows
+Fire         Z         A/X       Red 
+Orb          X         B/Y       Green 
+Start/Pause  Enter     Start     Start/Pause
     `, style);
 
     this.message.x = 400;
