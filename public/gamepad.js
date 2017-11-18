@@ -44,15 +44,6 @@ function checkGamepad() {
     }    
     else
       resetCharge = true;
-
-    if(gp.buttons[8].value === 1) {
-      if(resetReset) {
-        Controls.handleReset();
-        resetReset = false;
-      }
-    }
-    else
-      resetReset = true;
     
     if(gp.buttons[9].value === 1) {
       if(resetPause) {
