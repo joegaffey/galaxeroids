@@ -17,13 +17,6 @@ class Controls {
     else
       app.pause();
   }
-  
-  static handleReset(ev) {
-    if(app.paused) {
-      app.reset();
-      app.appStop();
-    }
-  }
 
   static handleLeft(ev) {
     ship.speed = -Props.SHIP_SPEED -ship.speedBoost;
