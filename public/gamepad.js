@@ -9,7 +9,7 @@ function detectGamepad() {
     return;
   var pads = navigator.getGamepads();
   for(var i in pads) {
-    if(pads[i] && pads[i].timestamp > 0) {
+    if(pads[i] && pads[i].connected && pads[i].timestamp > 0) {
       gpIndex = i;
       break;
     }
