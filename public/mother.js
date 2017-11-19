@@ -45,11 +45,25 @@ class Mother extends PIXI.Sprite {
   
   strafe() {
     const duration = 1;
-    const timeline = new TimelineMax({repeat: -1})
+    const x = 50 + Math.floor(Math.random() * 650);
+    const timeline = new TimelineMax({onComplete: mother.rain})
       .to(mother.position, duration, {x: 400, delay: 1}, 0)  
       .to(mother.position, duration, {x: 100, delay: 1}, 1)
       .to(mother.position, duration, {x: 600, delay: 1}, 2)
-      .to(mother.position, duration, {x: 400, delay: 1}, 3);
+      .to(mother.position, duration, {x: x, delay: 1}, 3);
+  }
+  
+  rain(offset = 20) {
+    setTimeout(() => {
+      const x = mother.x - (mother.width / 2) + Math.floor((mother.width * Math.random()));
+      const y = mother.y + mother.height / 2;
+      mother.addBullet(x, y);
+      offset--;
+      if(offset > 0)
+        mother.rain(offset);
+      else
+        mother.strafe();
+    }, 200);      
   }
   
   hit() {
