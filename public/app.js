@@ -120,7 +120,6 @@ setInterval(function() {
   }
 }, Math.floor(5000 + Math.random() * 5000));
 
-
 setInterval(function() { 
   if(!app.paused) {
     if(mother)
@@ -143,7 +142,6 @@ app.nextLevel = function() {
 }
 
 var currentLevel = -1;
-app.nextLevel();
 
 app.reset = function() {
   app.gameover = false;
@@ -178,10 +176,16 @@ app.reset = function() {
   swarm = new Swarm();
   lives = new Lives();
   currentLevel = -1;
-  app.nextLevel();
 }
 
+app.gameover = true;
+
 app.unPause = function() {  
+  if(app.gameover) {
+    app.reset();
+    app.nextLevel();
+    setTimeout(() => { mother.ticker.start(); }, 3000);
+  }
   app.infoScreen.visible = false;
   app.paused = false;
   app.ticker.start();
@@ -216,13 +220,6 @@ app.minusScore = function(score) {
     app.score = 0;
   app.scoreText.text = app.score;
   app.infoScreen.setScore(app.score);
-}
-
-app.appStart = function() {
-  if(app.gameover) {
-    app.reset();
-  }
-  app.unPause();
 }
 
 app.endGame = function(msg) {
