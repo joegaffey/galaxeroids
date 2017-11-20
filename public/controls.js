@@ -13,7 +13,7 @@ class Controls {
 
   static handlePause(ev) {
     if(app.paused)
-      app.appStart();
+      app.unPause();
     else
       app.pause();
   }

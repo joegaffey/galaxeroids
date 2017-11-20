@@ -22,7 +22,6 @@ class Mother extends PIXI.Sprite {
       }
     }.bind(this));
     app.game.addChild(this);
-    this.ticker.start();
   }
   
   swapTexture() {
