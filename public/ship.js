@@ -207,4 +207,21 @@ class Ship extends PIXI.Sprite {
     //   app.unPause();
     // }, 2000);
   }
+  
+  explode() {
+    if(!this.i)
+      this.i = 12;
+    if(this.i > 1) {
+      this.i--;
+      GameAudio.explosionSound();
+      const x = this.x - 40 + Math.floor(Math.random() * 80); 
+      const y = this.y - 40 + Math.floor(Math.random() * 80); 
+      
+      Effects.explode(x, y, Props.EXPLOSION_HUGE);
+      ship.speed = 0;
+      setTimeout(() => { this.explode(); }, 500);
+    }
+    else
+      app.endGame(Props.DEATH_MESSAGE);
+  }
 }

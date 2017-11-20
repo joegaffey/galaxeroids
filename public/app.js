@@ -129,7 +129,6 @@ setInterval(function() {
 
 app.nextLevel = function() {
   currentLevel++;
-  console.log(currentLevel)
   if(currentLevel < levels.length) {
     app.showMessage('GET READY!!!');
     swarm.reset();
@@ -183,7 +182,6 @@ app.gameover = true;
 
 app.unPause = function() {  
   if(app.gameover) {
-    console.log('test');
     app.reset();
     app.nextLevel();
     setTimeout(() => { mother.ticker.start(); }, 3000);

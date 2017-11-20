@@ -70,7 +70,6 @@ Start/Pause  Enter     Start
 
     this.button.interactive = true;
     this.button.touchstart = this.button.click = function (e) {
-      console.log('test');
       app.unPause();
     };
     this.addChild(this.button);

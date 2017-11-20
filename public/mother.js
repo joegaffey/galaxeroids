@@ -43,6 +43,8 @@ class Mother extends PIXI.Sprite {
   }    
   
   strafe() {
+    if(!mother)
+      return;
     const duration = 1;
     const x = 50 + Math.floor(Math.random() * 650);
     const timeline = new TimelineMax({onComplete: mother.rain})
@@ -54,6 +56,8 @@ class Mother extends PIXI.Sprite {
   
   rain(offset = 20) {
     setTimeout(() => {
+      if(!mother)
+        return;
       const x = mother.x - (mother.width / 2) + Math.floor((mother.width * Math.random()));
       const y = mother.y + mother.height / 2;
       mother.addBullet(x, y);
@@ -95,12 +99,24 @@ class Mother extends PIXI.Sprite {
   
   explode() {
     this.ticker.stop();
-    GameAudio.explosionSound();
-    Effects.explode(this.x, this.y, Props.EXPLOSION_HUGE);
     app.addScore(Props.MOTHER_KILL_POINTS);
-    app.endGame(Props.SUCCESS_MESSAGE);
-    this.destroy(); 
-    mother = null;
+    
+    if(!this.i)
+      this.i = 12;
+    if(this.i > 1) {
+      this.i--;
+      GameAudio.explosionSound();
+      const x = this.x - 60 + Math.floor(Math.random() * 120); 
+      const y = this.y - 40 + Math.floor(Math.random() * 80); 
+      
+      Effects.explode(x, y, Props.EXPLOSION_HUGE);
+      setTimeout(() => { this.explode(); }, 500);
+    }
+    else {
+      this.destroy(); 
+      mother = null;
+      app.endGame(Props.SUCCESS_MESSAGE);
+    }
   }
   
   checkHit(bullet) {

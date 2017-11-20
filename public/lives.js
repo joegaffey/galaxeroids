@@ -22,7 +22,7 @@
   
   dec() {
     if(this.lives <= 0) {
-      app.endGame(Props.DEATH_MESSAGE);
+      ship.explode();
       return;
     }
     this.lives--;  
