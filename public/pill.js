@@ -8,9 +8,9 @@ function addNewPill(sprite, power) {
   pill.LIFE = 4;
   
   pill.powerUps = [
-    pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,
-    pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,
-    pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,
+    pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,pill.FIRE,
+    pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,pill.ORB,
+    pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,pill.SPEED,
     pill.ASSIST,pill.ASSIST,pill.ASSIST,pill.ASSIST,
     pill.LIFE
   ];

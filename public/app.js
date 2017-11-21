@@ -122,7 +122,7 @@ setInterval(function() {
 
 setInterval(function() { 
   if(!app.paused) {
-    if(mother)
+    if(mother && mother.x !== app.renderer.width / 2)
       mother.shoot();
   }
 }, Math.floor(Props.MOTHER_SHOOT_INTERVAL + Math.random() * Props.MOTHER_SHOOT_INTERVAL));
@@ -184,6 +184,7 @@ app.unPause = function() {
   if(app.gameover) {
     app.reset();
     app.nextLevel();
+    mother.enter();
     setTimeout(() => { mother.ticker.start(); }, 3000);
   }
   app.infoScreen.visible = false;

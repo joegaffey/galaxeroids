@@ -151,7 +151,7 @@ class Ship extends PIXI.Sprite {
         assist.destroyEnemies(pill.power);
       }
       else if(pill.type === pill.SPEED) {
-        if(this.speedBoost <= 4) {
+        if(this.speedBoost <= 3) {
           app.showMessage('SPEED +1');
           this.speedBoost++;
         }
@@ -159,7 +159,7 @@ class Ship extends PIXI.Sprite {
           app.showMessage('MAX SPEED');
       }
       else if(pill.type === pill.FIRE) {
-        if(this.firePower < 10) {
+        if(this.firePower < 15) {
           app.showMessage('FIRE +1');
           this.firePower +=2;
         }
