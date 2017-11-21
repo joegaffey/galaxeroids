@@ -3,7 +3,7 @@ class Mother extends PIXI.Sprite {
   constructor() {
     super(Mother.textures[0]);
     this.x = app.renderer.width / 2;
-    this.y = 50;
+    this.y = -100;
     this.anchor.x = this.anchor.y = 0.5;
     this.scale.x = this.scale.y = 2;
     this.hits = 0;
@@ -22,6 +22,10 @@ class Mother extends PIXI.Sprite {
       }
     }.bind(this));
     app.game.addChild(this);
+  }
+  
+  enter() {
+    TweenMax.to(this, 1.5, {y: 50});
   }
   
   swapTexture() {
@@ -71,10 +75,12 @@ class Mother extends PIXI.Sprite {
   
   hit() {
     GameAudio.motherHitSound();
-    if(this.isAttacking)
-      this.hits++;
-    if(this.hits % Props.MOTHER_PILL_HITS === 0)
+    this.hits++;
+    if(this.hits % Props.MOTHER_PILL_HITS === 0) {
       this.addPill(Props.PILL_POWER);
+      if(!this.isAttacking)
+        this.hits = 0;
+    }
     if(this.hits >= Props.MOTHER_MAX_HITS) {
       this.explode();
     }

@@ -31,6 +31,8 @@ class Enemy extends PIXI.Sprite {
   }  
   
   attack() {    
+    if(swarm.isflying)
+      return;
     const x1 = this.x;
     const y1 = this.y;
     const x2 = ship.x;
