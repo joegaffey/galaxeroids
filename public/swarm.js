@@ -10,27 +10,7 @@ class Swarm {
     this.direction = 1;       
     this.enemyCount = 0;
   }
-  
-  addEnemy() {
-    if(!mother)
-      return;
-    for(var i  = 0; i < this.enemies.length + 1; i++) {
-      if(!this.enemies[i]) {
-        var enemy = new Enemy();
-        enemy.index = i;
-        enemy.x = this.getEnemyXByIndex(i);
-        enemy.y = this.getEnemyYByIndex(i);
-        enemy.tint = Props.ENEMY_COLORS[(Math.floor(i / this.columns)) % Props.ENEMY_COLORS.length];
-        this.enemies[i] = enemy;
-        enemy.scale.x = enemy.scale.y = 1.5;
-        app.game.addChild(enemy);
-        this.enemyCount++;
-        this.moveEnemyIntoPosition(enemy, i);
-        return;
-      }
-    }
-  }
-  
+   
   addEnemyType(type, col, row) {
     if(!mother)
       return;
@@ -47,7 +27,7 @@ class Swarm {
     else if(type === 2) {
       enemy = new Enemy(GameGraphics.alien1_1);
       enemy.textures = [GameGraphics.alien1_1, GameGraphics.alien1_2];
-      enemy.scale.x = enemy.scale.y = 0.8;
+      enemy.scale.x = enemy.scale.y = 1.5;
     }
     else if(type === 3) {
       enemy = new Enemy(GameGraphics.alien2_1);
@@ -57,6 +37,11 @@ class Swarm {
     else if(type === 4) {
       enemy = new Enemy(GameGraphics.alien3_1);
       enemy.textures = [GameGraphics.alien3_1, GameGraphics.alien3_2];
+      enemy.scale.x = enemy.scale.y = 1.5;
+    }
+    else if(type === 5) {
+      enemy = new Enemy(GameGraphics.alien4_1);
+      enemy.textures = [GameGraphics.alien4_1, GameGraphics.alien4_2];
       enemy.scale.x = enemy.scale.y = 1.5;
     }
     var i = this.enemies.length;
