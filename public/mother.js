@@ -90,8 +90,9 @@ class Mother extends PIXI.Sprite {
   
   energy() {
     GameAudio.motherHitSound();
-    if(this.isAttacking)
+    if(this.isAttacking) {
       this.hits += 5;
+    }
     if(this.hits >= Props.MOTHER_MAX_HITS) {
       this.explode();
     }
@@ -136,7 +137,8 @@ class Mother extends PIXI.Sprite {
   
   checkEnergy(energy) {
     if(energy && isIntersecting(energy, this)) {
-      Effects.explode(energy.x, energy.y, Props.EXPLOSION_SMALL);
+      Effects.explode(energy.x, energy.y, Props.EXPLOSION_HUGE);
+      GameAudio.explosionSound();
       energy.ticker.stop();
       energy.destroy(); 
       this.energy();

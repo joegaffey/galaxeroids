@@ -344,10 +344,25 @@ class Swarm {
     this.enemies.forEach(function(enemy, i) {
       if(energy && enemy && isIntersecting(energy, enemy)) {
         energy.ticker.stop();
+        Effects.explode(energy.x, energy.y, Props.EXPLOSION_HUGE);
         energy.destroy(); 
-        enemy.explode();
+        const nearby = this.getWithinRange(enemy.position, 60);
+        nearby.forEach(nearEnemy => { 
+          if(nearEnemy)
+            nearEnemy.explode(); 
+        });
         return;
       }
     }.bind(this));
+  }
+  
+  getWithinRange(position, range) {
+    const withinRange = [];
+    this.enemies.forEach(enemy => {
+      if(enemy && Math.abs(enemy.x - position.x) < range && Math.abs(enemy.y - position.y) < range) {
+        withinRange.push(enemy);
+      }
+    });    
+    return withinRange;
   }
 }
