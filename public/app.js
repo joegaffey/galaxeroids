@@ -34,9 +34,6 @@ graphicsCanvas.appendChild(app.view);
 app.game = new PIXI.Container();
 app.stage.addChild(app.game);
 
-app.info = new PIXI.Container();
-app.stage.addChild(app.info);
-
 var style = new PIXI.TextStyle({
   fontFamily: 'PressStart',
   fontSize: 14,
@@ -87,6 +84,9 @@ var assist = new Assist();
 var lives = new Lives(); 
 
 app.bullets = [];
+
+app.info = new PIXI.Container();
+app.stage.addChild(app.info);
 
 app.infoScreen = new InfoScreen();
 app.info.addChild(app.infoScreen);

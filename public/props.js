@@ -15,7 +15,7 @@ Props.DEATH_MESSAGE = 'Game over Man! Game Over!';
 Props.SUCCESS_MESSAGE = 'You have saved the galaxy!';
 
 Props.SHIP_VERT_ADJUST = 30;
-Props.SHIP_SPEED = 2;
+Props.SHIP_SPEED = 2.5;
 Props.SHIP_MAX_SPEED = 2;
 Props.SHIP_SHOOT_DELAY = 25;
 

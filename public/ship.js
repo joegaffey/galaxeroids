@@ -137,7 +137,6 @@ class Ship extends PIXI.Sprite {
   checkHit(bullet) {
     if(isIntersecting(bullet, this)) {
       bullet.ticker.stop();
-      Effects.explode(bullet.x, bullet.y, Props.EXPLOSION_MEDIUM);
       bullet.destroy(); 
       this.hit();
       return;
@@ -153,7 +152,7 @@ class Ship extends PIXI.Sprite {
       else if(pill.type === pill.SPEED) {
         if(this.speedBoost <= 3) {
           app.showMessage('SPEED +1');
-          this.speedBoost++;
+          this.speedBoost += 0.5;
         }
         else
           app.showMessage('MAX SPEED');
@@ -198,6 +197,7 @@ class Ship extends PIXI.Sprite {
     let messages = ['AYE CARUMBA!', 'OUCH!!!', 'THAT\'S GOTTA HURT!', 'YIKES!'];
     let msg = messages[Math.floor(Math.random() * messages.length)];
     app.showMessage(msg);
+    Effects.explode(this.x, this.y, Props.EXPLOSION_HUGE);
     GameAudio.explosionSound();
     lives.dec();
     this.firePower = 0;
@@ -210,7 +210,7 @@ class Ship extends PIXI.Sprite {
   
   explode() {
     if(!this.i)
-      this.i = 12;
+      this.i = 8;
     if(this.i > 1) {
       this.i--;
       GameAudio.explosionSound();
@@ -219,7 +219,7 @@ class Ship extends PIXI.Sprite {
       
       Effects.explode(x, y, Props.EXPLOSION_HUGE);
       ship.speed = 0;
-      setTimeout(() => { this.explode(); }, 500);
+      setTimeout(() => { this.explode(); }, 400);
     }
     else
       app.endGame(Props.DEATH_MESSAGE);

@@ -87,17 +87,13 @@ Start/Pause  Enter     Start
   getControls() {
     const controls = new PIXI.Container();
     
-    const leftControl = new PIXI.Sprite(GameGraphics.leftControlGraphics);
-    leftControl.x = 23;
-    leftControl.y = 8;
-    leftControl.anchor.set(0, 0);
-    controls.addChild(leftControl);
-    
-    const rightControl = new PIXI.Sprite(GameGraphics.rightControlGraphics);
-    rightControl.x = 43;
-    rightControl.y = 8;
-    rightControl.anchor.set(0, 0);
-    controls.addChild(rightControl);
+    const joystickControl = new PIXI.Sprite(GameGraphics.getEnergyGraphics());
+    joystickControl.x = 40;
+    joystickControl.y = 8;
+    joystickControl.scale.x = joystickControl.scale.y = 1.9;
+    joystickControl.tint = 0x0000FF; 
+    joystickControl.anchor.set(0.5, 0);
+    controls.addChild(joystickControl);
     
     const shootControl = new PIXI.Sprite(GameGraphics.getEnergyGraphics());
     shootControl.x = 40;
@@ -120,6 +116,7 @@ Start/Pause  Enter     Start
     pauseControl.y = 70;
     pauseControl.scale.x = pauseControl.scale.y = 0.25;
     pauseControl.anchor.set(0.5, 0);
+    pauseControl.tint = 0x888888;
     controls.addChild(pauseControl);
     return controls;
   }

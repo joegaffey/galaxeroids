@@ -1,17 +1,17 @@
 class Controls {
-  static handleFire(ev) {
+  static handleFire() {
     if(app.paused)
       return;
     ship.shoot();
   }
 
-  static handleCharge(ev) {
+  static handleCharge() {
     if(app.paused)
       return;
     ship.charge();
   }
 
-  static handlePause(ev) {
+  static handlePause() {
     if(app.paused)
       app.unPause();
     else
