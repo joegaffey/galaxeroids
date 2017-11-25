@@ -1,8 +1,6 @@
 var GameGraphics = {};
 
 GameGraphics.pillGraphics = new PIXI.Texture.fromImage('pill.svg', undefined, undefined, Props.PILL_SCALE);
-GameGraphics.leftControlGraphics = new PIXI.Texture.fromImage('leftControl.svg', undefined, undefined, 0.15);
-GameGraphics.rightControlGraphics = new PIXI.Texture.fromImage('rightControl.svg', undefined, undefined, 0.15);
 
 GameGraphics.alien0Sheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsprites.png?1510171075032');
 GameGraphics.alien0_1 = new PIXI.Texture(GameGraphics.alien0Sheet, new PIXI.Rectangle(0, 0, 19, 19));

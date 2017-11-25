@@ -1,5 +1,11 @@
 var gpIndex = -1;
 
+var JOY_AXIS = 0;
+var browser = navigator.userAgent.toLowerCase();
+if(browser.indexOf('firefox') > -1) {
+  JOY_AXIS = 1;    
+}
+
 setInterval (function() {
   detectGamepad();  
 }, 1000);
@@ -11,6 +17,7 @@ function detectGamepad() {
   for(var i in pads) {
     if(pads[i] && pads[i].connected && pads[i].timestamp > 0) {
       gpIndex = i;
+      window.requestAnimationFrame(checkGamepad);
       break;
     }
   }
@@ -21,9 +28,10 @@ var resetPause = true;
 var resetReset = true;
 var resetCharge = true;
 
-function checkGamepad() {
-  var gp = navigator.getGamepads()[gpIndex];
-  var analogueLR = gp.axes[0];
+function checkGamepad(timestamp) {
+  var gp = navigator.getGamepads()[gpIndex];  
+  
+  var analogueLR = gp.axes[JOY_AXIS];
   try {
     if(analogueLR < -0.5) 
       Controls.handleLeft();  
@@ -57,6 +65,3 @@ function checkGamepad() {
   catch(e) { console.log(e); }
   window.requestAnimationFrame(checkGamepad);
 }
-
-if(gpIndex > -1)
-  window.requestAnimationFrame(checkGamepad);
