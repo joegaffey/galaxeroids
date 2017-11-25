@@ -28,6 +28,10 @@ GameGraphics.motherSheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.co
 GameGraphics.mother1 = new PIXI.Texture(GameGraphics.motherSheet, new PIXI.Rectangle(0, 0, 40, 20));
 GameGraphics.mother2 = new PIXI.Texture(GameGraphics.motherSheet, new PIXI.Rectangle(0, 20, 40, 20));
 
+GameGraphics.getShipGraphics = function() {
+  return new PIXI.Texture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fship1.png?1510356198839');
+}
+
 GameGraphics.getBulletGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
@@ -62,16 +66,6 @@ GameGraphics.getShipBulletGraphics = function() {
   return graphics.generateTexture();
 }
 
-GameGraphics.getPauseGraphics = function() {
-  var graphics = new PIXI.Graphics();
-  graphics.beginFill(0x888888);
-  graphics.drawRect(0, 0, 20, 60);
-  graphics.drawRect(40, 0, 20, 60);
-  graphics.endFill();
-  graphics.boundsPadding = 0;
-  return graphics.generateTexture();
-}
-
 GameGraphics.getScanLines = function() {
   var graphics = new PIXI.Graphics();
   graphics.lineStyle(2, 0x333333, 0.2);
@@ -95,6 +89,62 @@ GameGraphics.getEnergyGraphics = function() {
   return graphics.generateTexture();
 }
 
+GameGraphics.getJoystickAreaGraphics = function() {
+  var graphics = new PIXI.Graphics();
+  graphics.beginFill(0xFFFFFF);
+  graphics.drawRect(0, 0, 400, 600);
+  graphics.endFill();
+  graphics.boundsPadding = 0;
+  return graphics.generateTexture();
+}
+
+GameGraphics.getButtonGraphics = function(colour) {
+  var graphics = new PIXI.Graphics();
+  graphics.beginFill(colour);
+  graphics.lineStyle(3, 0xFFFFFF, 1);
+  graphics.drawCircle(0, 0, 30);
+  graphics.endFill();
+  graphics.boundsPadding = 0;
+  return graphics.generateTexture();
+}
+
+GameGraphics.getJoyBaseGraphics = function() {
+  var graphics = new PIXI.Graphics();
+  graphics.beginFill(0xFFFFFF);
+  
+  graphics.moveTo(50,0);
+  graphics.lineTo(40, 10);
+  graphics.lineTo(60, 10);
+  graphics.lineTo(50, 0);
+  
+  graphics.moveTo(0,50);
+  graphics.lineTo(10, 40);
+  graphics.lineTo(10, 60);
+  graphics.lineTo(0, 50);
+  
+  graphics.moveTo(100,50);
+  graphics.lineTo(90, 40);
+  graphics.lineTo(90, 60);
+  graphics.lineTo(100, 50);
+  
+  graphics.moveTo(50,100);
+  graphics.lineTo(60, 90);
+  graphics.lineTo(40, 90);
+  graphics.lineTo(50, 100);
+  
+  graphics.endFill();
+  return graphics.generateTexture();
+}
+
+GameGraphics.getPauseGraphics = function() {
+  var graphics = new PIXI.Graphics();
+  graphics.beginFill(0xFFFFFF);
+  graphics.drawRect(0, 0, 20, 60);
+  graphics.drawRect(40, 0, 20, 60);
+  graphics.endFill();
+  return graphics.generateTexture();
+}
+
 GameGraphics.getMotherGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
@@ -102,10 +152,6 @@ GameGraphics.getMotherGraphics = function() {
   graphics.endFill();
   graphics.boundsPadding = 0;
   return graphics.generateTexture();
-}
-
-GameGraphics.getShipGraphics = function() {
-  return new PIXI.Texture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fship1.png?1510356198839');
 }
 
 GameGraphics.getAssistGraphics = function() {
@@ -120,6 +166,7 @@ GameGraphics.getAssistGraphics = function() {
   graphics.lineTo(0, 0);
   graphics.drawEllipse(60, -5, 30, 25);
   graphics.endFill();
+  
   graphics.beginFill(0x000000);
   graphics.drawCircle(20, 0, 4);
   graphics.drawCircle(40, 0, 4);
