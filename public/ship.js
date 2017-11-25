@@ -1,4 +1,5 @@
 class Ship extends PIXI.Sprite {
+  
   constructor() {    
     super(GameGraphics.getShipGraphics());
     this.shootDelay = Props.SHIP_SHOOT_DELAY;
