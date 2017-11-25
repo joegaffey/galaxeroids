@@ -20,11 +20,11 @@ app.gameover = false;
 app.score = 0;
 
 document.addEventListener('visibilitychange', function() {
-  if(document.visibilityState == 'hidden') {
+  if(document.visibilityState === 'hidden') {
     app.pause();
   }
-  else if( document.visibilityState == 'visible') {
-    app.unPause();
+  else if( document.visibilityState === 'visible') {
+    app.ticker.update();
   }
 });
 
