@@ -87,34 +87,20 @@ GameGraphics.getEnergyGraphics = function() {
   return graphics.generateTexture();
 }
 
-GameGraphics.getJoystickAreaGraphics = function() {
-  var graphics = new PIXI.Graphics();
-  graphics.beginFill(0xFFFFFF);
-  graphics.drawRect(0, 0, 400, 600);
-  graphics.endFill();
-  graphics.boundsPadding = 0;
-  return graphics.generateTexture();
-}
-
 GameGraphics.getButtonGraphics = function(colour) {
   var graphics = new PIXI.Graphics();
-  graphics.beginFill(colour);
-  graphics.lineStyle(3, 0xFFFFFF, 1);
+  graphics.lineStyle(1.5, 0xFFFFFF, 1);
   graphics.drawCircle(0, 0, 30);
-  graphics.endFill();
-  graphics.boundsPadding = 0;
+  graphics.lineStyle(3, colour, 1);
+  graphics.drawCircle(0, 0, 24);
+  graphics.boundsPadding = 2;
   return graphics.generateTexture();
 }
 
 GameGraphics.getJoyBaseGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
-  
-  graphics.moveTo(50,0);
-  graphics.lineTo(40, 10);
-  graphics.lineTo(60, 10);
-  graphics.lineTo(50, 0);
-  
+   
   graphics.moveTo(0,50);
   graphics.lineTo(10, 40);
   graphics.lineTo(10, 60);
@@ -124,11 +110,7 @@ GameGraphics.getJoyBaseGraphics = function() {
   graphics.lineTo(90, 40);
   graphics.lineTo(90, 60);
   graphics.lineTo(100, 50);
-  
-  graphics.moveTo(50,100);
-  graphics.lineTo(60, 90);
-  graphics.lineTo(40, 90);
-  graphics.lineTo(50, 100);
+
   
   graphics.endFill();
   return graphics.generateTexture();
