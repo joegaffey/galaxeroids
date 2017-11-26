@@ -8,19 +8,19 @@ class TouchControls extends PIXI.Container {
     this.fireButton.interactive = true;
     this.fireButton.buttonMode = true;
     this.fireButton.anchor.set(0.5);
-    this.fireButton.x = 700;
+    this.fireButton.x = 730;
     this.fireButton.y = 450;
     this.fireButton.scale.x = this.fireButton.scale.y = 1.5;
-    this.fireButton.on('pointerdown', this.onFire);
+    this.fireButton.on('pointerdown', this.onFire, false);
     
     this.orbButton = new PIXI.Sprite(GameGraphics.getButtonGraphics(0x00FF00));
     this.orbButton.interactive = true;
     this.orbButton.buttonMode = true;
     this.orbButton.anchor.set(0.5);
-    this.orbButton.x = 550;
+    this.orbButton.x = 600;
     this.orbButton.y = 500;
     this.orbButton.scale.x = this.orbButton.scale.y = 1.25;
-    this.orbButton.on('pointerdown', this.onOrb);
+    this.orbButton.on('pointerdown', this.onOrb, false);
     
     this.pauseButton = new PIXI.Sprite(GameGraphics.getPauseGraphics());
     this.pauseButton.interactive = true;
@@ -29,9 +29,9 @@ class TouchControls extends PIXI.Container {
     this.pauseButton.x = 40;
     this.pauseButton.y = 60;
     this.pauseButton.scale.x = this.pauseButton.scale.y = 0.75;
-    this.pauseButton.on('pointerdown', this.onPause);
+    this.pauseButton.on('pointerdown', this.onPause, false);
     
-    this.JOY_X = 200;
+    this.JOY_X = 150;
     this.JOY_Y = 450;
     
     this.joystickBase = new PIXI.Sprite(GameGraphics.getJoyBaseGraphics());
@@ -46,20 +46,21 @@ class TouchControls extends PIXI.Container {
     this.joystick.x = this.JOY_X;
     this.joystick.y = this.JOY_Y;
     this.joystick.scale.x = this.joystick.scale.y = 1.5;
-    this.joystick.on('pointerdown', this.onJoyMoveStart.bind(this))
-    this.joystick.on('pointermove', this.onJoyMove.bind(this));  
-    this.joystick.on('pointerup', this.onJoyRelease.bind(this))
-    this.joystick.on('pointerupoutside', this.onJoyRelease.bind(this));
+    this.joystick.on('pointerdown', this.onJoyMoveStart.bind(this), false)
+    this.joystick.on('pointermove', this.onJoyMove.bind(this), false);  
+    this.joystick.on('pointerup', this.onJoyRelease.bind(this), false)
+    this.joystick.on('pointerupoutside', this.onJoyRelease.bind(this), false);
     
     this.joystickArea = new PIXI.Sprite();
     this.joystickArea.interactive = true;
     this.joystickArea.anchor.set(0);
+    this.joystickArea.x = this.joystickArea.y = 0;
     this.joystickArea.width = app.renderer.width / 2;
     this.joystickArea.height = app.renderer.height;
-    this.joystickArea.on('pointerdown', this.onJoyMoveStart.bind(this))
-    this.joystickArea.on('pointermove', this.onJoyMove.bind(this));  
-    this.joystickArea.on('pointerup', this.onJoyRelease.bind(this))
-    this.joystickArea.on('pointerupoutside', this.onJoyRelease.bind(this));
+    this.joystickArea.on('pointerdown', this.onJoyMoveStart.bind(this), false)
+    this.joystickArea.on('pointermove', this.onJoyMove.bind(this), false);  
+    this.joystickArea.on('pointerup', this.onJoyRelease.bind(this), false)
+    this.joystickArea.on('pointerupoutside', this.onJoyRelease.bind(this), false);
     
     this.addChild(this.fireButton);
     this.addChild(this.orbButton);
@@ -76,6 +77,8 @@ class TouchControls extends PIXI.Container {
   }
   
   moveJoystick(event) {
+    if(event.data.global.x > app.renderer.width /2)
+      return;
     this.joystick.x = event.data.global.x;
     this.joystick.y = event.data.global.y;
     if(this.joystick.x > this.JOY_X) {
