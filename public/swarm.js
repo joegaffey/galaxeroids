@@ -9,6 +9,8 @@ class Swarm {
     this.xShift = 0;
     this.direction = 1;       
     this.enemyCount = 0;
+    this.isFlying = false;
+    this.deadEnemies = [];
   }
    
   addEnemyType(type, col, row) {
@@ -54,11 +56,6 @@ class Swarm {
     this.moveEnemyIntoPosition(enemy, i);
   }
   
-  addEnemies(n) {
-    for(var i = 0; i < n; i++) 
-      this.addEnemy();
-  }
-  
   addEnemyRows(rowsArr) {
     this.columns = rowsArr[0].length;
     this.width = this.columns * Props.ENEMY_GAP;
@@ -79,10 +76,6 @@ class Swarm {
   }
   
   acrobatics() {
-    if(this.isFlying) {
-      this.isFlying = false; //Workaround for onCompleteAll not getting called sometimes
-      return;
-    }
     this.isFlying = true;
     var i = Math.floor(Math.random() * 3);
     switch(i) {
@@ -202,6 +195,7 @@ class Swarm {
   }
   
   acrobaticsCompleteAll() {
+    console.log();
     swarm.isFlying = false; 
   }
     
@@ -303,6 +297,14 @@ class Swarm {
   }
 
   reset() {
+    this.deadEnemies.forEach(enemy => {
+      TweenMax.killTweensOf(enemy);
+      TweenMax.killTweensOf(enemy.position);
+      enemy.destroy();
+      enemy = null;
+    });
+    this.deadEnemies = [];
+    this.isFlying = false;
     this.enemies.forEach(function(enemy) {
       if(enemy) {
         enemy.ticker.stop();

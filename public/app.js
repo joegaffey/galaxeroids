@@ -92,7 +92,7 @@ app.infoScreen = new InfoScreen();
 app.info.addChild(app.infoScreen);
 
 setInterval(function() { 
-  if(!app.paused) {
+  if(!app.paused && !swarm.isFlying) {
     swarm.move(); 
     if(mother)
       mother.swapTexture();
@@ -108,7 +108,7 @@ setInterval(function() {
 }, Math.floor(Props.SWARM_SHOOT_INTERVAL + Math.random() * Props.SWARM_SHOOT_INTERVAL));
 
 setInterval(function() { 
-  if(!app.paused) {
+  if(!app.paused && !swarm.isFlying) {
     if(Math.random() > 0.5) {
       var enemy = swarm.getRandomEnemy();
       if(enemy)
@@ -180,7 +180,7 @@ app.reset = function() {
 
 app.gameover = true;
 
-app.unPause = function() {  
+app.unPause = function() {    
   if(app.gameover) {
     app.reset();
     app.nextLevel();

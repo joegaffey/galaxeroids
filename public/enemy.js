@@ -19,9 +19,11 @@ class Enemy extends PIXI.Sprite {
         this.rotation = this.yOffset * 2 * Props.ENEMY_ROTATION_SPEED;
         this.y = swarm.getEnemyYByIndex(this.index) - this.yOffset;
         this.yOffset--;
-      }
-      else
-        this.rotation = 0;
+        if(this.yOffset === 0) {
+          this.rotation = 0;  
+          this.inPosition = true;    
+        }
+      }        
       
       if(this.y > 600)
          ship.checkCollision(this);
@@ -61,6 +63,8 @@ class Enemy extends PIXI.Sprite {
     };
     
     function attackComplete() {
+      if(!this)
+        return;
       TweenMax.to(this.position, 0.4, {
         bezier: {
           type: 'Soft',
@@ -127,14 +131,14 @@ class Enemy extends PIXI.Sprite {
   }
   
   explode() {
-    TweenMax.killTweensOf(this);
-    TweenMax.killTweensOf(this.position);      
+    this.ticker.stop();
+    this.visible = false;
     swarm.enemyCount--;
     swarm.enemies[this.index] = null;
     GameAudio.explosionSound();
     Effects.explode(this.x, this.y, Props.EXPLOSION_MEDIUM);
-    this.ticker.stop();
-    this.destroy();
+    
+    swarm.deadEnemies.push(this);
     if(swarm.enemyCount === 0) {
       if(!mother)
         app.endGame(Props.SUCCESS_MESSAGE);
@@ -163,6 +167,7 @@ class Enemy extends PIXI.Sprite {
       Effects.explode(this.x, this.y, Props.EXPLOSION_TINY);
       app.addScore(Props.ENEMY_HIT_POINTS);
       this.yOffset += 50;
+      this.inPosition = false;    
       GameAudio.alienHitSound();
     }
   }
