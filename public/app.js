@@ -84,6 +84,7 @@ var assist = new Assist();
 var lives = new Lives(); 
 
 app.bullets = [];
+app.pills = [];
 
 app.info = new PIXI.Container();
 app.stage.addChild(app.info);
@@ -92,10 +93,14 @@ app.infoScreen = new InfoScreen();
 app.info.addChild(app.infoScreen);
 
 setInterval(function() { 
-  if(!app.paused && !swarm.isFlying) {
+  if(app.paused)
+    return;
+  if(mother) {
+    mother.swapTexture();
+    GameAudio.moveSound();
+  }
+  if(!swarm.isFlying) {
     swarm.move(); 
-    if(mother)
-      mother.swapTexture();
   }
 }, Props.SWARM_MOVE_INTERVAL);
 
@@ -129,18 +134,19 @@ setInterval(function() {
 
 app.nextLevel = function() {
   currentLevel++;
+  swarm.reset();
+    
   if(currentLevel < levels.length) {
     app.showMessage('GET READY!!!');
-    swarm.reset();
     setTimeout(function() {
       swarm.addEnemyRows(levels[currentLevel].swarm.rows);  
     }, 2000);
   }
   else {
+    swarm.isFlying = true;
     mother.attack();
   }
 }
-
 var currentLevel = -1;
 
 app.reset = function() {
@@ -149,19 +155,28 @@ app.reset = function() {
   if(mother) {
     mother.reset();
   }
-  swarm.reset();
-  ship.reset();
+  if(swarm)
+    swarm.reset();
+  if(ship)
+    ship.reset();
   assist.reset();
   lives.reset();
   
-  app.bullets.forEach(function(bullet) {
+  app.bullets.forEach(bullet => {
     if(bullet) {
       bullet.ticker.stop();
       app.game.removeChild(bullet);
-      //bullet.destroy(); 
     }
   });
   app.bullets = [];
+  
+  app.pills.forEach(pill => {
+    if(pill) {
+      pill.ticker.stop();
+      app.game.removeChild(pill);
+    }
+  });
+  app.pills = [];
   
   app.game.children.forEach(function(child) {
     child.destroy();

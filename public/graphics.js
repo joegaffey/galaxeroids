@@ -1,33 +1,50 @@
 var GameGraphics = {};
 
+GameGraphics.alien0SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsprites.png?1510171075032';
+GameGraphics.alien1SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien1.png?1511471417455';
+GameGraphics.alien2SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien2.png?1511298193099';
+GameGraphics.alien3SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien3.png?1511298193179';
+GameGraphics.alien4SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien4.png?1511473160252';
+GameGraphics.motherSheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlienMother.png?1510435694501';
+GameGraphics.shipImageURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fship1.png?1510356198839';
+
+// GameGraphics.alien0SheetURL = './assets/sprites.png';
+// GameGraphics.alien1SheetURL = './assets/Alien1.png';
+// GameGraphics.alien2SheetURL = './assets/Alien2.png';
+// GameGraphics.alien3SheetURL = './assets/Alien3.png';
+// GameGraphics.alien4SheetURL = './assets/Alien4.png';
+// GameGraphics.motherSheetURL = './assets/AlienMother.png';
+// GameGraphics.shipImageURL = './assets/ship1.png';
+
+
 GameGraphics.pillGraphics = new PIXI.Texture.fromImage('pill.svg', undefined, undefined, Props.PILL_SCALE);
 
-GameGraphics.alien0Sheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsprites.png?1510171075032');
+GameGraphics.alien0Sheet = new PIXI.BaseTexture.fromImage(GameGraphics.alien0SheetURL);
 GameGraphics.alien0_1 = new PIXI.Texture(GameGraphics.alien0Sheet, new PIXI.Rectangle(0, 0, 19, 19));
 GameGraphics.alien0_2 = new PIXI.Texture(GameGraphics.alien0Sheet, new PIXI.Rectangle(20, 0, 19, 19));
 
-GameGraphics.alien1Sheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien1.png?1511471417455');
+GameGraphics.alien1Sheet = new PIXI.BaseTexture.fromImage(GameGraphics.alien1SheetURL);
 GameGraphics.alien1_1 = new PIXI.Texture(GameGraphics.alien1Sheet, new PIXI.Rectangle(0, 0, 20, 20));
 GameGraphics.alien1_2 = new PIXI.Texture(GameGraphics.alien1Sheet, new PIXI.Rectangle(0, 20, 20, 20));
 
-GameGraphics.alien2Sheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien2.png?1511298193099');
+GameGraphics.alien2Sheet = new PIXI.BaseTexture.fromImage(GameGraphics.alien2SheetURL);
 GameGraphics.alien2_1 = new PIXI.Texture(GameGraphics.alien2Sheet, new PIXI.Rectangle(0, 0, 20, 20));
 GameGraphics.alien2_2 = new PIXI.Texture(GameGraphics.alien2Sheet, new PIXI.Rectangle(0, 20, 20, 20));
 
-GameGraphics.alien3Sheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien3.png?1511298193179');
+GameGraphics.alien3Sheet = new PIXI.BaseTexture.fromImage(GameGraphics.alien3SheetURL);
 GameGraphics.alien3_1 = new PIXI.Texture(GameGraphics.alien3Sheet, new PIXI.Rectangle(0, 0, 20, 20));
 GameGraphics.alien3_2 = new PIXI.Texture(GameGraphics.alien3Sheet, new PIXI.Rectangle(0, 20, 20, 20));
 
-GameGraphics.alien4Sheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien4.png?1511473160252');
+GameGraphics.alien4Sheet = new PIXI.BaseTexture.fromImage(GameGraphics.alien4SheetURL);
 GameGraphics.alien4_1 = new PIXI.Texture(GameGraphics.alien4Sheet, new PIXI.Rectangle(0, 0, 20, 20));
 GameGraphics.alien4_2 = new PIXI.Texture(GameGraphics.alien4Sheet, new PIXI.Rectangle(0, 20, 20, 20));
 
-GameGraphics.motherSheet = new PIXI.BaseTexture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlienMother.png?1510435694501');
-GameGraphics.mother1 = new PIXI.Texture(GameGraphics.motherSheet, new PIXI.Rectangle(0, 0, 40, 20));
+GameGraphics.motherSheet = new PIXI.BaseTexture.fromImage(GameGraphics.motherSheetURL);
+GameGraphics.mother1 = new PIXI.Texture(GameGraphics.motherSheet, new PIXI.Rectangle(0, 0, 40, 19));
 GameGraphics.mother2 = new PIXI.Texture(GameGraphics.motherSheet, new PIXI.Rectangle(0, 20, 40, 20));
 
 GameGraphics.getShipGraphics = function() {
-  return new PIXI.Texture.fromImage('https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fship1.png?1510356198839');
+  return new PIXI.Texture.fromImage(GameGraphics.shipImageURL);
 }
 
 GameGraphics.getBulletGraphics = function() {
