@@ -135,6 +135,7 @@ setInterval(function() {
 app.nextLevel = function() {
   currentLevel++;
   swarm.reset();
+  swarm = new Swarm();
     
   if(currentLevel < levels.length) {
     app.showMessage('GET READY!!!');

@@ -37,6 +37,13 @@ class Mother extends PIXI.Sprite {
   }
   
   attack() {
+    let loops = 4;
+    setInterval(() => {
+      if(loops > 0) {
+        GameAudio.motherAttackSound();
+        loops--;
+      }
+    }, 500);
     this.isAttacking = true;
     this.ticker.stop();
     const x1 = 400, y1 = 200, scale = 4, duration = 2;
@@ -58,6 +65,7 @@ class Mother extends PIXI.Sprite {
   
   rain(offset = 20) {
     setTimeout(() => {
+      GameAudio.thrustSound();
       if(!mother)
         return;
       if(Math.random() * 8 < 1)

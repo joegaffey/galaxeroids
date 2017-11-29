@@ -60,6 +60,7 @@ class Swarm {
   }
   
   addEnemyRows(rowsArr) {
+    GameAudio.motherAttackSound();
     this.columns = rowsArr[0].length;
     this.width = this.columns * Props.ENEMY_GAP;
     this.xPos = (app.renderer.width / 2) - (this.width / 2);

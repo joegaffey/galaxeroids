@@ -13,8 +13,12 @@ function initAudio() {
       'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2FextraShip.wav?1501607283115',
       'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Fufo_highpitch.wav?1499375910630',
       'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Fexplosion.wav?1499375911491',
-      'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Fsound-frogger-hop.wav?1501606884861',
-      'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Fpacman_eatghost.wav?1504903948517'
+      'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsound-frogger-hop.mp3?1511994094518',
+      'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Fpacman_eatghost.wav?1504903948517',
+      'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FsaucerSmall.wav?1511979283826',
+      'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FsaucerBig.wav?1511979284354',
+      'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fpacman_eatfruit.wav?1511979283539',
+      'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fthrust.wav?1511992065618'
     
       // './assets/shoot.wav',
       // './assets/fastinvader1.wav',
@@ -23,6 +27,10 @@ function initAudio() {
       // './assets/explosion.wav',
       // './assets/sound-frogger-hop.wav'      
       // './assets/pacman_eatghost.wav'
+      // './assets/saucerSmall.wav'
+      // './assets/saucerBig.wav'
+      // './assets/pacman_eatfruit.wav'
+    
     ],
     GameAudio.finishedLoading);
   bufferLoader.load();
@@ -41,15 +49,23 @@ GameAudio.moveSound = function() {
 }
 
 GameAudio.alienHitSound = function() {
-  GameAudio.playSound(5, 2); 
+  GameAudio.playSound(2, 0.25);
 }
 
 GameAudio.pillCollectSound = function() {
-  GameAudio.playSound(5, 2); 
+  GameAudio.playSound(5, 5); 
 }
 
 GameAudio.motherHitSound = function() {
-  GameAudio.playSound(3, 0.6); 
+  let i = Math.floor(Math.random() * 2);
+  if(i === 0)
+    GameAudio.playSound(7, 1);
+  else
+    GameAudio.playSound(8, 1);
+}
+
+GameAudio.motherAttackSound = function() {
+  GameAudio.playSound(9, 1); 
 }
 
 GameAudio.cellHitSound = function() {
@@ -62,6 +78,10 @@ GameAudio.explosionSound = function() {
 
 GameAudio.assistSound = function() {
   GameAudio.playSound(6, 1);
+}
+
+GameAudio.thrustSound = function() {
+  GameAudio.playSound(10, 1);
 }
 
 GameAudio.playSound = function(i, gain) {
