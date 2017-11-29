@@ -25,7 +25,7 @@ class Enemy extends PIXI.Sprite {
         }
       }        
       
-      if(this.y > 600)
+      if(this.y > 500) 
          ship.checkCollision(this);
       
     }.bind(this));
@@ -42,7 +42,7 @@ class Enemy extends PIXI.Sprite {
 
     this.inPosition = false;
     this.isAttacking = true;
-    TweenMax.to([this.position, this], 4, {
+    TweenMax.to(this, 4, {
       bezier: {
         type: 'Soft',
         values:[
@@ -56,16 +56,9 @@ class Enemy extends PIXI.Sprite {
       }, 
       onComplete: attackComplete.bind(this)
     });      
-    
-    var complete = function() { 
-      this.inPosition = true;
-      this.isAttacking = false;
-    };
-    
+        
     function attackComplete() {
-      if(!this)
-        return;
-      TweenMax.to(this.position, 0.4, {
+      TweenMax.to(this, 0.5, {
         bezier: {
           type: 'Soft',
           values:[
@@ -73,16 +66,12 @@ class Enemy extends PIXI.Sprite {
             {x: swarm.getEnemyXByIndex(this.index), y: swarm.getEnemyYByIndex(this.index)},
           ]
         },
-        onComplete: complete.bind(this)
+        onComplete: () => { 
+          this.inPosition = true;
+          this.isAttacking = false;
+        }
       });
-    }    
-    
-    this.ticker.add(function() {
-      if(isIntersecting(ship, this)) {
-        this.explode();
-        ship.hit();
-      }
-    }.bind(this));    
+    }  
   }
   
   swapTexture() {
@@ -113,35 +102,26 @@ class Enemy extends PIXI.Sprite {
       this.x += dirX * Props.ENEMY_SPEED;
       this.y += dirY * Props.ENEMY_SPEED;
     }
-    
-//     TweenMax.to(this.position, 2, {
-//       bezier: {
-//           type: 'Soft',
-//           values:[
-//             {x: mother.x, y: mother.y}, 
-//             {x: this.startX, y: this.startY},
-//           ]
-//        },
-//        oncomplete: complete.bind(this)        
-//     });
-    
-//     function complete() { 
-//       this.inPosition = true 
-//     }
   }
   
-  explode() {
+  dispose() {
+    TweenMax.killTweensOf(this);
+    this.ticker.stop();
+    this.destroy();
+  }
+  
+  explode(effects = true) {
     this.ticker.stop();
     this.visible = false;
+    if(effects) {
+      GameAudio.explosionSound();
+      Effects.explode(this.x, this.y, Props.EXPLOSION_MEDIUM);        
+    }
     swarm.enemyCount--;
     swarm.enemies[this.index] = null;
-    GameAudio.explosionSound();
-    Effects.explode(this.x, this.y, Props.EXPLOSION_MEDIUM);
+    swarm.deadEnemies.push(this);    
     
-    swarm.deadEnemies.push(this);
-    if(swarm.enemyCount === 0) {
-      if(!mother)
-        app.endGame(Props.SUCCESS_MESSAGE);
+    if(swarm.enemyCount === 0 && currentLevel < levels.length) {
       app.nextLevel();
     }
   }

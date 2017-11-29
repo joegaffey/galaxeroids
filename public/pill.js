@@ -39,4 +39,5 @@ function addNewPill(sprite, power) {
   });
   pill.ticker.start();
   app.game.addChild(pill);
+  app.pills.push(pill);
 }

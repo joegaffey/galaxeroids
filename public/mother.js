@@ -37,6 +37,13 @@ class Mother extends PIXI.Sprite {
   }
   
   attack() {
+    let loops = 4;
+    setInterval(() => {
+      if(loops > 0) {
+        GameAudio.motherAttackSound();
+        loops--;
+      }
+    }, 500);
     this.isAttacking = true;
     this.ticker.stop();
     const x1 = 400, y1 = 200, scale = 4, duration = 2;
@@ -49,28 +56,59 @@ class Mother extends PIXI.Sprite {
   strafe() {
     if(!mother)
       return;
-    const duration = 1;
+    const duration = 0.5;
     const x = 50 + Math.floor(Math.random() * 650);
     const timeline = new TimelineMax({onComplete: mother.rain})
-      .to(mother.position, duration, {x: 400, delay: 1}, 0)  
-      .to(mother.position, duration, {x: 100, delay: 1}, 1)
-      .to(mother.position, duration, {x: 600, delay: 1}, 2)
-      .to(mother.position, duration, {x: x, delay: 1}, 3);
+      .to(mother.position, duration, {x: 400}, 0)  
+      .to(mother.position, duration, {x: x}, 1);
   }
   
   rain(offset = 20) {
     setTimeout(() => {
+      GameAudio.thrustSound();
       if(!mother)
         return;
+      if(Math.random() * 8 < 1)
+        mother.sendEnemy();
       const x = mother.x - (mother.width / 2) + Math.floor((mother.width * Math.random()));
       const y = mother.y + mother.height / 2;
       mother.addBullet(x, y);
       offset--;
-      if(offset > 0)
+      if(offset > 0) {
         mother.rain(offset);
-      else
-        mother.strafe();
+      }
+      else {
+        let y = mother.y + 50;
+        if(mother.y > 400)
+          TweenMax.to(mother.position, 0.5, {y: 200, onComplete: mother.strafe});    
+        else 
+          TweenMax.to(mother.position, 0.2, {y: y, onComplete: mother.strafe});    
+      }
     }, 200);      
+  }  
+  
+  sendEnemy() {    
+    const x1 = this.x;
+    const y1 = this.y;
+    const x2 = ship.x;
+    const y2 = ship.y;
+    
+    let enemy = swarm.addEnemyType(Math.floor(Math.random() * 4) + 1);
+    enemy.x = this.x;
+    enemy.y = this.y;
+    enemy.isAttacking = true;
+
+    TweenMax.to([enemy.position, enemy], 3, {
+      bezier: {
+        type: 'Soft',
+        values:[
+          {x: x1, y: y1, rotation: 0},
+          {x: x1, y: y1 - 200, rotation: -0.5},
+          {x: x2, y: y1 - 200, rotation: -1}, 
+          {x: x2, y: y2 + 200, rotation: 0},
+        ]
+      }, onComplete: () => { enemy.explode(false); } 
+    });   
   }
   
   hit() {
@@ -83,6 +121,7 @@ class Mother extends PIXI.Sprite {
     }
     if(this.hits >= Props.MOTHER_MAX_HITS) {
       this.explode();
+      app.endGame(Props.SUCCESS_MESSAGE);      
     }
     else
       app.addScore(Props.MOTHER_HIT_POINTS);
@@ -105,6 +144,8 @@ class Mother extends PIXI.Sprite {
   }
   
   explode() {
+    if(!this)
+       return;
     this.ticker.stop();
     app.addScore(Props.MOTHER_KILL_POINTS);
     
@@ -117,7 +158,7 @@ class Mother extends PIXI.Sprite {
       const y = this.y - 40 + Math.floor(Math.random() * 80); 
       
       Effects.explode(x, y, Props.EXPLOSION_HUGE);
-      setTimeout(() => { this.explode(); }, 500);
+      setTimeout(() => { this.explode(); }, 300);
     }
     else {
       this.destroy(); 

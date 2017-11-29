@@ -13,13 +13,23 @@ class Swarm {
     this.deadEnemies = [];
   }
    
-  addEnemyType(type, col, row) {
+  addEnemyType(type) {
     if(!mother)
-      return;
+      return null;
     if(type === 0) {
       this.enemies.push(null);
-      return;
+      return null;
     }
+    var enemy = this.getEnemyByType(type);
+    var i = this.enemies.length;
+    enemy.index = i;
+    this.enemies.push(enemy);
+    app.game.addChild(enemy);
+    this.enemyCount++;
+    return enemy;
+  }
+  
+  getEnemyByType(type) {
     var enemy;
     if(type === 1) {
       enemy = new Enemy(GameGraphics.alien0_1);
@@ -46,28 +56,39 @@ class Swarm {
       enemy.textures = [GameGraphics.alien4_1, GameGraphics.alien4_2];
       enemy.scale.x = enemy.scale.y = 1.5;
     }
-    var i = this.enemies.length;
-    enemy.index = i;
-    enemy.x = this.getEnemyXByIndex(i);
-    enemy.y = this.getEnemyYByIndex(i);
-    this.enemies.push(enemy);
-    app.game.addChild(enemy);
-    this.enemyCount++;
-    this.moveEnemyIntoPosition(enemy, i);
+    return enemy;
   }
   
   addEnemyRows(rowsArr) {
+    GameAudio.motherAttackSound();
     this.columns = rowsArr[0].length;
     this.width = this.columns * Props.ENEMY_GAP;
     this.xPos = (app.renderer.width / 2) - (this.width / 2);
     rowsArr.forEach(function(row, i){
       this.addEnemyRow(row, i);     
     }.bind(this));
+    // this.moveEnemiesIntoPosition();
   }
   
-  addEnemyRow(rowArr, row){
-    rowArr.forEach(function(type, col) {
-      this.addEnemyType(type, col, row);  
+//   moveEnemiesIntoPosition() {
+//     this.enemies.forEach((enemy) => {
+//       if(enemy) {
+//         enemy.x = mother.x;
+//         enemy.y = mother.y;
+//         var x1 = swarm.getEnemyXByIndex(enemy.index);
+//         var y1 = swarm.getEnemyYByIndex(enemy.index);
+
+//         TweenMax.to(enemy, 0.5, {x: x1, y: y1});
+//         enemy.inPosition = true;
+//       }
+//     });
+//   }
+  
+  addEnemyRow(rowArr){
+    rowArr.forEach(function(type) {
+      const enemy = this.addEnemyType(type);  
+      if(enemy)
+        this.moveEnemyIntoPosition(enemy, enemy.index);
     }.bind(this)); 
   }
   
@@ -297,25 +318,23 @@ class Swarm {
   }
 
   reset() {
+    this.isFlying = false;
     this.deadEnemies.forEach(enemy => {
-      TweenMax.killTweensOf(enemy);
-      TweenMax.killTweensOf(enemy.position);
-      enemy.destroy();
-      enemy = null;
+      if(enemy)
+        enemy.dispose();
     });
     this.deadEnemies = [];
-    this.isFlying = false;
-    this.enemies.forEach(function(enemy) {
+    this.enemies.forEach(enemy => {
       if(enemy) {
-        enemy.ticker.stop();
-        enemy.destroy();
+        enemy.dispose();
       }
     });
-    this.enemies.splice(0, this.enemies.length);
+    this.enemies = [];
+    this.enemyCount = 0;
     this.yPos = Props.SWARM_TOP;
     this.xPos = 0;
   }
-
+  
   move() {
     if(this.enemyCount === 0)
       return;
@@ -328,7 +347,6 @@ class Swarm {
       this.shiftRight();
     else
       this.shiftLeft();
-    GameAudio.moveSound();
   }
 
   checkHit(bullet) {
