@@ -11,6 +11,7 @@ class Swarm {
     this.enemyCount = 0;
     this.isFlying = false;
     this.deadEnemies = [];
+    this.previousPositions = [];
   }
    
   addEnemyType(type) {
@@ -337,6 +338,10 @@ class Swarm {
   }
   
   move() {
+    if(this.isFlying) {
+      swarm.checkFlying();
+      return;
+    }
     if(this.enemyCount === 0)
       return;
     if((this.direction === 1 && this.xShift > Props.SWARM_MAX_SHIFT) || 
@@ -348,6 +353,25 @@ class Swarm {
       this.shiftRight();
     else
       this.shiftLeft();
+  }
+  
+  checkFlying() {
+    let currentPositions = [];
+    let diff = 0;
+    this.enemies.forEach((enemy, i) =>  {
+      if(enemy)
+        currentPositions.splice(i, 0, enemy.x);
+    });  
+    currentPositions.forEach((position, i) => {
+      if(position && this.previousPositions[i]) {
+        diff += Math.abs(position - this.previousPositions[i]);
+      }
+    });
+    if(this.previousPositions.length > 0 && diff === 0) {
+      console.log('Frozen swarm - releasing');
+      this.isFlying = false;
+    }
+    this.previousPositions = currentPositions;
   }
 
   checkHit(bullet) {

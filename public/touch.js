@@ -1,10 +1,14 @@
 document.body.addEventListener('touchstart', showControls);
 
 function showControls() {
+  document.body.removeEventListener('touchstart', showControls);
+  var touchControls = new TouchControls();
+  app.controls.addChild(touchControls);
+
   
   // Handling for itch.io iframe - not working
   if(GameAudio.context.state === 'suspended') {
-    GameAudio.context.resume();
+    GameAudio.context.start();
     
   // Other workaround attempts 
   // if(GameAudio.context.state === 'suspended') {
@@ -22,7 +26,4 @@ function showControls() {
   //   });       
   // 
   }
-  document.body.removeEventListener('touchstart', showControls);
-  var touchControls = new TouchControls();
-  app.controls.addChild(touchControls);
 }
