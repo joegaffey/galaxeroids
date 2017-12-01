@@ -139,7 +139,7 @@ class Enemy extends PIXI.Sprite {
       return;
     }
     this.hits++;
-    if(this.hits === Props.ENEMY_MAX_HITS) {
+    if(this.hits === this.maxHits) {
       app.addScore(Props.ENEMY_KILL_POINTS);  
       this.explode();      
     }

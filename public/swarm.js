@@ -56,6 +56,7 @@ class Swarm {
       enemy.textures = [GameGraphics.alien4_1, GameGraphics.alien4_2];
       enemy.scale.x = enemy.scale.y = 1.5;
     }
+    enemy.maxHits = type;
     return enemy;
   }
   
