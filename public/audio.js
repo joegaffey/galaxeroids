@@ -3,6 +3,7 @@ var GameAudio = {};
 window.onload = initAudio;
 
 function initAudio() {
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
   GameAudio.context = new AudioContext();
   
   // Glitch CDN URLs. For other hosting replace with links to assets folder
@@ -91,11 +92,16 @@ GameAudio.introSound = function() {
 }
 
 GameAudio.playSound = function(i, gain) {
-  var source = GameAudio.context.createBufferSource();
-  source.buffer = GameAudio.bufferList[i];
-  var gainNode = GameAudio.context.createGain()
-  gainNode.gain.value = gain;
-  gainNode.connect(GameAudio.context.destination)
-  source.connect(gainNode)
-  source.start(0);
+  try {
+    var source = GameAudio.context.createBufferSource();
+    source.buffer = GameAudio.bufferList[i];
+    var gainNode = GameAudio.context.createGain()
+    gainNode.gain.value = gain;
+    gainNode.connect(GameAudio.context.destination)
+    source.connect(gainNode)
+    source.start(0);
+  }
+  catch(e) { 
+    console.log(e); 
+  }
 }

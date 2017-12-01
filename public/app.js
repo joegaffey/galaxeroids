@@ -107,9 +107,7 @@ setInterval(function() {
     mother.swapTexture();
     GameAudio.moveSound();
   }
-  if(!swarm.isFlying) {
-    swarm.move(); 
-  }
+  swarm.move();
 }, Props.SWARM_MOVE_INTERVAL);
 
 setInterval(function() { 
