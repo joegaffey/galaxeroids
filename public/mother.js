@@ -65,6 +65,8 @@ class Mother extends PIXI.Sprite {
   
   rain(offset = 20) {
     setTimeout(() => {
+      if(app.paused)
+        return;
       GameAudio.thrustSound();
       if(!mother)
         return;

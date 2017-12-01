@@ -1,5 +1,6 @@
 try {
   var myFont = new FontFace('PressStart', 'url(https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FPressStart2P.ttf?1509802747753)');
+  // var myFont = new FontFace('PressStart', 'url(./assets/PressStart2P.ttf)');
   myFont.load().then(function(font) {
     document.fonts.add(font);
   });
@@ -30,6 +31,10 @@ document.addEventListener('visibilitychange', function() {
 
 var graphicsCanvas = document.querySelector('.graphicsCanvas');
 graphicsCanvas.appendChild(app.view);
+
+
+app.stars = new Stars();
+app.stage.addChild(app.stars);
 
 app.game = new PIXI.Container();
 app.stage.addChild(app.game);
@@ -85,6 +90,9 @@ var lives = new Lives();
 
 app.bullets = [];
 app.pills = [];
+
+app.controls = new PIXI.Container();
+app.stage.addChild(app.controls);
 
 app.info = new PIXI.Container();
 app.stage.addChild(app.info);
@@ -198,6 +206,7 @@ app.gameover = true;
 
 app.unPause = function() {    
   if(app.gameover) {
+    GameAudio.introSound();
     app.reset();
     app.nextLevel();
     mother.enter();

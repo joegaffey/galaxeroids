@@ -1,6 +1,7 @@
 @font-face {
     font-family: PressStart;
     src: url(https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FPressStart2P.ttf?1509802747753);
+/*     src: url(./assets/PressStart2P.ttf); */
 }
 
 body {
