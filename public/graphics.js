@@ -47,13 +47,18 @@ GameGraphics.getShipGraphics = function() {
   return new PIXI.Texture.fromImage(GameGraphics.shipImageURL);
 }
 
-GameGraphics.getBulletGraphics = function() {
+GameGraphics.drawBulletGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
   graphics.drawRect(4, 4, 3, 10);
   graphics.endFill();
   graphics.boundsPadding = 0;
-  return graphics.generateTexture();
+  GameGraphics.bulletGraphics = graphics.generateTexture();
+}
+GameGraphics.drawBulletGraphics();
+
+GameGraphics.getBulletGraphics = function() {
+  return GameGraphics.bulletGraphics;
 }
 
 GameGraphics.getBlackBGGraphics = function() {
@@ -66,7 +71,7 @@ GameGraphics.getBlackBGGraphics = function() {
   return graphics.generateTexture();
 }
 
-GameGraphics.getShipBulletGraphics = function() {
+GameGraphics.drawShipBulletGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
   graphics.drawRect(4, 2, 4, 2);
@@ -78,7 +83,12 @@ GameGraphics.getShipBulletGraphics = function() {
   graphics.drawRect(4, 10, 4, 5);
   graphics.endFill();
   graphics.boundsPadding = 0;
-  return graphics.generateTexture();
+  GameGraphics.shipBulletGraphics = graphics.generateTexture();
+}
+GameGraphics.drawShipBulletGraphics();
+
+GameGraphics.getShipBulletGraphics = function() {
+  return GameGraphics.shipBulletGraphics;
 }
 
 GameGraphics.getScanLines = function() {
@@ -95,13 +105,18 @@ GameGraphics.getScanLines = function() {
   return graphics.generateTexture();
 }
 
-GameGraphics.getEnergyGraphics = function() {
+GameGraphics.drawEnergyGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
   graphics.drawCircle(0, 0, 4);
   graphics.endFill();
   graphics.boundsPadding = 0;
-  return graphics.generateTexture();
+  GameGraphics.energyGraphics = graphics.generateTexture();
+}
+GameGraphics.drawEnergyGraphics();
+
+GameGraphics.getEnergyGraphics = function() {
+  return GameGraphics.energyGraphics;
 }
 
 GameGraphics.getButtonGraphics = function(colour) {
@@ -127,7 +142,6 @@ GameGraphics.getJoyBaseGraphics = function() {
   graphics.lineTo(90, 40);
   graphics.lineTo(90, 60);
   graphics.lineTo(100, 50);
-
   
   graphics.endFill();
   return graphics.generateTexture();
