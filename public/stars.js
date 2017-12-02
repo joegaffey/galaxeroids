@@ -2,6 +2,7 @@ class Stars extends PIXI.Container {
   constructor() {
     super();
     this.stars = [];
+    this.starTexture = GameGraphics.getEnergyGraphics();
     
     for(let i = 0; i < 250; i++) {
       this.addStar();
@@ -24,7 +25,7 @@ class Stars extends PIXI.Container {
   }
   
   addStar() {
-    let star = new PIXI.Sprite(GameGraphics.getEnergyGraphics());
+    let star = new PIXI.Sprite(this.starTexture);
     star.scale.x = star.scale.y = 0.4 * Math.random();
     star.alpha = 0.5;
     star.x = Math.floor(Math.random() * app.renderer.width);
