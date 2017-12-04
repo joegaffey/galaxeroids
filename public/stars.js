@@ -1,4 +1,4 @@
-class Stars extends PIXI.Container {
+class Stars extends PIXI.ParticleContainer {
   constructor() {
     super();
     this.stars = [];
