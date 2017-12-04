@@ -43,7 +43,7 @@ class TouchControls extends PIXI.Container {
     this.joystick = new PIXI.Sprite(GameGraphics.getButtonGraphics(0x0000FF));
     this.joystick.interactive = true;
     this.joystick.anchor.set(0.5);
-    this.joystick.x = this.JOY_X;
+    this.joystick.x = this.joystick.prevX = this.JOY_X;
     this.joystick.y = this.JOY_Y;
     this.joystick.scale.x = this.joystick.scale.y = 1.5;
     this.joystick.on('pointerdown', this.onJoyMoveStart.bind(this), false)
@@ -72,35 +72,34 @@ class TouchControls extends PIXI.Container {
 
   onJoyMove(event) {
     if(this.isJoyMoving) {
-      this.moveJoystick(event);
+      this.moveJoy(event);
     }
   }
   
-  moveJoystick(event) {
+  moveJoy(event) {
     if(event.data.global.x > app.renderer.width /2)
       return;
     this.joystick.x = event.data.global.x;
-    this.joystick.y = event.data.global.y;
-    if(this.joystick.x > this.JOY_X) {
+    if(this.joystick.x > this.joystick.prevX) {
       Controls.handleRight();   
     }
-    else if(this.joystick.x < this.JOY_X) {
+    else if(this.joystick.x < this.joystick.prevX) {
       Controls.handleLeft();   
     }
-    else if(this.joystick.x === this.JOY_X) {
-      Controls.handleStop();
-    }
+    this.joystick.prevX = this.joystick.x;
   }
   
   onJoyMoveStart(event) {
     this.isJoyMoving = true;
-    this.moveJoystick(event);
+    this.moveJoy(event);
   }
   
   onJoyRelease() {
     this.isJoyMoving = false;
-    this.joystick.x = this.JOY_X;
+    
+    this.joystick.x = this.joystick.prevX = this.JOY_X;
     this.joystick.y = this.JOY_Y;
+    
     Controls.handleStop();
   } 
   

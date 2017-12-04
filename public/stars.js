@@ -14,9 +14,7 @@ class Stars extends PIXI.Container {
         if(star) {          
           star.y++;
           if(star.y > app.renderer.height) {
-            star.destroy();
-            this.addStar();
-            this.stars.splice(i, 1);
+            this.placeStar(star);
           }
         }
       });
@@ -26,11 +24,15 @@ class Stars extends PIXI.Container {
   
   addStar() {
     let star = new PIXI.Sprite(this.starTexture);
-    star.scale.x = star.scale.y = 0.4 * Math.random();
     star.alpha = 0.5;
-    star.x = Math.floor(Math.random() * app.renderer.width);
-    star.y = Math.floor(Math.random() * app.renderer.height);    
+    this.placeStar(star);
     this.addChild(star);
     this.stars.push(star);
+  }
+  
+  placeStar(star) {
+    star.scale.x = star.scale.y = 0.4 * Math.random();
+    star.x = Math.floor(Math.random() * app.renderer.width);
+    star.y = Math.floor(Math.random() * app.renderer.height);    
   }
 }
