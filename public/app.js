@@ -126,7 +126,7 @@ setInterval(function() {
         enemy.attack();
     }
     else {
-      swarm.acrobatics();
+      swarm.acrobatics(3 + Math.floor(Math.random() * (swarm.enemyCount - 3)));
     }
   }
 }, Math.floor(5000 + Math.random() * 5000));
