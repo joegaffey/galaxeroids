@@ -98,23 +98,23 @@ class Swarm {
     this.enemies[i].explode();
   }
   
-  acrobatics() {
+  acrobatics(count) {
     this.isFlying = true;
     var i = Math.floor(Math.random() * 3);
     switch(i) {
       case 0: 
-          this.fig8();
+          this.fig8(count);
           break;
       case 1: 
-          this.loop();
+          this.loop(count);
           break;        
       case 2: 
-          this.dive();
+          this.dive(count);
           break;        
     }
   }
     
-  loop() {
+  loop(count) {
     const x1 = 100;
     const y1 = 250;
     const x2 = 700;
@@ -125,7 +125,7 @@ class Swarm {
     const duration = 2.5;
     const delay = 0.1;
     
-    const flyers = this.getLiveEnemies();
+    const flyers = this.getLiveEnemies(count);
     flyers.forEach(enemy => { 
       enemy.inPosition = false; 
       enemy.isFlying = true;
@@ -146,7 +146,7 @@ class Swarm {
     );      
   }
    
-  fig8() {    
+  fig8(count) {    
     const x1 = 200, y1 = 350;
     const x2 = 100, y2 = 250;
     const x3 = 200, y3 = 100;
@@ -157,7 +157,7 @@ class Swarm {
     const duration = 2.5;
     const delay = 0.1;
     
-    const flyers = this.getLiveEnemies();
+    const flyers = this.getLiveEnemies(count);
     flyers.forEach(enemy => { 
       enemy.inPosition = false; 
       enemy.isFlying = true;
@@ -181,7 +181,7 @@ class Swarm {
     );      
   }
   
-  dive() {    
+  dive(count) {    
     const x1 = 400, y1 = -100;
     const x2 = ship.x, y2 = -100;
     const x3 = ship.x, y3 = 900;
@@ -190,7 +190,7 @@ class Swarm {
     const duration = 5;
     const delay = 0.1;
     
-    const flyers = this.getLiveEnemies();
+    const flyers = this.getLiveEnemies(count);
     flyers.forEach(enemy => { 
       enemy.inPosition = false; 
       enemy.isFlying = true;
@@ -236,11 +236,14 @@ class Swarm {
     });
   } 
 
-  getLiveEnemies() {
+  getLiveEnemies(count) {
     const live = [];
+    let i = 0;
     this.enemies.forEach(enemy => { 
-      if(enemy)
+      if(enemy && i < count) {
+        i++;
         live.push(enemy); 
+      }
     });
     return live;
   }

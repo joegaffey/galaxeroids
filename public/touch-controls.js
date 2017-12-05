@@ -85,20 +85,11 @@ class TouchControls extends PIXI.Container {
       return;
     this.joystick.x = event.data.global.x;
     if(this.joystick.x > this.joystick.prevX) {
-      this.joyDir = this.JOY_RIGHT;
       Controls.handleRight();         
     }
     else if(this.joystick.x < this.joystick.prevX) {
-      this.joyDir = this.JOY_LEFT;
       Controls.handleLeft();   
     }
-    else {
-      if(this.joyDir === this.JOY_RIGHT)
-        Controls.handleRight();
-      if(this.joyDir === this.JOY_LEFT)
-        Controls.handleLeft();
-    }
-    
     this.joystick.prevX = this.joystick.x;
   }
   
@@ -108,11 +99,9 @@ class TouchControls extends PIXI.Container {
   }
   
   onJoyRelease() {
-    this.isJoyMoving = false;
-    
+    this.isJoyMoving = false;    
     this.joystick.x = this.joystick.prevX = this.JOY_X;
-    this.joystick.y = this.JOY_Y;
-    
+    this.joystick.y = this.JOY_Y;    
     Controls.handleStop();
   } 
   
