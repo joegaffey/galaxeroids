@@ -9,7 +9,6 @@ class Swarm {
     this.xShift = 0;
     this.direction = 1;       
     this.enemyCount = 0;
-    this.isFlying = false;
     this.deadEnemies = [];
     this.previousPositions = [];
   }
@@ -86,7 +85,7 @@ class Swarm {
 //     });
 //   }
   
-  addEnemyRow(rowArr){
+  addEnemyRow(rowArr) {
     rowArr.forEach(function(type) {
       const enemy = this.addEnemyType(type);  
       if(enemy)
@@ -99,22 +98,29 @@ class Swarm {
   }
   
   acrobatics(count) {
-    this.isFlying = true;
+    const flyers = this.getLiveEnemies(count);
+    flyers.forEach(enemy => { 
+      enemy.inPosition = false; 
+      enemy.isFlying = true;
+    });
+    if(flyers.length <= 0)
+      return;
+    
     var i = Math.floor(Math.random() * 3);
     switch(i) {
       case 0: 
-          this.fig8(count);
+          this.fig8(flyers);
           break;
       case 1: 
-          this.loop(count);
+          this.loop(flyers);
           break;        
       case 2: 
-          this.dive(count);
+          this.dive(flyers);
           break;        
     }
   }
     
-  loop(count) {
+  loop(flyers) {
     const x1 = 100;
     const y1 = 250;
     const x2 = 700;
@@ -124,12 +130,6 @@ class Swarm {
     
     const duration = 2.5;
     const delay = 0.1;
-    
-    const flyers = this.getLiveEnemies(count);
-    flyers.forEach(enemy => { 
-      enemy.inPosition = false; 
-      enemy.isFlying = true;
-    });
     
     TweenMax.staggerTo(flyers, duration, {
       bezier: {
@@ -142,11 +142,11 @@ class Swarm {
         }, 
         ease: Linear.easeNone,
         onComplete: this.acrobaticsComplete
-      },delay, this.acrobaticsCompleteAll
+      },delay
     );      
   }
    
-  fig8(count) {    
+  fig8(flyers) {    
     const x1 = 200, y1 = 350;
     const x2 = 100, y2 = 250;
     const x3 = 200, y3 = 100;
@@ -156,12 +156,6 @@ class Swarm {
     
     const duration = 2.5;
     const delay = 0.1;
-    
-    const flyers = this.getLiveEnemies(count);
-    flyers.forEach(enemy => { 
-      enemy.inPosition = false; 
-      enemy.isFlying = true;
-    });
     
     TweenMax.staggerTo(flyers, duration, {
       bezier: {
@@ -177,11 +171,11 @@ class Swarm {
         }, 
         ease: Linear.easeNone,
         onComplete: this.acrobaticsComplete
-      },delay, this.acrobaticsCompleteAll
+      },delay
     );      
   }
   
-  dive(count) {    
+  dive(flyers) {    
     const x1 = 400, y1 = -100;
     const x2 = ship.x, y2 = -100;
     const x3 = ship.x, y3 = 900;
@@ -189,12 +183,6 @@ class Swarm {
     
     const duration = 5;
     const delay = 0.1;
-    
-    const flyers = this.getLiveEnemies(count);
-    flyers.forEach(enemy => { 
-      enemy.inPosition = false; 
-      enemy.isFlying = true;
-    });
     
     TweenMax.staggerTo(flyers, duration, {
       bezier: {
@@ -208,18 +196,13 @@ class Swarm {
         }, 
         ease: Linear.easeNone,
         onComplete: this.acrobaticsComplete
-      },delay, this.acrobaticsCompleteAll
+      },delay
     );      
   }
   
   sequenceComplete() { 
     this.target.inPosition = true;
     this.target.isFlying = false;
-  }
-  
-  acrobaticsCompleteAll() {
-    console.log();
-    swarm.isFlying = false; 
   }
     
   acrobaticsComplete() {
@@ -240,7 +223,7 @@ class Swarm {
     const live = [];
     let i = 0;
     this.enemies.forEach(enemy => { 
-      if(enemy && i < count) {
+      if(enemy && !enemy.isFlying && i < count) {
         i++;
         live.push(enemy); 
       }
@@ -323,7 +306,6 @@ class Swarm {
   }
 
   reset() {
-    this.isFlying = false;
     this.deadEnemies.forEach(enemy => {
       if(enemy)
         enemy.dispose();
@@ -341,10 +323,6 @@ class Swarm {
   }
   
   move() {
-    if(this.isFlying) {
-      swarm.checkFlying();
-      return;
-    }
     if(this.enemyCount === 0)
       return;
     if((this.direction === 1 && this.xShift > Props.SWARM_MAX_SHIFT) || 
@@ -356,25 +334,6 @@ class Swarm {
       this.shiftRight();
     else
       this.shiftLeft();
-  }
-  
-  checkFlying() {
-    let currentPositions = [];
-    let diff = 0;
-    this.enemies.forEach((enemy, i) =>  {
-      if(enemy)
-        currentPositions.splice(i, 0, enemy.x);
-    });  
-    currentPositions.forEach((position, i) => {
-      if(position && this.previousPositions[i]) {
-        diff += Math.abs(position - this.previousPositions[i]);
-      }
-    });
-    if(this.previousPositions.length > 0 && diff === 0) {
-      console.log('Frozen swarm - releasing');
-      this.isFlying = false;
-    }
-    this.previousPositions = currentPositions;
   }
 
   checkHit(bullet) {

@@ -119,7 +119,7 @@ setInterval(function() {
 }, Math.floor(Props.SWARM_SHOOT_INTERVAL + Math.random() * Props.SWARM_SHOOT_INTERVAL));
 
 setInterval(function() { 
-  if(!app.paused && !swarm.isFlying) {
+  if(!app.paused) {
     if(Math.random() > 0.5) {
       var enemy = swarm.getRandomEnemy();
       if(enemy)
@@ -150,7 +150,6 @@ app.nextLevel = function() {
     }, 2000);
   }
   else {
-    swarm.isFlying = true;
     mother.attack();
   }
 }

@@ -17,11 +17,13 @@ class Enemy extends PIXI.Sprite {
       
       if(this.yOffset > 0) {
         this.rotation = this.yOffset * 2 * Props.ENEMY_ROTATION_SPEED;
-        this.y = swarm.getEnemyYByIndex(this.index) - this.yOffset;
+        if(!this.isFlying)
+          this.y = swarm.getEnemyYByIndex(this.index) - this.yOffset;
         this.yOffset--;
         if(this.yOffset === 0) {
-          this.rotation = 0;  
-          this.inPosition = true;    
+          this.rotation = 0;
+          if(!this.isFlying)
+            this.inPosition = true;    
         }
       }        
       
@@ -33,7 +35,7 @@ class Enemy extends PIXI.Sprite {
   }  
   
   attack() {    
-    if(swarm.isflying)
+    if(this.isflying)
       return;
     const x1 = this.x;
     const y1 = this.y;
@@ -86,7 +88,8 @@ class Enemy extends PIXI.Sprite {
     if(app.paused)
       return;
     if(Math.abs(this.x - this.startX) < Props.ENEMY_SPEED && Math.abs(this.y - this.startY) < Props.ENEMY_SPEED) {
-      this.inPosition = true;
+      if(!this.isFlying) 
+        this.inPosition = true;
       this.x = swarm.getEnemyXByIndex(this.index);
       this.y = swarm.getEnemyYByIndex(this.index);
       this.ticker.remove(this.moveToStartPosition, this);
