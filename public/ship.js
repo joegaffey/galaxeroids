@@ -15,11 +15,24 @@ class Ship extends PIXI.Sprite {
     this.speed = 0;
     this.speedBoost = 0;
     this.direction = 1;
+    this.isInvincible = false;
+    this.invincibilityAlpha = 1;
     this.ticker = new PIXI.ticker.Ticker();
     this.ticker.add(function() {
       this.shootDelay--;
-      if(app.paused)
+      if(app.paused) {
         this.speed = 0;
+        return;
+      }
+      if(this.isInvincible) {
+        if(this.invincibilityAlpha <= 0) {
+          this.invincibilityAlpha = 1;
+        } 
+        else {
+          this.invincibilityAlpha -= 0.1;
+        }
+        this.alpha = this.invincibilityAlpha;
+      }
       this.x += this.speed;
       if(this.x <= this.width / 2 || this.x >= Props.STAGE_HRES - this.width / 2)
         this.x -= this.speed;
@@ -136,7 +149,7 @@ class Ship extends PIXI.Sprite {
   }
   
   checkHit(bullet) {
-    if(isIntersecting(bullet, this)) {
+    if(!this.isInvincible && isIntersecting(bullet, this)) {
       bullet.ticker.stop();
       bullet.destroy(); 
       this.hit();
@@ -187,7 +200,7 @@ class Ship extends PIXI.Sprite {
   }
   
   checkCollision(enemy) {
-    if(enemy && isIntersecting(enemy, this)) {
+    if(!this.isInvincible && enemy && isIntersecting(enemy, this)) {
       enemy.explode();
       this.hit();
     }
@@ -207,6 +220,17 @@ class Ship extends PIXI.Sprite {
     // setTimeout(function() {
     //   app.unPause();
     // }, 2000);
+  }
+  
+  setInvincible(bool) {
+    this.isInvincible = bool;
+    if(this.isInvincible){
+      setTimeout(() => {
+        this.isInvincible = false;
+        this.alpha = 1;
+      }, 3000);
+    }
+      
   }
   
   explode() {
