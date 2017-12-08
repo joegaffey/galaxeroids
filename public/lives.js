@@ -25,6 +25,7 @@
       ship.explode();
       return;
     }
+    ship.setInvincible(true);
     this.lives--;  
     this.livesText.setText('x' + this.lives);
   }
