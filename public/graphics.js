@@ -16,7 +16,6 @@ GameGraphics.shipImageURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758
 // GameGraphics.motherSheetURL = './assets/AlienMother.png';
 // GameGraphics.shipImageURL = './assets/ship1.png';
 
-
 GameGraphics.pillGraphics = new PIXI.Texture.fromImage('pill.svg', undefined, undefined, Props.PILL_SCALE);
 
 GameGraphics.alien0Sheet = new PIXI.BaseTexture.fromImage(GameGraphics.alien0SheetURL);
@@ -133,15 +132,19 @@ GameGraphics.getJoyBaseGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
    
-  graphics.moveTo(0,50);
+  graphics.moveTo(0, 50);
   graphics.lineTo(10, 40);
   graphics.lineTo(10, 60);
   graphics.lineTo(0, 50);
   
-  graphics.moveTo(100,50);
+  graphics.moveTo(100, 50);
   graphics.lineTo(90, 40);
   graphics.lineTo(90, 60);
   graphics.lineTo(100, 50);
+  
+  graphics.moveTo(50, 20);
+  graphics.lineStyle(1.5, 0xFFFFFF, 1);
+  graphics.lineTo(50, 80);
   
   graphics.endFill();
   return graphics.generateTexture();
