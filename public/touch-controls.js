@@ -35,8 +35,7 @@ class TouchControls extends PIXI.Container {
     this.JOY_Y = 450;
     
     this.JOY_RIGHT = 0;
-    this.JOY_LEFT = 1;
-    
+    this.JOY_LEFT = 1;    
     
     this.joystickBase = new PIXI.Sprite(GameGraphics.getJoyBaseGraphics());
     this.joystickBase.anchor.set(0.5);
@@ -84,13 +83,12 @@ class TouchControls extends PIXI.Container {
     if(event.data.global.x > app.renderer.width / 2)
       return;
     this.joystick.x = event.data.global.x;
-    if(this.joystick.x > this.joystick.prevX) {
+    if(this.joystick.x > this.JOY_X) {
       Controls.handleRight();         
     }
-    else if(this.joystick.x < this.joystick.prevX) {
+    else if(this.joystick.x < this.JOY_X) {
       Controls.handleLeft();   
     }
-    this.joystick.prevX = this.joystick.x;
   }
   
   onJoyMoveStart(event) {
@@ -100,8 +98,7 @@ class TouchControls extends PIXI.Container {
   
   onJoyRelease() {
     this.isJoyMoving = false;    
-    this.joystick.x = this.joystick.prevX = this.JOY_X;
-    this.joystick.y = this.JOY_Y;    
+    this.joystick.x = this.JOY_X;
     Controls.handleStop();
   } 
   
