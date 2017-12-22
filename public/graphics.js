@@ -159,6 +159,14 @@ GameGraphics.getPauseGraphics = function() {
   return graphics.generateTexture();
 }
 
+GameGraphics.getHealthGraphics = function() {
+  var graphics = new PIXI.Graphics();
+  graphics.beginFill(0xFFFFFF);
+  graphics.drawRect(0, 0, 20, 2);
+  graphics.endFill();
+  return graphics.generateTexture();
+}
+
 GameGraphics.getMotherGraphics = function() {
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0xFFFFFF);
