@@ -1,16 +1,26 @@
-Effects = {};
+var Effects = {};
 Effects.explosionTextures = [];
 
-Effects.onAssetsLoaded = function() {
-  for (var i = 0; i < 13; i++) {
-    var texture = PIXI.Texture.fromFrame('Explosion_Sequence_A ' + (i+1) + '.png');
-    Effects.explosionTextures.push(texture);
-  }
+Effects.createExplosionGraphics = function() {
+  var sheet = PIXI.BaseTexture.fromImage("https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2F8bitExplode.png?1503090470892");
+  // var sheet = PIXI.BaseTexture.fromImage("./assets/8bitExplode.png");
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(0, 4, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(36, 4, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(72, 4, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(108, 4, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(144, 4, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(180, 4, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(0, 40, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(36, 40, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(72, 40, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(108, 40, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(144, 40, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(180, 40, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(0, 76, 36, 36)));  
+  Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(36, 76, 36, 36)));  
 }
+Effects.createExplosionGraphics();
 
-PIXI.loader
-    .add('spritesheet', 'explosion-sprites.json')
-    .load(Effects.onAssetsLoaded);
 
 Effects.explode = function(x, y, size) {
   var explosion = new PIXI.extras.AnimatedSprite(Effects.explosionTextures);
