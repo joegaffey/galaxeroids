@@ -351,12 +351,13 @@ class Swarm {
     this.enemies.forEach(function(enemy, i) {
       if(energy && enemy && isIntersecting(energy, enemy)) {
         energy.ticker.stop();
-        Effects.explode(energy.x, energy.y, Props.EXPLOSION_HUGE);
+        GameAudio.explosionSound();
+        Effects.explode(energy.x, energy.y, Props.EXPLOSION_HUGE * 1.5);
         energy.destroy(); 
         const nearby = this.getWithinRange(enemy.position, 60);
         nearby.forEach(nearEnemy => { 
           if(nearEnemy)
-            nearEnemy.explode(); 
+            nearEnemy.explode(false); 
         });
         return;
       }
