@@ -11,10 +11,7 @@ catch(e) {
 
 var app = new PIXI.Application();
 
-// Use canvas renderer to avoid cross origin issues with webgl
-// Change to auto renderer to enable webgl in suported hosting environments 
-// app.renderer = PIXI.autoDetectRenderer(Props.STAGE_HRES, Props.STAGE_VRES, { transparent: true });
-app.renderer = new PIXI.CanvasRenderer(Props.STAGE_HRES, Props.STAGE_VRES, { transparent: true });
+app.renderer = PIXI.autoDetectRenderer(Props.STAGE_HRES, Props.STAGE_VRES, { transparent: true });
 
 app.paused = true;
 app.gameover = false;

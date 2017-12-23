@@ -18,7 +18,7 @@ class Controls {
       app.pause();
   }
 
-  static handleLeft(ev) {
+  static handleLeft() {
     ship.speed = -Props.SHIP_SPEED -ship.speedBoost;
   }
 
