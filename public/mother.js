@@ -44,6 +44,7 @@ class Mother extends PIXI.Sprite {
         loops--;
       }
     }, 500);
+    this.addHealthBar();
     this.isAttacking = true;
     this.ticker.stop();
     const x1 = 400, y1 = 200, scale = 4, duration = 2;
@@ -113,8 +114,24 @@ class Mother extends PIXI.Sprite {
     });   
   }
   
+  addHealthBar() {
+    this.health = new PIXI.Sprite(GameGraphics.getHealthGraphics());
+    this.health.anchor.x = 0.5;
+    this.health.y = -15;
+    this.health.tint = 0xFF0000;
+    this.health.startWidth = this.health.width;
+    
+    this.health.update = () => {
+      let hitRatio = (Props.MOTHER_MAX_HITS - this.hits) / Props.MOTHER_MAX_HITS;
+      this.health.width = this.health.startWidth * hitRatio;
+    };
+    this.addChild(this.health);
+  }
+  
   hit() {
     GameAudio.motherHitSound();
+    if(this.isAttacking)
+      this.health.update();
     this.hits++;
     if(this.hits % Props.MOTHER_PILL_HITS === 0) {
       this.addPill(Props.PILL_POWER);
@@ -227,4 +244,4 @@ class Mother extends PIXI.Sprite {
 }
 
 Mother.textures = [GameGraphics.mother1,
-                  GameGraphics.mother2];
+                   GameGraphics.mother2];
