@@ -54,6 +54,12 @@ app.messageText.y = 10;
 app.messageText.anchor.set(0.5, 0);
 app.stage.addChild(app.messageText);
 
+app.middleMessageText = new PIXI.Text('', style);
+app.middleMessageText.x = 400;
+app.middleMessageText.y = 300;
+app.middleMessageText.anchor.set(0.5, 0.5);
+app.stage.addChild(app.middleMessageText);
+
 var scanLinesSprite = new PIXI.Sprite(GameGraphics.getScanLines());
 app.stage.addChild(scanLinesSprite);
 
@@ -61,6 +67,13 @@ app.showMessage = function(msg) {
   app.messageText.setText(msg);
   setTimeout(function() {
     app.messageText.setText('');
+  }, 2000);
+}
+
+app.showMiddleMessage = function(msg) {
+  app.middleMessageText.setText(msg);
+  setTimeout(function() {
+    app.middleMessageText.setText('');
   }, 2000);
 }
 
@@ -141,7 +154,7 @@ app.nextLevel = function() {
   swarm = new Swarm();
     
   if(currentLevel < levels.length) {
-    app.showMessage('GET READY!!!');
+    app.showMiddleMessage('GET READY!!!');
     setTimeout(function() {
       swarm.addEnemyRows(levels[currentLevel].swarm.rows);  
     }, 2000);
