@@ -7,7 +7,7 @@
   "display": "fullscreen",
   "orientation": "landscape",
   "Scope": "/",
-  "start_url": "/",
+  "start_url": "/galaxeroids/public/",
   "icons": [
     {
       "src": "https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Ficon-72x72.png?1499458827145",
