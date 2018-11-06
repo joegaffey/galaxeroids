@@ -5,7 +5,7 @@ Galaxeroids is my entry to the 2017 GitHub [Game Off](https://itch.io/jam/game-o
 
 It was created entirely in-browser using [Glitch](https://glitch.com/) for code and [Piskel](https://www.piskelapp.com/) for graphics.
 
-You can [play it here](https://joegaffey.github.io/galaxeroids/public/) but it's Work In Progress until 1/12 (at least).
+You can [play it here](https://joegaffey.github.io/galaxeroids/public/). 
 
 Thanks to [Pixi.js](http://www.pixijs.com/) for general rendering and animation duties and [GSAP](https://greensock.com/docs/Plugins/PixiPlugin) for the alien attack animations.
 

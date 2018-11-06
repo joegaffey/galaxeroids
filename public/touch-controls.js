@@ -49,6 +49,7 @@ class TouchControls extends PIXI.Container {
     this.joystick.x = this.joystick.prevX = this.JOY_X;
     this.joystick.y = this.JOY_Y;
     this.joystick.scale.x = this.joystick.scale.y = 1.5;
+    
     this.joystick.on('pointerdown', this.onJoyMoveStart.bind(this), false)
     this.joystick.on('pointermove', this.onJoyMove.bind(this), false);  
     this.joystick.on('pointerup', this.onJoyRelease.bind(this), false)
