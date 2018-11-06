@@ -2,8 +2,7 @@ var Effects = {};
 Effects.explosionTextures = [];
 
 Effects.createExplosionGraphics = function() {
-  var sheet = PIXI.BaseTexture.fromImage("https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2F8bitExplode.png?1503090470892");
-  // var sheet = PIXI.BaseTexture.fromImage("./assets/8bitExplode.png");
+  var sheet = PIXI.BaseTexture.fromImage("./assets/8bitExplode.png");
   Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(0, 4, 36, 36)));  
   Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(36, 4, 36, 36)));  
   Effects.explosionTextures.push(new PIXI.Texture(sheet, new PIXI.Rectangle(72, 4, 36, 36)));  

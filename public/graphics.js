@@ -1,20 +1,12 @@
 var GameGraphics = {};
 
-GameGraphics.alien0SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fsprites.png?1510171075032';
-GameGraphics.alien1SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien1.png?1511471417455';
-GameGraphics.alien2SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien2.png?1511298193099';
-GameGraphics.alien3SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien3.png?1511298193179';
-GameGraphics.alien4SheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlien4.png?1511473160252';
-GameGraphics.motherSheetURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FAlienMother.png?1510435694501';
-GameGraphics.shipImageURL = 'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2Fship1.png?1510356198839';
-
-// GameGraphics.alien0SheetURL = './assets/sprites.png';
-// GameGraphics.alien1SheetURL = './assets/Alien1.png';
-// GameGraphics.alien2SheetURL = './assets/Alien2.png';
-// GameGraphics.alien3SheetURL = './assets/Alien3.png';
-// GameGraphics.alien4SheetURL = './assets/Alien4.png';
-// GameGraphics.motherSheetURL = './assets/AlienMother.png';
-// GameGraphics.shipImageURL = './assets/ship1.png';
+GameGraphics.alien0SheetURL = './assets/sprites.png';
+GameGraphics.alien1SheetURL = './assets/Alien1.png';
+GameGraphics.alien2SheetURL = './assets/Alien2.png';
+GameGraphics.alien3SheetURL = './assets/Alien3.png';
+GameGraphics.alien4SheetURL = './assets/Alien4.png';
+GameGraphics.motherSheetURL = './assets/AlienMother.png';
+GameGraphics.shipImageURL = './assets/ship1.png';
 
 GameGraphics.pillGraphics = new PIXI.Texture.fromImage('pill.svg', undefined, undefined, Props.PILL_SCALE);
 

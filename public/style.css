@@ -14,7 +14,24 @@ body {
   font-family: PressStart, Verdana, system-ui; 
 }
 
+.banner {
+  background-color: blue;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 10vw;
+}
+
+.left {
+  left: 0px;
+}
+
+.right {
+  right: 0px;
+}
+
 .graphicsCanvas {
+  background-color: #222;
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -23,6 +40,7 @@ body {
 }
 
 .graphicsCanvas > canvas {
+  background-color: #000000;
   display: block;
   margin: 0 auto;
 }

@@ -9,7 +9,7 @@ function showControls() {
   // Handling for itch.io iframe - not working
   if(GameAudio.context.state === 'suspended') {
     GameAudio.context.start();
-    
+  }
   // Other workaround attempts 
   // if(GameAudio.context.state === 'suspended') {
   //   try {
@@ -25,5 +25,4 @@ function showControls() {
   //     console.log(reason); 
   //   });       
   // 
-  }
 }

@@ -6,12 +6,10 @@ function initAudio() {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   GameAudio.context = new AudioContext();
   
-  // Glitch CDN URLs. For other hosting replace with links to assets folder
   var bufferLoader = new BufferLoader(GameAudio.context,
     [
       'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Fshoot.wav?1499375807873',
       'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Ffastinvader1.wav?1499375911936',
-      // 'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2FextraShip.wav?1501607283115',
       'https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FhitAlien.mp3?1512083761887',
       'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Fufo_highpitch.wav?1499375910630',
       'https://cdn.glitch.com/1e654918-0ade-40b8-9a8e-674df6feb199%2Fexplosion.wav?1499375911491',
@@ -25,16 +23,16 @@ function initAudio() {
     
       // './assets/shoot.wav',
       // './assets/fastinvader1.wav',
-      // './assets/extraShip.wav',
+      // './assets/hitAlien.mp3',
       // './assets/ufo_highpitch.wav',
       // './assets/explosion.wav',
-      // './assets/sound-frogger-hop.wav'      
-      // './assets/pacman_eatghost.wav'
-      // './assets/saucerSmall.wav'
-      // './assets/saucerBig.wav'
+      // './assets/sound-frogger-hop.wav',      
+      // './assets/pacman_eatghost.wav',
+      // './assets/saucerSmall.wav',
+      // './assets/saucerBig.wav',
       // './assets/pacman_eatfruit.wav',
-      // './assets/intro8000.wav'
-    
+      // './assets/thrust.wav',
+      // './assets/intro8000.mp3'    
     ],
     GameAudio.finishedLoading);
   bufferLoader.load();

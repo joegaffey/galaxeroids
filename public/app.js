@@ -1,6 +1,5 @@
 try {
-  var myFont = new FontFace('PressStart', 'url(https://cdn.glitch.com/f55a21aa-208f-4d8d-9979-9758d85ca2b9%2FPressStart2P.ttf?1509802747753)');
-  // var myFont = new FontFace('PressStart', 'url(./assets/PressStart2P.ttf)');
+  var myFont = new FontFace('PressStart', 'url(./assets/PressStart2P.ttf)');
   myFont.load().then(function(font) {
     document.fonts.add(font);
   });

@@ -4,6 +4,7 @@ class Ship extends PIXI.Sprite {
     super(GameGraphics.getShipGraphics());
     this.shootDelay = Props.SHIP_SHOOT_DELAY;
     this.firePower = 0;
+       
     this.orbs = 3;
     this.renderOrbs();
     
