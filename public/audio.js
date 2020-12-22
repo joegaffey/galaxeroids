@@ -1,4 +1,5 @@
 var GameAudio = {};
+GameAudio.level = 0.2;
 
 window.onload = initAudio;
 
@@ -93,10 +94,10 @@ GameAudio.playSound = function(i, gain) {
   try {
     var source = GameAudio.context.createBufferSource();
     source.buffer = GameAudio.bufferList[i];
-    var gainNode = GameAudio.context.createGain()
-    gainNode.gain.value = gain;
+    var gainNode = GameAudio.context.createGain();
+    gainNode.gain.value = gain * GameAudio.level;
     gainNode.connect(GameAudio.context.destination)
-    source.connect(gainNode)
+    source.connect(gainNode);
     source.start(0);
   }
   catch(e) { 
