@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="en">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="./assets/7d5307e6-90de-6a9d-91ca-1189a7edec70.webPlatform.png">
+  
+<title>Galaxeroids</title>
+<meta content="user-scalable=0" name="viewport">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" type="text/css" href="style.css">
+<!-- <link rel="shortcut icon" href="TBD.png"> -->
+</head>
+<body>
+<div class="graphicsCanvas"></div>
+  
+<script>
+if (navigator.serviceWorker.controller) {
+  console.log('[PWA Builder] active service worker found, no need to register')
+} else {
+  //Register the ServiceWorker
+  navigator.serviceWorker.register('pwabuilder-sw.js', {
+    scope: './'
+  }).then(function(reg) {
+    console.log('Service worker has been registered for scope:'+ reg.scope);
+  });
+}  
+</script>
+<script src="audio.js"></script>
+<script src="./libs/pixi621.min.js"></script> 
+<script src="./libs/gsap391.min.js"></script> 
+<script src="./libs/MotionPathPlugin391.min.js"></script>
+<script src="buffer-loader.js"></script>
+<script src="props.js"></script>
+<script src="stars.js"></script>
+<script src="ship.js"></script>
+<script src="info-screen.js"></script>    
+<script src="levels.js"></script>
+<script src="graphics.js"></script>
+<script src="physics.js"></script>
+<script src="pill.js"></script>
+<script src="enemy.js"></script>
+<script src="mother.js"></script>
+<script src="swarm.js"></script>
+<script src="assist.js"></script>
+<script src="effects.js"></script>  
+<script src="lives.js"></script>
+<script src="app.js"></script>
+<script src="controls.js"></script>
+<script src="keyboard.js"></script>
+<script src="touch.js"></script>    
+<script src="touch-controls.js"></script>    
+<script src="gamepad.js"></script>
+</body>
+</html>

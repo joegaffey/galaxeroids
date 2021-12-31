@@ -1,0 +1,52 @@
+@font-face {
+  font-family: PressStart, Verdana, sans-serif;
+  src: url(./assets/PressStart2P.ttf) format("truetype");
+}
+
+html {
+  font-family: PressStart, Verdana, sans-serif;
+}
+
+body {
+  background-color: #000000;
+  background-size: 100% auto;
+  background-repeat:no-repeat;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  font-family: Verdana, sans-serif;
+  font-display: swap;
+}
+
+.banner {
+  background-color: blue;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 10vw;
+}
+
+.left {
+  left: 0px;
+}
+
+.right {
+  right: 0px;
+}
+
+.graphicsCanvas {
+  font-family: PressStart, Verdana, sans-serif;
+  background-color: #222;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.graphicsCanvas > canvas {
+  font-family: PressStart, Verdana, sans-serif;
+  background-color: #000000;
+  display: block;
+  margin: 0 auto;
+}

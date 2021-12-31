@@ -1,0 +1,108 @@
+{
+  "name": "Galaxeroids",
+  "short_name": "Galaxeroids",
+  "description": "Pew pew!",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "splash_pages": null,
+  "start_url": "/",
+  "icons": [
+    {
+        "src": "/assets/894b736e-ef3b-1128-00de-53406d6c3d14.webPlatform.png",
+        "sizes": "44x44",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/52dd830a-3bd5-0939-b390-2f5e12ec9b3d.webPlatform.png",
+        "sizes": "48x48",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/67ca076f-d1e1-6d4e-7eac-8979bcd01dea.webPlatform.png",
+        "sizes": "1240x600",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/58101fc6-5352-a395-7e20-8a753a468801.webPlatform.png",
+        "sizes": "300x300",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/bcf3186a-aaa4-eb7c-fd00-c021eb052679.webPlatform.png",
+        "sizes": "150x150",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/c33bf6fa-0846-2b65-86f1-d4b2177937df.webPlatform.png",
+        "sizes": "88x88",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/841c4a98-8414-afc7-edfa-6e7cb858787b.webPlatform.png",
+        "sizes": "24x24",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/32dc507a-31f4-55b5-31c2-b604200d09f0.webPlatform.png",
+        "sizes": "50x50",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/9299ff93-c2db-7f5f-d34a-d54f26c57ace.webPlatform.png",
+        "sizes": "620x300",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/8164b7c4-2785-5954-84e5-288c43a7848d.webPlatform.png",
+        "sizes": "192x192",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/24e74fea-cb73-78a8-f914-91bc62b1cd36.webPlatform.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/d5e7acdb-9c76-b870-50ce-d160d5d0ee4a.webPlatform.png",
+        "sizes": "96x96",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/c48c2958-ca24-b28f-1977-3155097431c9.webPlatform.png",
+        "sizes": "72x72",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/7d5307e6-90de-6a9d-91ca-1189a7edec70.webPlatform.png",
+        "sizes": "36x36",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/8806ecd9-f966-2c4d-f055-a1ecaf59db67.webPlatform.png",
+        "sizes": "1024x1024",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/b7582c66-2cf1-c88b-a308-1d92337c3616.webPlatform.png",
+        "sizes": "180x180",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/e65f0c58-d8da-b9b7-7a1e-0aa6e9b9dd5c.webPlatform.png",
+        "sizes": "152x152",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/601154a1-2729-c49a-80dc-87b36480082c.webPlatform.png",
+        "sizes": "120x120",
+        "type": "image/png"
+    },
+    {
+        "src": "/assets/ca50b5de-5fc0-7eaf-8e36-8cff1ea96016.webPlatform.png",
+        "sizes": "76x76",
+        "type": "image/png"
+    }
+  ]
+}
