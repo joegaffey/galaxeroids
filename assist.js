@@ -1,5 +1,5 @@
 class Assist extends PIXI.Sprite {
-  constructor() {
+  constructor(ticker) {
     super(GameGraphics.getAssistGraphics());
     
     this.anchor.x = 0.5;
@@ -15,12 +15,13 @@ class Assist extends PIXI.Sprite {
     this.lazer = new PIXI.Graphics();        
     this.lazer.lineStyle(Props.ASSIST_LAZER_WIDTH, Props.ASSIST_LAZER_COLOR);
     app.game.addChild(this.lazer);
-    
-    // this.ticker = new PIXI.ticker.Ticker();
-    this.ticker = PIXI.Ticker.shared;
 
-    this.ticker.add(this.update, this);    
-    this.ticker.start();
+    this.ticker = ticker;
+    // this.ticker.add(this.update, this); 
+
+    app.ticker.add((time) => {
+      this.update();
+    });
   }
   
   update() {

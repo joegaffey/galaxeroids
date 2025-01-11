@@ -7,6 +7,7 @@ GameGraphics.drawShipBulletGraphics(app);
 GameGraphics.drawEnergyGraphics(app);
 
 app.ticker.maxFPS = 60;
+app.ticker.speed = 1;
 
 app.paused = true;
 app.gameover = false;
@@ -87,10 +88,9 @@ window.onresize = resize;
 resize();
 
 var ship = new Ship();
-
 var mother = new Mother(); 
 var swarm = new Swarm();
-var assist = new Assist();
+var assist = new Assist(app.ticker);
 var lives = new Lives(); 
 
 app.bullets = [];
@@ -198,7 +198,7 @@ app.reset = function() {
   
   mother = new Mother();
   ship = new Ship();
-  assist = new Assist();
+  assist = new Assist(app.ticker);
   swarm = new Swarm();
   lives = new Lives();
   currentLevel = -1;
